@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encryption2.0 - Secure Image Steganography</title>
+    <!-- Use a simple, elegant font from Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <style>
+        :root {
+            --color-primary: #0a0a0a;
+            --color-secondary: #181818;
+            --color-accent: #6C1E9D;
+            --color-accent-light: #8A2BE2;
+            --color-accent-dark: #4A147D;
+            --color-text: #E0E0E0;
+            --color-text-subtle: #A3A3A3;
+        }
+
+        body {
+            background-color: var(--color-primary);
+            color: var(--color-text);
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+            background-image: linear-gradient(135deg, #100C1C 0%, #1A1A1A 100%);
+        }
+
+        .container {
+            background-color: var(--color-secondary);
+            padding: 40px;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 650px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--color-accent-dark);
+            position: relative;
+        }
+
+        .logo {
+            margin-bottom: 20px;
+        }
+
+        .logo-svg {
+            width: 80px;
+            height: 80px;
+            fill: var(--color-accent);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            color: var(--color-accent-light);
+            margin-top: -10px;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+        
+        p.subtitle {
+            font-size: 1rem;
+            color: var(--color-text-subtle);
+            margin-bottom: 30px;
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--color-text);
+            font-weight: 600;
+        }
+
+        .input-group input[type="file"] {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #2a2a2a;
+            border: 2px solid var(--color-secondary);
+            border-radius: 10px;
+            color: var(--color-text);
+            cursor: pointer;
+            transition: border-color 0.3s;
+        }
+        
+        .input-group input[type="file"]:hover {
+            border-color: var(--color-accent);
+        }
+
+        .input-group input[type="file"]::-webkit-file-upload-button {
+            visibility: hidden;
+            width: 0;
+            height: 0;
+        }
+
+        .input-group input[type="file"]::before {
+            content: 'Choose an image';
+            display: inline-block;
+            background: linear-gradient(to right, var(--color-accent-light), var(--color-accent));
+            border-radius: 8px;
+            padding: 8px 16px;
+            outline: none;
+            white-space: nowrap;
+            -webkit-user-select: none;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--color-text);
+            margin-right: 10px;
+            transition: background 0.3s;
+        }
+
+        .input-group input[type="file"]:hover::before {
+            background: linear-gradient(to right, var(--color-accent), var(--color-accent-dark));
+        }
+
+        .input-group textarea {
+            width: 100%;
+            height: 120px;
+            padding: 12px;
+            background-color: #2a2a2a;
+            border: 2px solid var(--color-secondary);
+            border-radius: 10px;
+            color: var(--color-text);
+            font-size: 1rem;
+            resize: vertical;
+            transition: border-color 0.3s;
+        }
+        .input-group textarea:hover {
+            border-color: var(--color-accent);
+        }
+
+        .password-container {
+            position: relative;
+        }
+
+        .password-label-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .password-container input {
+            width: 100%;
+            padding: 12px;
+            background-color: #2a2a2a;
+            border: 2px solid var(--color-secondary);
+            border-radius: 10px;
+            color: var(--color-text);
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        .password-container input:hover {
+            border-color: var(--color-accent);
+        }
+
+        .password-toggle {
+            cursor: pointer;
+            color: var(--color-text-subtle);
+            transition: color 0.2s;
+            user-select: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .password-toggle:hover {
+            color: var(--color-text);
+        }
+
+        .password-toggle svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            flex: 1;
+            min-width: 150px;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+            background: linear-gradient(to right, var(--color-accent-light), var(--color-accent));
+            color: var(--color-text);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn:hover {
+            background: linear-gradient(to right, var(--color-accent-dark), var(--color-accent-light));
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(138, 43, 226, 0.5);
+        }
+
+        .progress-container {
+            width: 100%;
+            height: 10px;
+            background-color: #2a2a2a;
+            border-radius: 5px;
+            margin: 25px 0 15px;
+            overflow: hidden;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(to right, var(--color-accent-dark), var(--color-accent-light));
+            width: 0;
+            transition: width 0.3s ease;
+        }
+
+        #status-message {
+            font-weight: 600;
+            color: var(--color-accent-light);
+            margin-bottom: 20px;
+            min-height: 20px;
+            font-size: 0.95rem;
+        }
+        
+        #download-link {
+            display: none;
+            background: linear-gradient(to right, var(--color-accent-light), var(--color-accent));
+            color: var(--color-text);
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 700;
+            transition: background 0.3s, transform 0.2s;
+            box-shadow: 0 5px 15px rgba(138, 43, 226, 0.3);
+        }
+        
+        #download-link:hover {
+            background: linear-gradient(to right, var(--color-accent-dark), var(--color-accent-light));
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(138, 43, 226, 0.5);
+        }
+
+        canvas {
+            display: none; /* Hidden canvas used for image manipulation */
+        }
+        
+        /* Modal for messages instead of alert() */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: var(--color-secondary);
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.5);
+            text-align: center;
+        }
+
+        .modal-message {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .modal-close-btn {
+            background: linear-gradient(to right, var(--color-accent), var(--color-accent-dark));
+            color: var(--color-text);
+            border: none;
+            padding: 10px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s, transform 0.2s;
+        }
+        
+        .modal-close-btn:hover {
+            background: linear-gradient(to right, var(--color-accent-dark), var(--color-accent));
+            transform: translateY(-1px);
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            .container {
+                padding: 30px;
+            }
+            .btn {
+                font-size: 1rem;
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <!-- A simple SVG for the hooded figure logo -->
+            <svg class="logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <mask id="hood-mask">
+                        <rect width="100" height="100" fill="white" />
+                        <circle cx="50" cy="50" r="30" fill="black" />
+                    </mask>
+                </defs>
+                <path d="M50 20 C 20 20, 20 80, 50 80 C 80 80, 80 20, 50 20 Z" fill="var(--color-accent-light)" mask="url(#hood-mask)"/>
+                <path d="M50 20 C 40 10, 30 15, 30 25 L 30 40 C 30 50, 40 60, 50 60 C 60 60, 70 50, 70 40 L 70 25 C 70 15, 60 10, 50 20 Z" fill="var(--color-secondary)"/>
+            </svg>
+        </div>
+        <h1>Encryption2.0</h1>
+        <p class="subtitle">Securely hide secret messages within images.</p>
+
+        <div class="input-group">
+            <label for="image-input">Upload an Image</label>
+            <input type="file" id="image-input" accept="image/*">
+        </div>
+
+        <div class="input-group">
+            <label for="message-input">Secret Message</label>
+            <textarea id="message-input" placeholder="Enter your secret message here..."></textarea>
+        </div>
+
+        <div class="input-group password-container">
+            <div class="password-label-container">
+                <label for="password-input">Password</label>
+                <!-- Eye SVG for the password toggle, positioned above the input -->
+                <span class="password-toggle" id="password-toggle-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 5C5.66667 5 2 12 2 12C2 12 5.66667 19 12 19C18.3333 19 22 12 22 12C22 12 18.3333 5 12 5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </div>
+            <input type="password" id="password-input" placeholder="Enter a password to encrypt/decrypt">
+        </div>
+
+        <div class="button-group">
+            <button class="btn" id="hide-btn">Hide Message</button>
+            <button class="btn" id="reveal-btn">Reveal Message</button>
+        </div>
+
+        <div class="progress-container">
+            <div id="progress-bar" class="progress-bar"></div>
+        </div>
+
+        <p id="status-message"></p>
+
+        <a href="#" id="download-link" download="cloaked_image.png">Download Image</a>
+    </div>
+    
+    <!-- A hidden canvas for image processing -->
+    <canvas id="canvas"></canvas>
+
+    <!-- Modal for showing messages instead of alert() -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <p class="modal-message" id="modal-message-text"></p>
+            <button class="modal-close-btn" onclick="closeModal()">OK</button>
+        </div>
+    </div>
+    
+    <script>
+        // --- UI Element References ---
+        const imageInput = document.getElementById('image-input');
+        const messageInput = document.getElementById('message-input');
+        const passwordInput = document.getElementById('password-input');
+        const passwordToggle = document.getElementById('password-toggle-icon');
+        const hideBtn = document.getElementById('hide-btn');
+        const revealBtn = document.getElementById('reveal-btn');
+        const progressBar = document.getElementById('progress-bar');
+        const statusMessage = document.getElementById('status-message');
+        const downloadLink = document.getElementById('download-link');
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const modal = document.getElementById('modal');
+        const modalMessageText = document.getElementById('modal-message-text');
+
+        // --- Helper Functions ---
+        
+        /**
+         * Converts a string to a binary representation.
+         * @param {string} str The string to convert.
+         * @returns {string} The binary string.
+         */
+        function toBinary(str) {
+            return str.split('').map(char => {
+                // Pad each character's binary representation to 8 bits
+                return char.charCodeAt(0).toString(2).padStart(8, '0');
+            }).join('');
+        }
+
+        /**
+         * Converts a binary string back to a regular string.
+         * @param {string} bin The binary string.
+         * @returns {string} The decoded string.
+         */
+        function fromBinary(bin) {
+            let str = '';
+            for (let i = 0; i < bin.length; i += 8) {
+                str += String.fromCharCode(parseInt(bin.substring(i, i + 8), 2));
+            }
+            return str;
+        }
+        
+        /**
+         * Converts a decimal number to a binary string of a specific length.
+         * @param {number} num The number to convert.
+         * @param {number} len The desired length of the binary string.
+         * @returns {string} The binary string.
+         */
+        function decToBin(num, len) {
+            return num.toString(2).padStart(len, '0');
+        }
+
+        /**
+         * Shows a status message to the user and updates the UI.
+         * @param {string} message The message to display.
+         * @param {string} color The color of the message.
+         */
+        function showStatus(message, color = '#8A2BE2') {
+            statusMessage.textContent = message;
+            statusMessage.style.color = color;
+        }
+        
+        /**
+         * Shows a modal with a given message.
+         * @param {string} message The message to display in the modal.
+         */
+        function showModal(message) {
+            modalMessageText.textContent = message;
+            modal.style.display = 'flex';
+        }
+        
+        /**
+         * Closes the currently open modal.
+         */
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+
+        /**
+         * Simulates a progress bar update.
+         * @param {number} progress The progress percentage (0-100).
+         */
+        function updateProgress(progress) {
+            progressBar.style.width = `${progress}%`;
+        }
+
+        // --- Main Logic ---
+
+        // Event listener for the "Hide" button
+        hideBtn.addEventListener('click', async () => {
+            const imageFile = imageInput.files[0];
+            const message = messageInput.value;
+            const password = passwordInput.value;
+            
+            // Check for required inputs
+            if (!imageFile || !message || !password) {
+                showModal('Please upload an image, type a message, and enter a password to hide.');
+                return;
+            }
+
+            // Check if the message is too long for the image
+            const messageLengthInBits = message.length * 8;
+            
+            // Show loading status and reset progress
+            showStatus('Preparing image...');
+            updateProgress(0);
+            
+            try {
+                // Read the image file as a Data URL
+                const reader = new FileReader();
+                reader.readAsDataURL(imageFile);
+                reader.onloadend = async () => {
+                    const img = new Image();
+                    img.onload = async () => {
+                        // Set canvas dimensions to match the image
+                        canvas.width = img.width;
+                        canvas.height = img.height;
+                        ctx.drawImage(img, 0, 0);
+
+                        // Get the pixel data from the canvas
+                        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                        const data = imageData.data;
+                        
+                        // Encrypt the message using the password
+                        showStatus('Encrypting message...');
+                        const encryptedMessage = CryptoJS.AES.encrypt(message, password).toString();
+                        
+                        // Add a special separator to mark the end of the hidden message
+                        const secretData = encryptedMessage + '###END_OF_MESSAGE###';
+                        const binarySecret = toBinary(secretData);
+                        
+                        // Check if the image can hold the message.
+                        // Each pixel can hold 3 bits (1 per R, G, B channel).
+                        const availableSpace = (data.length / 4) * 3;
+                        if (binarySecret.length > availableSpace) {
+                             showModal('Message is too long for this image. Please use a larger image or a shorter message.');
+                             return;
+                        }
+
+                        // Steganography logic: Hide each bit in the LSB of a pixel's color channel.
+                        // We will use R, G, B channels, but skip the alpha channel.
+                        showStatus('Hiding message in pixels...');
+                        for (let i = 0; i < binarySecret.length; i++) {
+                            // Calculate the index in the pixel array
+                            const pixelIndex = Math.floor(i / 3) * 4;
+                            const channelIndex = i % 3; // 0 for R, 1 for G, 2 for B
+                            const value = data[pixelIndex + channelIndex];
+                            
+                            // Get the current LSB (least significant bit)
+                            const currentLSB = value & 1;
+                            const secretBit = parseInt(binarySecret[i], 2);
+                            
+                            // If the LSB doesn't match the secret bit, change it.
+                            if (currentLSB !== secretBit) {
+                                if (currentLSB === 0) {
+                                    data[pixelIndex + channelIndex] = value + 1; // Change 0 to 1
+                                } else {
+                                    data[pixelIndex + channelIndex] = value - 1; // Change 1 to 0
+                                }
+                            }
+                            
+                            // Update progress
+                            updateProgress((i / binarySecret.length) * 100);
+                        }
+                        
+                        // Put the modified pixel data back onto the canvas
+                        ctx.putImageData(imageData, 0, 0);
+                        
+                        // Generate a download link for the modified image
+                        const newImageUrl = canvas.toDataURL('image/png');
+                        downloadLink.href = newImageUrl;
+                        downloadLink.style.display = 'inline-block';
+                        
+                        showStatus('Message hidden! Click the link below to download.', '#2ecc71');
+                        updateProgress(100);
+                    };
+                    img.src = reader.result;
+                };
+            } catch (error) {
+                showStatus('An error occurred during hiding. Please try again.', '#FF6347');
+                console.error(error);
+            }
+        });
+
+        // Event listener for the "Reveal" button
+        revealBtn.addEventListener('click', async () => {
+            const imageFile = imageInput.files[0];
+            const password = passwordInput.value;
+            
+            // Check for required inputs
+            if (!imageFile || !password) {
+                showModal('Please upload a steganographic image and enter a password to reveal.');
+                return;
+            }
+            
+            showStatus('Loading image and revealing message...');
+            updateProgress(0);
+            
+            try {
+                const reader = new FileReader();
+                reader.readAsDataURL(imageFile);
+                reader.onloadend = () => {
+                    const img = new Image();
+                    img.onload = () => {
+                        canvas.width = img.width;
+                        canvas.height = img.height;
+                        ctx.drawImage(img, 0, 0);
+
+                        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                        const data = imageData.data;
+                        
+                        let binarySecret = '';
+                        let secretMessage = '';
+                        let isMessageComplete = false;
+                        
+                        // Steganography logic: Extract each bit from the LSB of pixel's color channel.
+                        showStatus('Extracting message from pixels...');
+                        for (let i = 0; i < data.length; i += 4) {
+                            // Extract LSB from Red, Green, and Blue channels
+                            binarySecret += (data[i] & 1).toString();
+                            binarySecret += (data[i + 1] & 1).toString();
+                            binarySecret += (data[i + 2] & 1).toString();
+
+                            // Convert the binary string to a text string
+                            secretMessage = fromBinary(binarySecret);
+                            
+                            // Check for the end-of-message separator
+                            if (secretMessage.includes('###END_OF_MESSAGE###')) {
+                                isMessageComplete = true;
+                                break;
+                            }
+                            
+                            // Update progress
+                            updateProgress((i / data.length) * 100);
+                        }
+                        
+                        if (!isMessageComplete) {
+                            showModal('No hidden message found or the image is corrupted.');
+                            showStatus('No hidden message found.', '#FF6347');
+                            return;
+                        }
+                        
+                        // Remove the separator
+                        secretMessage = secretMessage.split('###END_OF_MESSAGE###')[0];
+                        
+                        // Decrypt the message with the password
+                        showStatus('Decrypting message...');
+                        const decryptedBytes = CryptoJS.AES.decrypt(secretMessage, password);
+                        const decryptedMessage = decryptedBytes.toString(CryptoJS.enc.Utf8);
+                        
+                        if (decryptedMessage) {
+                            messageInput.value = decryptedMessage;
+                            showStatus('Message revealed successfully!', '#2ecc71');
+                        } else {
+                            showModal('Could not decrypt the message. The password may be incorrect.');
+                            showStatus('Decryption failed. Invalid password.', '#FF6347');
+                        }
+                        updateProgress(100);
+                    };
+                    img.src = reader.result;
+                };
+            } catch (error) {
+                showStatus('An error occurred during revealing. Please try again.', '#FF6347');
+                console.error(error);
+            }
+        });
+
+        // --- UI Interactions ---
+
+        // Toggle password visibility
+        passwordToggle.addEventListener('click', () => {
+            const isPassword = passwordInput.type === 'password';
+            passwordInput.type = isPassword ? 'text' : 'password';
+            passwordToggle.innerHTML = isPassword ? `
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.09 9.09 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19M1 1l22 22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            ` : `
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            `;
+        });
+
+        // Reset UI when a new image is selected
+        imageInput.addEventListener('change', () => {
+            messageInput.value = '';
+            passwordInput.value = '';
+            statusMessage.textContent = '';
+            updateProgress(0);
+            downloadLink.style.display = 'none';
+        });
+
+    </script>
+</body>
+</html>
