@@ -13,40 +13,72 @@
             font-family: 'Inter', sans-serif;
             background: radial-gradient(ellipse at top, #111827 0%, #0f172a 100%);
         }
+        .card {
+            transition: all 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
     </style>
 </head>
 <body class="text-white min-h-screen flex flex-col items-center p-4">
     <div class="flex-grow flex items-center justify-center w-full">
-        <div class="bg-slate-800/50 backdrop-blur-lg p-8 md:p-12 rounded-2xl shadow-2xl border border-slate-700 w-full max-w-3xl text-center">
+        <div class="bg-slate-800/50 backdrop-blur-lg p-8 md:p-12 rounded-2xl shadow-2xl border border-slate-700 w-full max-w-4xl text-center">
             <h1 class="text-4xl md:text-5xl font-extrabold mb-4 text-sky-400">Encryption Hub</h1>
             <p class="text-gray-300 mb-10 max-w-prose mx-auto text-lg">
-               This is the page for your privacy<br>This Site brings Privacy to life<br>Below are the options for Encryption
+                Your privacy is our priority. Explore our suite of modern, browser-based encryption tools to protect your messages and files.
             </p>
 
-            <div class="flex flex-col md:flex-row gap-6 justify-center">
-                <!-- Card for Page 1 -->
-                <div class="group flex-1 block p-6 bg-slate-700/50 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 hover:border-sky-500 border border-slate-600">
-                    <h2 class="text-2xl font-bold mb-2 text-white group-hover:text-sky-400 transition-colors duration-300">Encryption</h2>
-                    <p class="text-sm text-gray-400 mb-6">Encryption : Encrypt and send your Text securly<br>Hide your text with Modern Encryption Technology</p>
-                    <a href="page1.html" class="inline-block px-8 py-3 bg-sky-600 text-white font-bold rounded-full shadow-lg hover:bg-sky-700 transition-colors duration-300 transform hover:scale-105">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Card for Text Encryption -->
+                <a href="page1.html" class="card group flex flex-col items-center p-6 bg-slate-700/50 rounded-xl shadow-lg border border-slate-600 hover:border-sky-500">
+                    <svg class="w-16 h-16 mb-4 text-sky-400 group-hover:text-sky-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                    <h2 class="text-2xl font-bold mb-2 text-white group-hover:text-sky-400">Encryption</h2>
+                    <p class="text-sm text-gray-400 mb-6">
+                        Encrypt and send secure text messages using modern, robust algorithms.
+                    </p>
+                    <span class="inline-block px-8 py-3 bg-sky-600 text-white font-bold rounded-full shadow-lg hover:bg-sky-700 transform hover:scale-105 transition">
                         Encryption
-                    </a>
-                </div>
+                    </span>
+                </a>
                 
-                <!-- Card for Page 2 -->
-                <div class="group flex-1 block p-6 bg-slate-700/50 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 hover:border-teal-500 border border-slate-600">
-                    <h2 class="text-2xl font-bold mb-2 text-white group-hover:text-teal-400 transition-colors duration-300">Encryption 2.0</h2>
-                    <p class="text-sm text-gray-400 mb-6">Encryption 2.0 : Encrypts your message and hides it in an image you choose so that no one has idea that you are sending an encrypted text</p>
-                    <a href="page2.html" class="inline-block px-8 py-3 bg-teal-600 text-white font-bold rounded-full shadow-lg hover:bg-teal-700 transition-colors duration-300 transform hover:scale-105">
+                <!-- Card for Image Steganography -->
+                <a href="page2.html" class="card group flex flex-col items-center p-6 bg-slate-700/50 rounded-xl shadow-lg border border-slate-600 hover:border-teal-500">
+                    <svg class="w-16 h-16 mb-4 text-teal-400 group-hover:text-teal-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    <h2 class="text-2xl font-bold mb-2 text-white group-hover:text-teal-400">Encryption 2.0</h2>
+                    <p class="text-sm text-gray-400 mb-6">
+                        Hide your secret messages within an image file for discreet communication.
+                    </p>
+                    <span class="inline-block px-8 py-3 bg-teal-600 text-white font-bold rounded-full shadow-lg hover:bg-teal-700 transform hover:scale-105 transition">
                         Encryption 2.0
-                    </a>
-                </div>
+                    </span>
+                </a>
+
+                <!-- Card for File Encryption -->
+                <a href="page3.html" class="card group flex flex-col items-center p-6 bg-slate-700/50 rounded-xl shadow-lg border border-slate-600 hover:border-purple-500">
+                    <svg class="w-16 h-16 mb-4 text-purple-400 group-hover:text-purple-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    <h2 class="text-2xl font-bold mb-2 text-white group-hover:text-purple-400">Encryption 3.0</h2>
+                    <p class="text-sm text-gray-400 mb-6">
+                        Encrypt and decrypt any file type (images, videos, audio) in your browser.
+                    </p>
+                    <span class="inline-block px-8 py-3 bg-purple-600 text-white font-bold rounded-full shadow-lg hover:bg-purple-700 transform hover:scale-105 transition">
+                        Encryption 3.0
+                    </span>
+                </a>
             </div>
         </div>
     </div>
     
     <footer class="py-6 text-center text-sm text-gray-400">
-        <p> Md Azeem  &copy; 2025 All Rights Reserved.</p>
+        <p>MD AZEEM &copy; 2025 All Rights Reserved.</p>
     </footer>
 </body>
 </html>
+
