@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encryption</title>
+    <style>
+        /*!
+         * From https://tailwindcss.com/docs/installation/play-cdn
+         * This is a minimal, self-contained version of the Tailwind CSS used in the original example.
+         * The full version of the code is too long to display, so it has been replaced with a minimal version to save space.
+         * In a real-world scenario, you would copy the entire contents of the CDN file here.
+         */
+        
+        /* The following CSS is a direct copy from the original HTML to ensure the layout and styling are preserved */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 1rem;
+        }
+        .container {
+            width: 100%;
+            max-width: 600px;
+            background-color: #1a1a1a;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #a0a0a0;
+        }
+        .input, .textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            background-color: #333333;
+            border: 1px solid #444444;
+            color: #ffffff;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        .input:focus, .textarea:focus {
+            outline: none;
+            border-color: #6d28d9;
+            box-shadow: 0 0 0 2px rgba(109, 40, 217, 0.5);
+        }
+        .textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .btn {
+            flex-grow: 1;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
+            border: none;
+        }
+        .btn-primary {
+            background-color: #6d28d9;
+            color: #ffffff;
+        }
+        .btn-primary:hover {
+            background-color: #5b21aa;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(109, 40, 217, 0.3);
+        }
+        .btn-secondary {
+            background-color: #3f3f46;
+            color: #ffffff;
+        }
+        .btn-secondary:hover {
+            background-color: #52525b;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(63, 63, 70, 0.3);
+        }
+        .result-box {
+            background-color: #0d0d0d;
+            border: 1px solid #2a2a2a;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-top: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .result-title {
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: #a0a0a0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .result-text {
+            color: #cccccc;
+            word-break: break-all;
+        }
+        .message-box {
+            background-color: #2c2c2c;
+            color: #ffffff;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-top: 1.5rem;
+            text-align: center;
+            animation: slideIn 0.3s ease-out;
+            display: none;
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .copy-btn, .visibility-btn {
+            background-color: transparent;
+            border: 1px solid #444444;
+            color: #a0a0a0;
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .copy-btn:hover, .visibility-btn:hover {
+            background-color: #333333;
+            transform: scale(1.05);
+        }
+        .password-input-group {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .password-input-group .input {
+            padding-right: 3rem;
+        }
+        .password-input-group .visibility-btn {
+            position: absolute;
+            right: 0.5rem;
+            border: none;
+            background-color: transparent;
+        }
+        .loading-spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid #6d28d9;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+            margin-left: 1rem;
+            display: none;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .hidden {
+            display: none;
+        }
+        .bg-black {
+            background-color: #000;
+        }
+        .text-white {
+            color: #fff;
+        }
+        .text-3xl {
+            font-size: 1.875rem; /* 30px */
+            line-height: 2.25rem; /* 36px */
+        }
+        .font-bold {
+            font-weight: 700;
+        }
+        .text-center {
+            text-align: center;
+        }
+        .mb-8 {
+            margin-bottom: 2rem; /* 32px */
+        }
+        .mt-6 {
+            margin-top: 1.5rem; /* 24px */
+        }
+        .flex {
+            display: flex;
+        }
+        .items-center {
+            align-items: center;
+        }
+        .justify-between {
+            justify-content: space-between;
+        }
+        .flex-grow {
+            flex-grow: 1;
+        }
+        .h-5 {
+            height: 1.25rem; /* 20px */
+        }
+        .w-5 {
+            width: 1.25rem; /* 20px */
+        }
+        .animate-spin {
+            animation: spin 1s linear infinite;
+        }
+    </style>
+</head>
+<body class="bg-black text-white">
+
+<div class="container">
+    <h1 class="text-3xl font-bold text-center mb-8">Encryption</h1>
+
+    <div class="form-group">
+        <label for="message" class="label">Message:</label>
+        <textarea id="message" class="textarea" placeholder="Enter your message here..."></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="password" class="label">Password:</label>
+        <div class="password-input-group">
+            <input type="password" id="password" class="input flex-grow" placeholder="Enter a password...">
+            <button id="passwordToggle" class="visibility-btn">
+                <svg id="eye-icon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                    <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
+                </svg>
+                <svg id="eye-slash-icon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hidden" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M3.707 2.293A1 1 0 002.293 3.707l14 14a1 1 0 001.414-1.414l-14-14z" clip-rule="evenodd" />
+                    <path d="M10 13a3 3 0 100-6 3 3 0 000 6z" />
+                    <path fill-rule="evenodd" d="M13.673 17.51a.692.692 0 00-.776-.457A9.914 9.914 0 0110 18c-4.478 0-8.268-2.943-9.542-7-.052-.16-.079-.328-.083-.497a.692.692 0 00-.472-.515.692.692 0 00-.516.474c-.004.02-.007.039-.011.059.004.053.011.106.023.159C1.732 14.057 5.522 17 10 17c.502 0 .99-.036 1.464-.105a.692.692 0 00.709.619.692.692 0 00.618-.71zM10 4a6 6 0 00-6 6c0 1.259.324 2.44.887 3.518a.692.692 0 00.62.433.692.692 0 00.414-.153c.125-.1.2-.23.218-.372.584-2.887 3.23-5.06 6.37-5.06a.692.692 0 00.692-.692.692.692 0 00-.692-.692c-2.31 0-4.322 1.4-5.228 3.5a.692.692 0 00.088.583.692.692 0 00.583.088 6.002 6.002 0 00-2.844 2.845.692.692 0 00-.088.583.692.692 0 00.583.088c.126.04.253.078.38.115A5.998 5.998 0 0010 4z" clip-rule="evenodd" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <div class="flex items-center justify-between">
+        <div class="btn-group flex-grow">
+            <button id="encryptBtn" class="btn btn-primary">Encrypt</button>
+            <button id="decryptBtn" class="btn btn-secondary">Decrypt</button>
+            <button id="clearBtn" class="btn btn-secondary">Clear</button>
+        </div>
+        <div id="loadingSpinner" class="loading-spinner hidden"></div>
+    </div>
+
+    <div id="resultBox" class="result-box hidden mt-6">
+        <div class="result-title">
+            Result:
+            <button id="copyBtn" class="copy-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
+                    <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3h-2a3 3 0 01-3-3z" />
+                </svg>
+                Copy
+            </button>
+        </div>
+        <div id="resultText" class="result-text"></div>
+    </div>
+    
+    <div id="messageBox" class="message-box"></div>
+</div>
+
+<script>
+    // --- Helper Functions ---
+
+    // Converts a string to a Uint8Array.
+    function strToUint8(str) {
+        return new TextEncoder().encode(str);
+    }
+
+    // Converts a Uint8Array to a string.
+    function uint8ToStr(uint8) {
+        return new TextDecoder().decode(uint8);
+    }
+
+    // Converts an ArrayBuffer to a Base64 string.
+    function arrayBufferToBase64(buffer) {
+        let binary = '';
+        const bytes = new Uint8Array(buffer);
+        const len = bytes.byteLength;
+        for (let i = 0; i < len; i++) {
+            binary += String.fromCharCode(bytes[i]);
+        }
+        return window.btoa(binary);
+    }
+
+    // Converts a Base64 string to an ArrayBuffer.
+    function base64ToArrayBuffer(base64) {
+        const binaryString = window.atob(base64);
+        const len = binaryString.length;
+        const bytes = new Uint8Array(len);
+        for (let i = 0; i < len; i++) {
+            bytes[i] = binaryString.charCodeAt(i);
+        }
+        return bytes.buffer;
+    }
+
+    // Displays a temporary message to the user.
+    function showMessage(text, isError = false) {
+        const messageBox = document.getElementById('messageBox');
+        messageBox.textContent = text;
+        messageBox.style.display = 'block';
+        if (isError) {
+            messageBox.style.backgroundColor = '#ef4444'; // Red for errors
+        } else {
+            messageBox.style.backgroundColor = '#2c2c2c'; // Dark gray for success/info
+        }
+        setTimeout(() => {
+            messageBox.style.display = 'none';
+        }, 3000);
+    }
+
+    // --- Core Cryptographic Functions ---
+
+    // Derives a key from the user's password using PBKDF2 with a random salt.
+    async function getKey(password, salt) {
+        const keyMaterial = await window.crypto.subtle.importKey(
+            "raw",
+            strToUint8(password),
+            { name: "PBKDF2" },
+            false,
+            ["deriveKey"]
+        );
+        return window.crypto.subtle.deriveKey(
+            {
+                name: "PBKDF2",
+                salt: salt,
+                iterations: 100000,
+                hash: "SHA-256",
+            },
+            keyMaterial,
+            { name: "AES-GCM", length: 256 },
+            true,
+            ["encrypt", "decrypt"]
+        );
+    }
+
+    // Encrypts a message (string or ArrayBuffer).
+    async function encryptMessage(data, password) {
+        try {
+            if (!password) {
+                showMessage("Please enter a password.", true);
+                return;
+            }
+
+            // Generate a unique salt for this encryption.
+            const salt = window.crypto.getRandomValues(new Uint8Array(16));
+            const key = await getKey(password, salt);
+            
+            // Generate a unique IV (Initialization Vector) for this encryption.
+            const iv = window.crypto.getRandomValues(new Uint8Array(12));
+
+            const encryptedData = await window.crypto.subtle.encrypt(
+                {
+                    name: "AES-GCM",
+                    iv: iv,
+                },
+                key,
+                data
+            );
+
+            // Combine the salt, IV, and encrypted data.
+            const combined = new Uint8Array(salt.byteLength + iv.byteLength + encryptedData.byteLength);
+            combined.set(salt, 0);
+            combined.set(iv, salt.byteLength);
+            combined.set(new Uint8Array(encryptedData), salt.byteLength + iv.byteLength);
+
+            return arrayBufferToBase64(combined);
+        } catch (error) {
+            console.error("Encryption failed:", error);
+            showMessage("Encryption failed. Please try again.", true);
+        }
+    }
+
+    // Decrypts an encrypted message (Base64 string).
+    async function decryptMessage(encryptedMessage, password) {
+        try {
+            if (!encryptedMessage || !password) {
+                showMessage("Please enter both the encrypted message and the password.", true);
+                return;
+            }
+            
+            const combined = base64ToArrayBuffer(encryptedMessage);
+            if (combined.byteLength < 28) { // 16 bytes for salt + 12 for IV
+                showMessage("Decryption failed. The message appears to be corrupted.", true);
+                return;
+            }
+
+            // Separate the salt, IV, and encrypted data.
+            const salt = combined.slice(0, 16);
+            const iv = combined.slice(16, 28);
+            const encryptedData = combined.slice(28);
+
+            const key = await getKey(password, salt);
+
+            // The 'decrypt' function automatically checks the authentication tag for data integrity.
+            const decryptedData = await window.crypto.subtle.decrypt(
+                {
+                    name: "AES-GCM",
+                    iv: iv,
+                },
+                key,
+                encryptedData
+            );
+
+            return uint8ToStr(new Uint8Array(decryptedData));
+        } catch (error) {
+            console.error("Decryption failed:", error);
+            // This is a generic catch-all, but usually indicates a bad password or corrupted data.
+            showMessage("Decryption failed. Incorrect password or corrupted message.", true);
+        }
+    }
+
+    // --- UI State Management Functions ---
+
+    // Shows/hides the loading spinner and disables/enables buttons.
+    function toggleLoading(isLoading) {
+        const spinner = document.getElementById('loadingSpinner');
+        const buttons = document.querySelectorAll('.btn-group .btn');
+        if (isLoading) {
+            spinner.classList.remove('hidden');
+            buttons.forEach(btn => btn.disabled = true);
+        } else {
+            spinner.classList.add('hidden');
+            buttons.forEach(btn => btn.disabled = false);
+        }
+    }
+
+    // Clears all inputs and result area.
+    function clearApp() {
+        document.getElementById('message').value = '';
+        document.getElementById('password').value = '';
+        document.getElementById('resultBox').classList.add('hidden');
+        document.getElementById('resultText').textContent = '';
+    }
+
+    // --- Event Listeners ---
+
+    // Handles the password visibility toggle.
+    document.getElementById('passwordToggle').addEventListener('click', () => {
+        const passwordInput = document.getElementById('password');
+        const eyeIcon = document.getElementById('eye-icon');
+        const eyeSlashIcon = document.getElementById('eye-slash-icon');
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            eyeIcon.classList.add('hidden');
+            eyeSlashIcon.classList.remove('hidden');
+        } else {
+            passwordInput.type = 'password';
+            eyeIcon.classList.remove('hidden');
+            eyeSlashIcon.classList.add('hidden');
+        }
+    });
+
+    // Handles the "Encrypt" button click.
+    document.getElementById('encryptBtn').addEventListener('click', async () => {
+        toggleLoading(true);
+        const passwordInput = document.getElementById('password');
+        const messageInput = document.getElementById('message');
+        const resultBox = document.getElementById('resultBox');
+        const resultText = document.getElementById('resultText');
+
+        const encryptedData = await encryptMessage(strToUint8(messageInput.value), passwordInput.value);
+        if (encryptedData) {
+            resultText.textContent = encryptedData;
+            resultBox.classList.remove('hidden');
+            showMessage("Message encrypted successfully!");
+        }
+        toggleLoading(false);
+    });
+
+    // Handles the "Decrypt" button click.
+    document.getElementById('decryptBtn').addEventListener('click', async () => {
+        toggleLoading(true);
+        const passwordInput = document.getElementById('password');
+        const messageInput = document.getElementById('message');
+        const resultBox = document.getElementById('resultBox');
+        const resultText = document.getElementById('resultText');
+
+        const decryptedData = await decryptMessage(messageInput.value, passwordInput.value);
+        if (decryptedData) {
+            resultText.textContent = decryptedData;
+            resultBox.classList.remove('hidden');
+            showMessage("Message decrypted successfully!");
+        }
+        toggleLoading(false);
+    });
+
+    // Handles the "Clear" button click.
+    document.getElementById('clearBtn').addEventListener('click', clearApp);
+
+    // Copies the result to the clipboard.
+    document.getElementById('copyBtn').addEventListener('click', () => {
+        const textToCopy = document.getElementById('resultText').textContent;
+        try {
+            const tempInput = document.createElement('textarea');
+            tempInput.value = textToCopy;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            showMessage("Copied to clipboard!");
+        } catch (err) {
+            showMessage("Failed to copy. Please try again.", true);
+        }
+    });
+</script>
+
+</body>
+</html>
