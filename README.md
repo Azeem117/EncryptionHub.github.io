@@ -1,3 +1,5 @@
+# 🔗 [Encryption Hub](https://azeem117.github.io/EncryptionHub.github.io/)  
+
 # 🚀 Release v1.0.0 – Simple Encryption Portal
 
 ## 🔐 Project Overview
@@ -42,7 +44,7 @@ The portal is organized into **three modules**: **Encryption**, **Encryption 2.0
 - **Strong Cryptography:** Uses AES-GCM to ensure confidentiality and integrity.  
 - **Secure Key Derivation:** PBKDF2 with high iteration count protects passwords from brute-force attacks.  
 - **Client-Side Operation:** No files leave the user’s browser; full privacy maintained.  
-- **Responsive & Intuitive UI:** Tailwind CSS ensures compatibility across devices; clear file input, password field, and dedicated "Encrypt"/"Decrypt" buttons.  
+- **Responsive & Intuitive UI:** Tailwind CSS ensures usability across devices; clear file input, password field, and dedicated "Encrypt"/"Decrypt" buttons.  
 - **Dynamic Feedback:** Real-time status messages and a loading spinner inform users of ongoing processes.  
 - **Error Handling:** Provides user-friendly messages for incorrect passwords or corrupted files.  
 - **Password Visibility Toggle:** Prevents input errors, enhancing usability.  
@@ -83,3 +85,5 @@ The project aims to provide a **versatile, secure, and user-friendly encryption 
 ## ✅ Conclusion
 This release of the **Simple Encryption Portal** demonstrates a **secure, modern, and portable web application** for encryption enthusiasts, developers, and casual users alike.  
 It combines **robust cryptography**, **user-friendly design**, and **cutting-edge steganography** to provide a comprehensive encryption platform.
+
+Visit the live portal here:  🔗 [Encryption Hub](https://azeem117.github.io/EncryptionHub.github.io/)  
