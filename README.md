@@ -82,8 +82,22 @@ The project aims to provide a **versatile, secure, and user-friendly encryption 
 
 ---
 
+## 📜 License
+This project is licensed under the **GNU General Public License v3.0 (GPL-3.0)**.  
+
+You are free to:  
+- Use, modify, and distribute the software  
+- Share and improve upon the work  
+
+As long as all derivative works are also distributed under the **GPL-3.0 license**, ensuring the project remains open and free for the community.  
+
+For full license details, see: [GNU GPL 3.0](https://www.gnu.org/licenses/gpl-3.0.en.html)  
+
+---
+
 ## ✅ Conclusion
 This release of the **Simple Encryption Portal** demonstrates a **secure, modern, and portable web application** for encryption enthusiasts, developers, and casual users alike.  
-It combines **robust cryptography**, **user-friendly design**, and **cutting-edge steganography** to provide a comprehensive encryption platform.
+It combines **robust cryptography**, **user-friendly design**, and **cutting-edge steganography** to provide a comprehensive encryption platform.  
 
-Visit the live portal here:  🔗 [Encryption Hub](https://azeem117.github.io/EncryptionHub.github.io/)  
+Visit the live portal here: 🔗 [Encryption Hub](https://azeem117.github.io/EncryptionHub.github.io/)  
+ 
