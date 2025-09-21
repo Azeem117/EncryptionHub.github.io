@@ -1,4 +1,4 @@
-# 🔗 [Encryption Hub](https://azeem117.github.io/EncryptionHub.github.io/)  
+# 🔗[Encryption Hub](https://azeem117.github.io/EncryptionHub.github.io/)  
 
 # 🚀 Release v1.0.0 – Simple Encryption Portal
 
@@ -89,9 +89,21 @@ You are free to:
 - Use, modify, and distribute the software  
 - Share and improve upon the work  
 
-As long as all derivative works are also distributed under the **GPL-3.0 license**, ensuring the project remains open and free for the community.  
+All derivative works must also be distributed under the **GPL-3.0 license**, ensuring the project remains open and free for the community.  
 
 For full license details, see: [GNU GPL 3.0](https://www.gnu.org/licenses/gpl-3.0.en.html)  
+
+### ⚖️ Third-Party Licenses
+
+This project uses the following third-party libraries, which are subject to their respective licenses:
+
+| Library        | Purpose                      | License | Website |
+|----------------|------------------------------|---------|---------|
+| Tailwind CSS   | Styling & UI                 | MIT     | [https://tailwindcss.com](https://tailwindcss.com) |
+| Google Fonts - Inter | Font                   | SIL Open Font License | [https://fonts.google.com/specimen/Inter](https://fonts.google.com/specimen/Inter) |
+| CryptoJS       | AES encryption               | MIT     | [https://cdnjs.com/libraries/crypto-js](https://cdnjs.com/libraries/crypto-js) |
+
+All included third-party code retains its original license, and this project distributes it in compliance with those terms.
 
 ---
 
@@ -100,4 +112,4 @@ This release of the **Simple Encryption Portal** demonstrates a **secure, modern
 It combines **robust cryptography**, **user-friendly design**, and **cutting-edge steganography** to provide a comprehensive encryption platform.  
 
 Visit the live portal here: 🔗 [Encryption Hub](https://azeem117.github.io/EncryptionHub.github.io/)  
- 
+
