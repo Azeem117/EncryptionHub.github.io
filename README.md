@@ -1,6 +1,6 @@
 # 🔗[Encryption Hub](https://azeem117.github.io/EncryptionHub.github.io/)  
 
-# 🚀 Release v1.0.0 – Simple Encryption Portal
+# 🚀 Release V.1.0.1 – Simple Encryption Portal
 
 ## 🔐 Project Overview
 The **Simple Encryption Portal** is a comprehensive web application designed for secure message, image, and file encryption.  
