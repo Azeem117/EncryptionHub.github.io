@@ -156,17 +156,18 @@ Report security issues: adwardcollin365@gmail.com
     position: relative;
   }
 
-  h1 {
+h1 {
   margin: 0;
   font-size: clamp(1.5rem, 1.2rem + 2vw, 2.2rem);
   background: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
-  -webkit-background-clip: text;  /* for Chrome, Safari, Edge */
-  background-clip: text;          /* for Firefox */
-  -webkit-text-fill-color: transparent; /* required for Chrome/Safari to show gradient */
-  color: transparent;             /* fallback */
+  -webkit-background-clip: text;   /* Chrome, Safari, Edge */
+  -webkit-text-fill-color: transparent; /* Makes gradient visible */
+  background-clip: text;            /* Firefox */
+  color: transparent;               /* Fallback */
   font-weight: 800;
   letter-spacing: -0.025em;
 }
+
 
 
   h2 {
