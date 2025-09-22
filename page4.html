@@ -1,0 +1,813 @@
+<!--
+==========================================================================
+Encryption Hub - A Secure Message Encryption and Steganography Application
+==========================================================================
+
+Copyright (C) 2025 MD AZEEM
+Website: https://github.com/Azeem117
+Version: 1.0.0
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program. If not, see <https://www.gnu.org/licenses/>.
+
+==========================================================================
+Third-Party Components and Libraries
+==========================================================================
+
+1. PDF Generation and Handling:
+   - pdfmake (https://pdfmake.github.io/docs/)
+     License: MIT
+     Used for: Creating password-protected PDFs with embedded payload
+   
+   - PDF.js (https://mozilla.github.io/pdf.js/)
+     License: Apache 2.0
+     Used for: Reading PDF content and extracting embedded payload
+
+2. Styling and UI:
+   - Tailwind CSS (https://tailwindcss.com/)
+     License: MIT
+     Used for: Utility-first CSS framework
+   
+   - Inter Font (https://fonts.google.com/specimen/Inter)
+     License: SIL Open Font License 1.1
+     Used for: Main typography
+
+3. Cryptography:
+   - Web Crypto API (Built-in browser API)
+     Used for: AES-GCM encryption, PBKDF2 key derivation
+   
+   - Steganography Implementation
+     Custom implementation using LSB (Least Significant Bit) technique
+     License: GPL-3.0 (part of this project)
+
+==========================================================================
+Feature Credits
+==========================================================================
+
+- Encryption: AES-GCM with PBKDF2 key derivation
+- Steganography: LSB (Least Significant Bit) implementation in image data
+- PDF Security: Password protection and encrypted payload embedding
+- UI/UX Design: Modern, responsive interface with progress feedback
+- File Handling: Support for PNG, JPEG, and PDF formats
+
+==========================================================================
+License Compliance Requirements
+==========================================================================
+
+1. MIT Licensed Components (pdfmake, Tailwind CSS):
+   - Copyright notices must be included in all copies
+   - License text must be preserved
+
+2. Apache 2.0 Licensed Components (PDF.js):
+   - Copyright notice must be preserved
+   - License text must be included
+   - Changes must be documented
+   - Attribution must be provided
+
+3. SIL Open Font License (Inter Font):
+   - Font name must not be used for derivatives
+   - License text must be preserved
+   - Copyright notice must be preserved
+
+4. GPL-3.0 (This Project):
+   - Source code must be made available
+   - Changes must be documented
+   - Same license must be used for derivatives
+   - Copyright notices must be preserved
+
+==========================================================================
+Security Notice
+==========================================================================
+
+This application implements client-side encryption and steganography.
+No data is transmitted to any server. All processing occurs locally
+in your browser using standard Web APIs and libraries.
+
+Report security issues: adwardcollin365@gmail.com
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Encryption 4.0</title>
+<style>
+  :root{
+    /* Modern Dark Theme Colors */
+    --bg-primary: #0A0F1E;
+    --bg-secondary: #141B2D;
+    --accent-primary: #6366f1;
+    --accent-secondary: #818cf8;
+    --accent-hover: #4f46e5;
+    --text-primary: #f3f4f6;
+    --text-secondary: #9ca3af;
+    --text-muted: #6b7280;
+    --success: #10b981;
+    --error: #ef4444;
+    --border: rgba(99, 102, 241, 0.2);
+    --card-bg: rgba(20, 27, 45, 0.7);
+    --glass-effect: rgba(255, 255, 255, 0.05);
+  }
+  
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    margin: 0;
+    background: linear-gradient(135deg, var(--bg-primary), var(--bg-secondary));
+    color: var(--text-primary);
+    font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
+    position: relative;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+      radial-gradient(circle at 20% 20%, rgba(99, 102, 241, 0.15), transparent 25%),
+      radial-gradient(circle at 80% 80%, rgba(99, 102, 241, 0.15), transparent 25%);
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  header {
+    padding: 2.5rem 1rem;
+    text-align: center;
+    background: linear-gradient(180deg, var(--bg-secondary) 0%, transparent 100%);
+    position: relative;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(1.5rem, 1.2rem + 2vw, 2.2rem);
+    background: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
+    -webkit-background-clip: text;
+    color: transparent;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+  }
+
+  h2 {
+    margin: 1rem 0 0;
+    color: var(--text-secondary);
+    font-weight: 500;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  main {
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 
+      0 10px 30px rgba(0, 0, 0, 0.3),
+      inset 0 1px 1px var(--glass-effect);
+    backdrop-filter: blur(10px);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+      0 15px 35px rgba(0, 0, 0, 0.4),
+      inset 0 1px 1px var(--glass-effect);
+  }
+  label {
+    display: block;
+    font-weight: 600;
+    margin: 1.2rem 0 0.5rem;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+  }
+
+  input[type="file"], input[type="password"], textarea {
+    width: 100%;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    padding: 1rem;
+    outline: none;
+    transition: all 0.3s ease;
+  }
+
+  input[type="file"]:hover, input[type="password"]:hover, textarea:hover {
+    border-color: var(--accent-primary);
+  }
+
+  input[type="file"]:focus, input[type="password"]:focus, textarea:focus {
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+  }
+
+  textarea {
+    min-height: 180px;
+    resize: vertical;
+    line-height: 1.6;
+  }
+
+  .row {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+  }
+
+  button {
+    appearance: none;
+    border: 0;
+    padding: 0.875rem 1.5rem;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.025em;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  button:not(.secondary) {
+    background: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
+    color: white;
+    box-shadow: 
+      0 4px 12px rgba(99, 102, 241, 0.3),
+      inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  }
+
+  button:not(.secondary):hover {
+    transform: translateY(-2px);
+    box-shadow: 
+      0 6px 20px rgba(99, 102, 241, 0.4),
+      inset 0 1px 1px rgba(255, 255, 255, 0.15);
+  }
+
+  button.secondary {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border: 1px solid var(--border);
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05);
+  }
+
+  button.secondary:hover {
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+    background: rgba(99, 102, 241, 0.1);
+  }
+
+  button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+  }
+  .muted {
+    color: var(--text-muted);
+  }
+
+  .status {
+    margin-top: 1rem;
+    min-height: 24px;
+    font-family: 'SF Mono', ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, monospace;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    transition: color 0.3s ease;
+  }
+
+  .status.ok {
+    color: var(--success);
+  }
+
+  .status.danger {
+    color: var(--error);
+  }
+
+  .progress-wrap {
+    margin-top: 1.5rem;
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    height: 8px;
+    position: relative;
+  }
+
+  .progress {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .progress::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent
+    );
+    animation: shimmer 1.5s infinite;
+  }
+
+  @keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+
+  a.download {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    border: 1px dashed var(--border);
+    color: var(--text-primary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    background: var(--bg-secondary);
+    backdrop-filter: blur(8px);
+  }
+
+  a.download:hover {
+    border-color: var(--accent-primary);
+    background: rgba(99, 102, 241, 0.1);
+    transform: translateY(-2px);
+  }
+
+  a.download + br + a.download {
+    margin-top: 0.5rem;
+  }
+
+  footer {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    padding: 2rem 1rem 3rem;
+    background: linear-gradient(0deg, var(--bg-secondary) 0%, transparent 100%);
+  }
+
+  footer a {
+    color: var(--accent-secondary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  footer a:hover {
+    color: var(--accent-primary);
+  }
+
+  footer hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 1.5rem auto;
+    width: 80%;
+    max-width: 400px;
+  }
+</style>
+<!-- pdfmake (PDF generation with password protection) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.10/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.10/vfs_fonts.min.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Encryption 4.0</h1>
+    <h2>One box to type or read secrets • Works with Image ↔ PDF • PDF output is password‑protected</h2>
+  </header>
+  <main>
+    <section class="card">
+      <label for="file">Select file (PNG/JPG/PDF)</label>
+      <input id="file" type="file" accept="image/png,image/jpeg,application/pdf" />
+
+      <label for="io">Message</label>
+      <textarea id="io" placeholder="Type the secret here (for Encrypt). After Decrypt, the message will appear here."></textarea>
+
+      <label for="pwd">Password</label>
+      <input id="pwd" type="password" placeholder="Enter password (used for AES and to lock the PDF)" />
+
+      <div class="row">
+        <button id="btnEncrypt">Encrypt</button>
+        <button id="btnDecrypt" class="secondary">← Decrypt</button>
+        <button id="btnSavePng" class="secondary" disabled>Download PNG</button>
+        <button id="btnSavePdf" class="secondary" disabled>Download PDF</button>
+      </div>
+
+      <div style="margin-top:14px">
+        <div class="progress-wrap" aria-label="Progress">
+          <div id="progress" class="progress"></div>
+        </div>
+        <div id="status" class="status muted">Idle</div>
+      </div>
+
+      <div id="links" style="margin-top:8px"></div>
+    </section>
+  </main>
+ <footer>
+  
+  <p class="muted">
+  
+  Libraries used: <a href="https://pdfmake.github.io/docs/" target="_blank">pdfmake</a> (MIT License) and <a href="https://mozilla.github.io/pdf.js/" target="_blank">pdf.js</a> (Apache 2.0 License).
+  </p>
+  <hr>
+  <p>Encryption Hub v1.0.0 - <a href="https://www.gnu.org/licenses/gpl-3.0.html" class="text-teal-300 hover:underline">GPLv3 Licensed</a></p>
+        <p class="text-slate-400">Copyright © 2025 Azeem117.</p>
+  
+</footer>
+
+
+  <script type="module">
+    import * as pdfjsLib from 'https://mozilla.github.io/pdf.js/build/pdf.mjs';
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://mozilla.github.io/pdf.js/build/pdf.worker.mjs';
+
+    // Expose helper to window so non-module code can call it
+    window.__extractPayloadFromPdf = async function(file, password){
+      const data = await file.arrayBuffer();
+      let loadingTask;
+      try{
+        loadingTask = pdfjsLib.getDocument({ data, password });
+        const pdf = await loadingTask.promise;
+        const max = pdf.numPages;
+        let fullText = '';
+        for (let i=1;i<=max;i++){
+          const page = await pdf.getPage(i);
+          const tc = await page.getTextContent();
+          // Concatenate readable strings
+          fullText += tc.items.map(x=>x.str).join('\n') + '\n';
+        }
+        const start = fullText.indexOf('E40V1:');
+        const end = fullText.indexOf(':END', Math.max(0,start));
+        if (start === -1 || end === -1) throw new Error('No embedded payload found in PDF.');
+        const b64 = fullText.substring(start + 6, end).trim();
+        return base64ToBytes(b64);
+      }catch(err){
+        if (err && err.name === 'PasswordException'){
+          throw new Error('Incorrect or missing PDF password.');
+        }
+        throw err;
+      }finally{
+        try{ loadingTask && loadingTask.destroy(); }catch(_){/*noop*/}
+      }
+    };
+
+    // Provide base64 helpers to window scope
+    function base64ToBytes(b64){
+      const str = atob(b64);
+      const bytes = new Uint8Array(str.length);
+      for (let i=0;i<str.length;i++) bytes[i] = str.charCodeAt(i);
+      return bytes;
+    }
+    window.base64ToBytes = base64ToBytes;
+  </script>
+
+  <script>
+  'use strict';
+  const $ = s=>document.querySelector(s);
+  const statusEl = $('#status');
+  const progressEl = $('#progress');
+  const offCanvas = document.createElement('canvas');
+  const offCtx = offCanvas.getContext('2d');
+
+  function setStatus(msg, kind='muted'){ statusEl.textContent = msg; statusEl.className = 'status ' + (kind||'muted'); }
+  function setProgress(p){ progressEl.style.width = `${Math.max(0,Math.min(100,p))}%`; }
+
+  // ---- Crypto (AES-GCM + PBKDF2) ----
+  const enc = new TextEncoder();
+  const dec = new TextDecoder();
+
+  // Constants for cryptographic operations
+  const PBKDF2_ITERATIONS = 1000000; // Increased to 1 million iterations for stronger key derivation
+  const MIN_PASSWORD_LENGTH = 6; // Minimum password length requirement
+  const SALT_BYTES = 16;
+  const IV_BYTES = 12;
+
+  async function deriveAesKey(password, salt){
+    // Validate password strength
+    if (password.length < MIN_PASSWORD_LENGTH) {
+      throw new Error(`Password must be at least ${MIN_PASSWORD_LENGTH} characters long for adequate security.`);
+    }
+
+    try {
+      const keyMaterial = await crypto.subtle.importKey(
+        'raw', 
+        enc.encode(password), 
+        {name: 'PBKDF2'}, 
+        false, 
+        ['deriveKey']
+      );
+
+      return await crypto.subtle.deriveKey(
+        {
+          name: 'PBKDF2',
+          salt,
+          iterations: PBKDF2_ITERATIONS,
+          hash: 'SHA-256'
+        },
+        keyMaterial,
+        {
+          name: 'AES-GCM',
+          length: 256
+        },
+        false,
+        ['encrypt', 'decrypt']
+      );
+    } catch (error) {
+      throw new Error('Key derivation failed: ' + (error.message || 'Unknown error'));
+    }
+  }
+  async function encryptMessage(message, password){
+    try {
+      // Input validation
+      if (!message || typeof message !== 'string') {
+        throw new Error('Message must be a non-empty string');
+      }
+      if (!password || typeof password !== 'string') {
+        throw new Error('Password must be a non-empty string');
+      }
+
+      // Check for weak passwords
+      const hasUpperCase = /[A-Z]/.test(password);
+      const hasLowerCase = /[a-z]/.test(password);
+      const hasNumbers = /\d/.test(password);
+      const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+      
+      if (!(hasUpperCase && hasLowerCase && hasNumbers && hasSpecialChar)) {
+        throw new Error('Password must contain uppercase, lowercase, numbers, and special characters');
+      }
+
+      const msgBytes = enc.encode(message);
+      if (msgBytes.length === 0) {
+        throw new Error('Message cannot be empty');
+      }
+
+      // Generate cryptographically secure random values
+      const salt = crypto.getRandomValues(new Uint8Array(SALT_BYTES));
+      const iv = crypto.getRandomValues(new Uint8Array(IV_BYTES));
+      
+      // Derive key with increased iterations
+      const key = await deriveAesKey(password, salt);
+      
+      // Encrypt with AES-GCM
+      const cipherBuf = await crypto.subtle.encrypt(
+        {
+          name: 'AES-GCM',
+          iv,
+          tagLength: 128 // Explicit tag length for maximum security
+        },
+        key,
+        msgBytes
+      );
+
+      return {
+        cipher: new Uint8Array(cipherBuf),
+        iv,
+        salt
+      };
+    } catch (error) {
+      throw new Error('Encryption failed: ' + (error.message || 'Unknown error'));
+    }
+  }
+  async function decryptMessage(cipher, password, iv, salt){
+    const key = await deriveAesKey(password, salt);
+    const plainBuf = await crypto.subtle.decrypt({name:'AES-GCM', iv}, key, cipher);
+    return dec.decode(new Uint8Array(plainBuf));
+  }
+
+  // ---- Packaging (header + payload) ----
+  // 36-byte header: 'E40' magic (3) | version (1) | salt (16) | iv (12) | cipherLength (4 BE)
+  const HEADER_BYTES = 36;
+  function buildPayloadBytes(salt, iv, cipher){
+    const out = new Uint8Array(HEADER_BYTES + cipher.length);
+    let o = 0;
+    out[o++]='E'.charCodeAt(0); out[o++]='4'.charCodeAt(0); out[o++]='0'.charCodeAt(0); out[o++]=1;
+    out.set(salt, o); o+=16; out.set(iv, o); o+=12;
+    out[o++] = (cipher.length>>>24)&255; out[o++] = (cipher.length>>>16)&255; out[o++] = (cipher.length>>>8)&255; out[o++] = cipher.length&255;
+    out.set(cipher, o);
+    return out;
+  }
+  function parseHeader(header){
+    if(header[0]!==69||header[1]!==52||header[2]!==48) throw new Error('No embedded data (magic mismatch).');
+    if(header[3]!==1) throw new Error('Unsupported payload version.');
+    const salt = header.slice(4,20);
+    const iv   = header.slice(20,32);
+    const len  = (header[32]<<24)|(header[33]<<16)|(header[34]<<8)|header[35];
+    if(len<0) throw new Error('Invalid cipher length.');
+    return { salt, iv, cipherLength: len };
+  }
+
+  // ---- Base64 helpers (chunked) ----
+  function bytesToBase64(bytes){
+    let binary='';
+    const chunk=0x8000; // 32k chunks to avoid call stack limits
+    for(let i=0;i<bytes.length;i+=chunk){
+      binary += String.fromCharCode.apply(null, bytes.subarray(i, i+chunk));
+    }
+    return btoa(binary);
+  }
+
+  // ---- Stego (LSB on red channel, offscreen canvas) ----
+  function stegoCapacityBytes(w,h){ return Math.floor((w*h)/8); }
+
+  async function loadImageOnCanvasFromFile(file){
+    const url = URL.createObjectURL(file);
+    try{
+      const img = await new Promise((resolve,reject)=>{ const i=new Image(); i.onload=()=>resolve(i); i.onerror=reject; i.src=url;});
+      offCanvas.width = img.naturalWidth; offCanvas.height = img.naturalHeight; offCtx.drawImage(img,0,0);
+      return {width:offCanvas.width, height:offCanvas.height};
+    } finally{ URL.revokeObjectURL(url); }
+  }
+
+  function embedBytesIntoOffCanvas(bytes){
+    const imgData = offCtx.getImageData(0,0,offCanvas.width,offCanvas.height);
+    const data = imgData.data; // RGBA
+    let bitPtr=0; const totalBits=bytes.length*8; const maxBits=Math.floor(data.length/4);
+    if(totalBits>maxBits) throw new Error('Not enough image capacity. Use a larger image or shorter message.');
+    for(let i=0;i<bytes.length;i++){
+      const byte=bytes[i];
+      for(let b=7;b>=0;b--){
+        const bit=(byte>>b)&1; const di=(bitPtr*4);
+        data[di]=(data[di]&0xFE)|bit; bitPtr++;
+      }
+    }
+    offCtx.putImageData(imgData,0,0);
+  }
+
+  function readBytesFromOffCanvas(n){
+    const imgData = offCtx.getImageData(0,0,offCanvas.width,offCanvas.height);
+    const data = imgData.data; let bitPtr=0; const out=new Uint8Array(n);
+    for(let i=0;i<n;i++){
+      let byte=0; for(let b=7;b>=0;b--){ const di=(bitPtr*4); if(di>=data.length) throw new Error('No more embedded data.'); const bit=data[di]&1; byte|=(bit<<b); bitPtr++; }
+      out[i]=byte;
+    }
+    return out;
+  }
+
+  // ---- Downloads ----
+  function canvasToDataURL(){ return offCanvas.toDataURL('image/png'); }
+  function downloadBlob(blob, filename){ const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download=filename; document.body.appendChild(a); a.click(); setTimeout(()=>{ URL.revokeObjectURL(url); a.remove(); }, 0); }
+
+  // ---- PDF (pdfmake) with password protection, embedding invisible payload text ----
+  async function createProtectedPdf({imageDataURL, payloadBytes, password}){
+    const payloadB64 = bytesToBase64(payloadBytes);
+    const invisibleText = { text: `E40V1:${payloadB64}:END`, fontSize: 1, color: '#ffffff', opacity: 0 }; // duplicate storage in metadata too
+
+    const content = [];
+    if (imageDataURL){ content.push({ image: imageDataURL, width: 480, margin:[0,0,0,10] }); }
+    content.push(invisibleText);
+
+    const docDefinition = {
+      info: { title: 'Encrypted Message', subject: 'E40 payload', keywords: `E40V1:${payloadB64}:END` },
+      content,
+      userPassword: password,
+      ownerPassword: password,
+      permissions: { printing: 'highResolution', modifying: false, copying: true, annotating: false, fillingForms: false, contentAccessibility: true, documentAssembly: false }
+    };
+    return new Promise((resolve)=>{
+      pdfMake.createPdf(docDefinition).getBlob((blob)=> resolve(blob));
+    });
+  }
+
+  // ---- UI handlers ----
+  let lastStegoPngDataURL = null;
+
+  $('#btnEncrypt').addEventListener('click', async ()=>{
+    try{
+      setProgress(5); setStatus('Starting encryption...');
+      const file = $('#file').files[0];
+      const message = ($('#io').value||'').trim();
+      const password = $('#pwd').value||'';
+      if (!message) throw new Error('Please type a message in the box.');
+      if (!password) throw new Error('Please enter a password.');
+
+      setProgress(20); setStatus('Encrypting message...');
+      const { cipher, iv, salt } = await encryptMessage(message, password);
+      const payload = buildPayloadBytes(salt, iv, cipher);
+
+      let imageDataURL = null;
+      if (file && file.type.startsWith('image/')){
+        setProgress(40); setStatus('Loading image...');
+        const {width,height} = await loadImageOnCanvasFromFile(file);
+        const capacity = stegoCapacityBytes(width,height);
+        if (payload.length > capacity) throw new Error(`Payload too large (need ${payload.length} bytes, have ~${capacity}). Use a bigger image or shorter text.`);
+        setProgress(60); setStatus('Embedding payload into image (LSB)...');
+        embedBytesIntoOffCanvas(payload);
+        imageDataURL = canvasToDataURL();
+        lastStegoPngDataURL = imageDataURL;
+        $('#btnSavePng').disabled = false;
+      }
+
+      setProgress(80); setStatus('Building password‑protected PDF...');
+      const pdfBlob = await createProtectedPdf({ imageDataURL, payloadBytes: payload, password });
+
+      setProgress(100); setStatus('Done ✔ You can download the PDF. The same password opens both the PDF and decrypts the message.', 'ok');
+      $('#btnSavePdf').disabled = false;
+
+      // attach temporary download links
+      const links = $('#links'); links.innerHTML = '';
+      const pdfUrl = URL.createObjectURL(pdfBlob);
+      const a1 = document.createElement('a'); a1.href = pdfUrl; a1.download = 'encrypted.pdf'; a1.className='download'; a1.textContent='⬇️ Download Password‑Protected PDF'; links.appendChild(a1);
+      if (imageDataURL){ const a2 = document.createElement('a'); a2.href=imageDataURL; a2.download='stego.png'; a2.className='download'; a2.textContent='⬇️ Download Stego PNG'; links.appendChild(document.createElement('br')); links.appendChild(a2); }
+
+    }catch(err){ console.error(err); setProgress(0); setStatus(err.message||String(err), 'danger'); }
+  });
+
+  $('#btnDecrypt').addEventListener('click', async ()=>{
+    try{
+      setProgress(10); setStatus('Preparing to extract...');
+      const file = $('#file').files[0];
+      const password = $('#pwd').value||'';
+      if (!file) throw new Error('Please select a PNG/JPG/PDF created by this tool.');
+      if (!password) throw new Error('Enter the password you used.');
+
+      let payloadBytes;
+      if (file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf')){
+        setProgress(30); setStatus('Opening PDF and reading embedded payload...');
+        payloadBytes = await window.__extractPayloadFromPdf(file, password);
+      } else if (file.type.startsWith('image/')){
+        setProgress(30); setStatus('Loading image to read embedded bytes...');
+        await loadImageOnCanvasFromFile(file);
+        const header = readBytesFromOffCanvas(HEADER_BYTES);
+        const { salt, iv, cipherLength } = parseHeader(header);
+        setProgress(55); setStatus(`Extracting ${cipherLength} bytes of ciphertext...`);
+        const cipher = readBytesFromOffCanvas(cipherLength);
+        payloadBytes = buildPayloadBytes(salt, iv, cipher); // reconstruct full payload for unified handling
+      } else {
+        throw new Error('Unsupported file type.');
+      }
+
+      // Parse and decrypt from payloadBytes
+      const header = payloadBytes.slice(0, HEADER_BYTES);
+      const meta = parseHeader(header);
+      const cipher = payloadBytes.slice(HEADER_BYTES, HEADER_BYTES + meta.cipherLength);
+
+      setProgress(80); setStatus('Decrypting...');
+      const plain = await decryptMessage(cipher, password, meta.iv, meta.salt);
+      setProgress(100); setStatus('Decrypted ✔', 'ok');
+      $('#io').value = plain; // single dialog box shows result
+    }catch(err){ console.error(err); setProgress(0); setStatus('Decrypt failed: ' + (err.message||String(err)), 'danger'); }
+  });
+
+  $('#btnSavePng').addEventListener('click', ()=>{
+    if (!lastStegoPngDataURL) return; const a=document.createElement('a'); a.href=lastStegoPngDataURL; a.download='stego.png'; a.click();
+  });
+
+  $('#btnSavePdf').addEventListener('click', async ()=>{
+    try{
+      const password = $('#pwd').value||''; if(!password) throw new Error('Enter password.');
+      // If we already created links, clicking the visible link is easier; this button is fallback
+      const link = [...document.querySelectorAll('#links a')].find(a=>a.download==='encrypted.pdf');
+      if (link) { link.click(); return; }
+      // Otherwise regenerate from box only (no image) using last typed text
+      const message = ($('#io').value||'').trim(); if(!message) throw new Error('Type a message first.');
+      const { cipher, iv, salt } = await encryptMessage(message, password);
+      const payload = buildPayloadBytes(salt, iv, cipher);
+      const pdfBlob = await createProtectedPdf({ imageDataURL:null, payloadBytes: payload, password });
+      downloadBlob(pdfBlob, 'encrypted.pdf');
+    }catch(err){ setStatus(err.message||String(err), 'danger'); }
+  });
+  </script>
+</body>
+</html>
