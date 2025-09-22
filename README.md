@@ -11,7 +11,7 @@ Key functionalities include:
 - Hide secret messages inside images (steganography)  
 - Encrypt files of any format (images, videos, audio, documents, etc.)  
 
-The portal is organized into **three modules**: **Encryption**, **Encryption 2.0**, and **Encryption 3.0**, each offering a unique encryption capability.
+The portal is organized into **four modules**: **Encryption**, **Encryption 2.0**, **Encryption 3.0**, and **Encryption 4.0**, each offering a unique encryption capability.
 
 ---
 
@@ -51,10 +51,23 @@ The portal is organized into **three modules**: **Encryption**, **Encryption 2.0
 
 ---
 
+### 🔹 4. Encryption 4.0 (Unified Modern Encryption)
+- Combines **text encryption, steganography, and PDF export** into a single, unified interface.  
+- **Password-Protected PDFs:** Embed encrypted messages directly into PDFs for secure sharing.  
+- **LSB Image Steganography:** Hide encrypted payloads inside PNG/JPG images without altering visible quality.  
+- **Enhanced AES-GCM:** Strong cryptography with 1,000,000 PBKDF2 iterations, unique IVs, and random salts.  
+- **Client-Side Processing:** All operations occur locally in the browser for full privacy.  
+- **Progress Indicators:** Real-time status messages and progress bar for large files and images.  
+- **Download Options:** Save stego images and encrypted PDFs with a single password.  
+- **Modern UI/UX:** Dark theme, gradient accents, smooth hover/focus effects, glassmorphism-style cards, and inline error handling.  
+
+---
+
 ## 🎯 Project Goal
 The project aims to provide a **versatile, secure, and user-friendly encryption solution**, combining:  
 - Password-protected message encryption  
 - Hidden message embedding in images  
+- Password-protected PDF export  
 - Full file encryption  
 - A modern, responsive, and intuitive user interface  
 
@@ -66,19 +79,21 @@ The project aims to provide a **versatile, secure, and user-friendly encryption 
 | **Encryption**     | Password-protected text messages, AES-GCM, PBKDF2, client-side security, copy-to-clipboard          |
 | **Encryption 2.0** | Hidden messages inside images, AES encryption, asynchronous processing, progress bar, self-contained|
 | **Encryption 3.0** | File encryption for all formats, AES-GCM, PBKDF2, client-side, responsive UI, dynamic feedback      |
+| **Encryption 4.0** | Unified modern encryption, password-protected PDFs, LSB steganography, AES-GCM with PBKDF2, client-side, progress feedback, modern UI |
 
 ---
 
 ## 🔑 Key Technical Highlights
 - **Client-Side Security:** Ensures private data and passwords never leave the browser.  
 - **AES-GCM Encryption:** Provides secure and authenticated encryption.  
-- **PBKDF2 Key Derivation:** Protects passwords using 100,000 iterations and random salt.  
+- **PBKDF2 Key Derivation:** Protects passwords using 1,000,000 iterations and random salt.  
 - **Randomized Initialization Vector:** Guarantees unique ciphertext for identical inputs.  
 - **Responsive & Modern Design:** Tailwind CSS, hover effects, dark theme, and accessible layout.  
 - **User-Friendly Features:** Copy-to-clipboard, password toggles, progress indicators, clear status, and error messages.  
 - **Self-Contained & Portable:** Entire application (HTML, CSS, JS) is in one file for easy sharing or hosting.  
-- **Robust Steganography:** Encryption 2.0 ensures hidden messages remain secure within images.  
+- **Robust Steganography:** Encryption 2.0 & 4.0 ensure hidden messages remain secure within images.  
 - **Asynchronous Processing:** Handles large files and images without freezing the browser.  
+- **PDF Security:** Password-protected PDFs allow secure sharing of encrypted messages.  
 
 ---
 
@@ -102,6 +117,9 @@ This project uses the following third-party libraries, which are subject to thei
 | Tailwind CSS   | Styling & UI                 | MIT     | [https://tailwindcss.com](https://tailwindcss.com) |
 | Google Fonts - Inter | Font                   | SIL Open Font License | [https://fonts.google.com/specimen/Inter](https://fonts.google.com/specimen/Inter) |
 | CryptoJS       | AES encryption               | MIT     | [https://cdnjs.com/libraries/crypto-js](https://cdnjs.com/libraries/crypto-js) |
+| pdfmake        | PDF generation & password-protection | MIT     | [pdfmake](https://pdfmake.github.io/docs/) |
+| PDF.js         | PDF reading & payload extraction | Apache 2.0 | [PDF.js](https://mozilla.github.io/pdf.js/) |
+| Inter Font     | Typography                   | SIL Open Font License | [Inter](https://fonts.google.com/specimen/Inter) |
 
 All included third-party code retains its original license, and this project distributes it in compliance with those terms.
 
@@ -109,7 +127,6 @@ All included third-party code retains its original license, and this project dis
 
 ## ✅ Conclusion
 This release of the **Simple Encryption Portal** demonstrates a **secure, modern, and portable web application** for encryption enthusiasts, developers, and casual users alike.  
-It combines **robust cryptography**, **user-friendly design**, and **cutting-edge steganography** to provide a comprehensive encryption platform.  
+It combines **robust cryptography**, **user-friendly design**, **cutting-edge steganography**, and **password-protected PDF export** to provide a comprehensive encryption platform.  
 
-Visit the live portal here: 🔗 [Encryption Hub](https://azeem117.github.io/EncryptionHub.github.io/)  
-
+Visit the live portal here: 🔗 [Encryption Hub](https://azeem117.github.io/EncryptionHub.github.io/)
