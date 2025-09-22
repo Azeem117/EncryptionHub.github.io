@@ -68,6 +68,7 @@ Special Notes:
             align-items: center;
             min-height: 100vh;
             padding: 1rem;
+            flex-direction: column;
         }
         .container {
             width: 100%;
@@ -270,6 +271,15 @@ Special Notes:
         .animate-spin {
             animation: spin 1s linear infinite;
         }
+        footer {
+            margin-top: auto;
+            padding-top: 2rem;
+            text-align: center;
+        }
+        footer p {
+            margin: 0;
+            padding: 0;
+        }
     </style>
 </head>
 <body class="bg-black text-white">
@@ -294,7 +304,7 @@ Special Notes:
                 <svg id="eye-slash-icon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hidden" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd" d="M3.707 2.293A1 1 0 002.293 3.707l14 14a1 1 0 001.414-1.414l-14-14z" clip-rule="evenodd" />
                     <path d="M10 13a3 3 0 100-6 3 3 0 000 6z" />
-                    <path fill-rule="evenodd" d="M13.673 17.51a.692.692 0 00-.776-.457A9.914 9.914 0 0110 18c-4.478 0-8.268-2.943-9.542-7-.052-.16-.079-.328-.083-.497a.692.692 0 00-.472-.515.692.692 0 00-.516.474c-.004.02-.007.039-.011.059.004.053.011.106.023.159C1.732 14.057 5.522 17 10 17c.502 0 .99-.036 1.464-.105a.692.692 0 00.709.619.692.692 0 00.618-.71zM10 4a6 6 0 00-6 6c0 1.259.324 2.44.887 3.518a.692.692 0 00.62.433.692.692 0 00.414-.153c.125-.1.2-.23.218-.372.584-2.887 3.23-5.06 6.37-5.06a.692.692 0 00.692-.692.692.692 0 00-.692-.692c-2.31 0-4.322 1.4-5.228 3.5a.692.692 0 00.088.583.692.692 0 00.583.088 6.002 6.002 0 00-2.844 2.845.692.692 0 00-.088.583.692.692 0 00.583.088c.126.04.253.078.38.115A5.998 5.998 0 0010 4z" clip-rule="evenodd" />
+                    <path fill-rule="evenodd" d="M13.673 17.51a.692.692 0 00-.776-.457A9.914 9.914 0 0110 18c-4.478 0-8.268-2.943-9.542-7-.052-.16-.079-.328-.083-.497a.692.692 0 00-.472-.515.692.692 0 00-.516.474c-.004.02-.007.039-.011.059.004.053.011.106.023.159C1.732 14.057 5.522 17 10 17c.502 0 .99-.036 1.464-.105a.692.692 0 00.709.619.692.692 0 00.618-.71zM10 4a6 6 0 00-6 6c0 1.259.324 2.44.887 3.518a.692.692 0 00.62.433.692.692 0 00.414-.153c.125-.1.2-.23.218-.372.584-2.887 3.23-5.06 6.37-5.06a.692.692 0 00.692-.692.692.692 0 00-.692-.692c-2.31 0-4.322 1.4-5.228 3.5a.692.692 0 00.088.583.692.692 0 00.583.088 6.002 6.002 0 00-2.844 2.845.692.692 0 00-.088.583.692.692 0 00.583.088c.126.04.253.078.38.115A5.998 5.000 0 0010 4z" clip-rule="evenodd" />
                 </svg>
             </button>
         </div>
@@ -324,13 +334,12 @@ Special Notes:
     </div>
     
     <div id="messageBox" class="message-box"></div>
-    
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-center p-6 mt-8"><br><br><br><br><hr>
-        <p>Encryption Hub v1.0.0 - <a href="https://www.gnu.org/licenses/gpl-3.0.html" class="text-blue-400 hover:underline">GPLv3 Licensed</a></p>
-        <p class="text-gray-400">Copyright © 2025 Azeem117.</p>
-    </footer> 
 </div>
+    
+<footer>
+    <p>Encryption Hub v1.0.0 - <a href="https://www.gnu.org/licenses/gpl-3.0.html" class="text-blue-400 hover:underline">GPLv3 Licensed</a></p>
+    <p class="text-gray-400">Copyright © 2025 Azeem117.</p>
+</footer> 
 
 <script>
     // --- Helper Functions ---
@@ -397,7 +406,7 @@ Special Notes:
             {
                 name: "PBKDF2",
                 salt: salt,
-                iterations: 100000,
+                iterations: 1000000,
                 hash: "SHA-256",
             },
             keyMaterial,
@@ -526,9 +535,14 @@ Special Notes:
 
     // Handles the "Encrypt" button click.
     document.getElementById('encryptBtn').addEventListener('click', async () => {
+        const messageInput = document.getElementById('message');
+        if (!messageInput.value) {
+            showMessage("Please enter a message to encrypt.", true);
+            return;
+        }
+        
         toggleLoading(true);
         const passwordInput = document.getElementById('password');
-        const messageInput = document.getElementById('message');
         const resultBox = document.getElementById('resultBox');
         const resultText = document.getElementById('resultText');
 
@@ -543,9 +557,14 @@ Special Notes:
 
     // Handles the "Decrypt" button click.
     document.getElementById('decryptBtn').addEventListener('click', async () => {
+        const messageInput = document.getElementById('message');
+        if (!messageInput.value) {
+            showMessage("Please enter a message to decrypt.", true);
+            return;
+        }
+
         toggleLoading(true);
         const passwordInput = document.getElementById('password');
-        const messageInput = document.getElementById('message');
         const resultBox = document.getElementById('resultBox');
         const resultText = document.getElementById('resultText');
 
