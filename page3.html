@@ -62,18 +62,18 @@ Special Notes:
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #1a202c;
+            background-color: #0f172a; /* Slate 950 */
         }
         .container {
-            background-color: #2d3748;
-            border: 2px solid #4a5568;
+            background-color: #1e293b; /* Slate 800 */
+            border: 2px solid #475569; /* Slate 600 */
         }
         .btn {
-            @apply px-6 py-3 font-semibold rounded-full shadow-md transition duration-300 ease-in-out transform hover:scale-105;
+            @apply px-14 py-7 font-bold rounded-full shadow-xl text-3xl transition duration-300 ease-in-out transform hover:scale-105;
         }
         #loader {
             border: 4px solid #f3f3f3;
-            border-top: 4px solid #3498db;
+            border-top: 4px solid #2dd4bf; /* Teal 400 */
             border-radius: 50%;
             width: 24px;
             height: 24px;
@@ -88,72 +88,80 @@ Special Notes:
 <body class="flex items-center justify-center min-h-screen p-4 text-white">
 
     <div class="container w-full max-w-xl mx-auto rounded-xl p-8 shadow-2xl">
-        <h1 class="text-3xl font-bold text-center text-teal-300 mb-2">Encryption 3.0</h1>
-        <p class="text-center text-sm text-gray-400 mb-6">Uses AES-GCM and PBKDF2 for strong encryption.</p>
+        <h1 class="text-3xl font-bold text-center text-teal-400 mb-2">Encryption 3.0</h1>
+        <p class="text-center text-sm text-slate-400 mb-6">Uses AES-GCM and PBKDF2 for strong encryption.</p>
 
         <!-- Main application area -->
         <div class="space-y-6">
             <!-- File input section -->
             <div>
-                <label for="fileInput" class="block text-gray-300 font-medium mb-2">
+                <label for="fileInput" class="block text-slate-300 font-medium mb-2">
                     Select a file to encrypt or decrypt:
                 </label>
                 <input type="file" id="fileInput"
-                       class="block w-full text-sm text-gray-500
-                              file:mr-4 file:py-2 file:px-4
-                              file:rounded-full file:border-0
-                              file:text-sm file:font-semibold
-                              file:bg-teal-500 file:text-white
-                              hover:file:bg-teal-600 cursor-pointer">
+                        class="block w-full text-sm text-slate-500
+                                file:mr-4 file:py-2 file:px-4
+                                file:rounded-full file:border-0
+                                file:text-sm file:font-semibold
+                                file:bg-slate-600 file:text-white
+                                hover:file:bg-slate-700 cursor-pointer">
             </div>
 
             <!-- Key input section -->
             <div>
-                <label for="keyInput" class="block text-gray-300 font-medium mb-2">
+                <label for="keyInput" class="block text-slate-300 font-medium mb-2">
                     Enter your secret key:
                 </label>
                 <div class="relative">
                     <input type="password" id="keyInput" placeholder="Enter your key..."
-                           class="w-full p-3 pr-10 rounded-full bg-gray-700 text-white placeholder-gray-400
-                                  focus:outline-none focus:ring-2 focus:ring-teal-500">
-                    <button id="togglePassword" class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-400 hover:text-white">
+                               class="w-full p-3 pr-10 rounded-full bg-slate-700 text-white placeholder-slate-400
+                                     focus:outline-none focus:ring-2 focus:ring-teal-500">
+                    <button id="togglePassword" class="absolute inset-y-0 right-0 px-3 flex items-center text-slate-400 hover:text-white">
                          <svg id="eye-icon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                         </svg>
                         <svg id="eye-off-icon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.879 10.121A4.989 4.989 0 0112 15a4.989 4.989 0 01-1.879-4.879m3.758 3.758a.5.5 0 11-.707-.707m.707.707a.5.5 0 10-.707-.707" />
-                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m2-2l2-2" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.879 10.121A4.989 4.989 0 0112 15a4.989 4.989 0 01-1.879-4.879m3.758 3.758a.5.5 0 11-.707-.707m.707.707a.5.5 0 10-.707-.707" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m2-2l2-2" />
                         </svg>
                     </button>
                 </div>
             </div>
 
             <!-- Action buttons -->
-            <div class="flex flex-col sm:flex-row gap-4">
-                <button id="encryptBtn" class="btn bg-blue-500 hover:bg-blue-600 flex-1 rounded-full">Encrypt File</button>
-                <button id="decryptBtn" class="btn bg-green-500 hover:bg-green-600 flex-1 rounded-full">Decrypt File</button>
-            </div>
+<div class="flex flex-col sm:flex-row gap-4">
+  <button id="encryptBtn" 
+    class="btn bg-teal-600 hover:bg-teal-700 flex-1 rounded-full 
+           px-6 py-4 text-lg font-semibold shadow-md">
+    Encrypt File
+  </button>
+
+  <button id="decryptBtn" 
+    class="btn bg-teal-600 hover:bg-teal-700 flex-1 rounded-full 
+           px-6 py-4 text-lg font-semibold shadow-md">
+    Decrypt File
+  </button>
+</div>
 
             <!-- Status and download area -->
             <div class="mt-6 text-center">
-                <p id="statusMessage" class="text-sm text-gray-400 min-h-[20px]"></p>
+                <p id="statusMessage" class="text-sm text-slate-400 min-h-[20px]"></p>
                 <div id="loader" class="mx-auto hidden"></div>
                 <a id="downloadLink" href="#" download class="hidden mt-4 inline-block btn bg-teal-500 hover:bg-teal-600 rounded-full">Download File</a>
             </div>
 
             <!-- Disclaimer -->
-            <div class="mt-8 pt-4 border-t border-gray-600 text-sm text-gray-400 text-center">
+            <div class="mt-8 pt-4 border-t border-slate-600 text-sm text-slate-400 text-center">
                 <p>
-                    <span class="font-bold text-red-400">Disclaimer:</span> This tool uses cryptographically secure algorithms (AES-GCM and PBKDF2) but is a client-side implementation. For maximum security, always use a dedicated, server-side cryptographic solution and a strong, unique password for each file.
+                    <span class="font-bold text-teal-400">Disclaimer:</span> This tool uses cryptographically secure algorithms (AES-GCM and PBKDF2) but is a client-side implementation. For maximum security, always use a dedicated, server-side cryptographic solution and a strong, unique password for each file.
                 </p>
-                
             </div>
             <!-- Footer -->
-    <footer class="bg-gray-800 text-center p-6 mt-8">
-        <p>Encryption Hub v1.0.0 - <a href="https://www.gnu.org/licenses/gpl-3.0.html" class="text-blue-400 hover:underline">GPLv3 Licensed</a></p>
-        <p class="text-gray-400">Copyright © 2025 Azeem117.</p>
+    <footer class="bg-slate-900 text-center p-6 mt-8">
+        <p>Encryption Hub v1.0.0 - <a href="https://www.gnu.org/licenses/gpl-3.0.html" class="text-teal-300 hover:underline">GPLv3 Licensed</a></p>
+        <p class="text-slate-400">Copyright © 2025 Azeem117.</p>
     </footer> 
         </div>
     </div>
@@ -171,7 +179,7 @@ Special Notes:
             const downloadLink = document.getElementById('downloadLink');
             const loader = document.getElementById('loader');
 
-            const iterations = 100000;
+            const iterations = 1000000;
             const keyLength = 256;
             let originalFile = null;
 
@@ -256,7 +264,6 @@ Special Notes:
 
                     statusMessage.textContent = "Encrypting file...";
 
-                    // Read the entire file into memory as an ArrayBuffer
                     const fileBuffer = await originalFile.arrayBuffer();
 
                     // Encrypt the file buffer
@@ -266,16 +273,29 @@ Special Notes:
                         fileBuffer
                     );
 
-                    // Safer concatenation using a single Uint8Array
-                    const combined = new Uint8Array(salt.length + iv.length + encryptedBuffer.byteLength);
-                    combined.set(salt, 0);
-                    combined.set(iv, salt.length);
-                    combined.set(new Uint8Array(encryptedBuffer), salt.length + iv.length);
+                    // --- NEW LOGIC: PREPEND FILENAME METADATA ---
+                    // Encode the original filename
+                    const fileNameBuffer = new TextEncoder().encode(originalFile.name);
+                    // Ensure filename is not too long to store in a single byte
+                    if (fileNameBuffer.byteLength > 255) {
+                        statusMessage.textContent = "Filename is too long.";
+                        setUIState(false);
+                        return;
+                    }
+                    const fileNameLength = new Uint8Array([fileNameBuffer.byteLength]);
+
+                    // Combine filename metadata, salt, iv, and encrypted data
+                    const combined = new Uint8Array(1 + fileNameBuffer.byteLength + salt.length + iv.length + encryptedBuffer.byteLength);
+                    combined.set(fileNameLength, 0);
+                    combined.set(fileNameBuffer, 1);
+                    combined.set(salt, 1 + fileNameBuffer.byteLength);
+                    combined.set(iv, 1 + fileNameBuffer.byteLength + salt.length);
+                    combined.set(new Uint8Array(encryptedBuffer), 1 + fileNameBuffer.byteLength + salt.length + iv.length);
                     
                     const encryptedBlob = new Blob([combined], { type: 'application/octet-stream' });
                     
-                    const fileNameParts = originalFile.name.split('.');
-                    const newFileName = fileNameParts.length > 1 ? fileNameParts.slice(0, -1).join('.') + '_secure.enc' : originalFile.name + '_secure.enc';
+                    // The download link will always have a generic .enc extension
+                    const newFileName = originalFile.name + '.enc';
 
                     const url = URL.createObjectURL(encryptedBlob);
                     downloadLink.href = url;
@@ -312,20 +332,27 @@ Special Notes:
                 statusMessage.textContent = "Deriving key with PBKDF2...";
 
                 try {
-                    // Read the entire file into memory as an ArrayBuffer
                     const encryptedFileBuffer = await originalFile.arrayBuffer();
-
-                    // Extract salt and IV
-                    if (encryptedFileBuffer.byteLength < 28) {
+                    
+                    // --- NEW LOGIC: EXTRACT FILENAME METADATA FIRST ---
+                    if (encryptedFileBuffer.byteLength < 29) { // 1 byte length + 1 byte filename + 16 salt + 12 iv
                         statusMessage.textContent = "Decryption failed. The file is corrupted or not a valid encrypted file.";
                         setUIState(false);
                         return;
                     }
 
-                    const salt = new Uint8Array(encryptedFileBuffer.slice(0, 16));
-                    const iv = new Uint8Array(encryptedFileBuffer.slice(16, 28));
-                    const encryptedData = new Uint8Array(encryptedFileBuffer.slice(28));
+                    const fileNameLength = new Uint8Array(encryptedFileBuffer.slice(0, 1))[0];
+                    const fileNameBuffer = new Uint8Array(encryptedFileBuffer.slice(1, 1 + fileNameLength));
+                    const newFileName = new TextDecoder().decode(fileNameBuffer);
 
+                    const saltStart = 1 + fileNameLength;
+                    const ivStart = saltStart + 16;
+                    const encryptedDataStart = ivStart + 12;
+
+                    const salt = new Uint8Array(encryptedFileBuffer.slice(saltStart, ivStart));
+                    const iv = new Uint8Array(encryptedFileBuffer.slice(ivStart, encryptedDataStart));
+                    const encryptedData = new Uint8Array(encryptedFileBuffer.slice(encryptedDataStart));
+                    
                     const derivedKey = await deriveKeyFromPassword(keyInput.value, salt, ["decrypt"]);
 
                     statusMessage.textContent = "Decrypting file...";
@@ -336,9 +363,6 @@ Special Notes:
                         derivedKey,
                         encryptedData
                     );
-
-                    const fileNameParts = originalFile.name.split('_secure.enc');
-                    const newFileName = fileNameParts.length > 1 ? fileNameParts[0] : 'decrypted_file';
 
                     const decryptedBlob = new Blob([decryptedBuffer], { type: 'application/octet-stream' });
                     
