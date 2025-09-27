@@ -461,22 +461,16 @@ Report security issues: adwardcollin365@gmail.com
       <label for="file">Select Data Source (PNG/JPG/PDF)</label>
       <input id="file" type="file" accept="image/png,image/jpeg,application/pdf" />
 
-      <label for="io">Message or Encoded Data (Base64)</label>
+      <label for="io">Message or Encoded Data </label>
       <textarea id="io" placeholder="Type the secret message here for ENCRYPT. After DECRYPT, the plain text or Base64 data will appear here."></textarea>
 
-      <label for="pwd">Encryption Key (Password)</label>
+      <label for="pwd">Password : </label>
       <input id="pwd" type="password" placeholder="Enter a secure password (used for AES)" />
 
       <div class="row">
-        <button id="btnEncrypt">Encrypt & Encode</button>
-        <button id="btnDecrypt" class="secondary">Decrypt & Decode</button>
+        <button id="btnEncrypt">Encrypt</button>
+        <button id="btnDecrypt" class="secondary">Decrypt</button>
       </div>
-
-      <div class="row" style="margin-top: 1rem;">
-        <button id="btnSavePng" class="secondary" disabled>Download Encoded PNG</button>
-        <button id="btnSavePdf" class="secondary" disabled>Download Password-Protected PDF</button>
-      </div>
-
       <div style="margin-top:14px">
         <div class="progress-wrap" aria-label="Progress">
           <div id="progress" class="progress"></div>
