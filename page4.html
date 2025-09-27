@@ -100,33 +100,34 @@ Report security issues: adwardcollin365@gmail.com
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Encryption 4.0</title>
-    <link rel="icon" type="image/png" sizes="16x16" href="logo/icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="logo/icon.png">
-    <link rel="icon" type="image/png" sizes="48x48" href="logo/icon.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="logo/icon.png">
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#111827">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Encryption 4.0 - Neon Cyber Hub</title>
+<!-- Using Inter font -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<!-- Placeholder for icon.png -->
+<!-- <link rel="icon" type="image/png" sizes="16x16" href="logo/icon.png"> -->
+<meta name="theme-color" content="#0a0b1a">
 
 <style>
-  :root{
-    /* Modern Teal & Charcoal Theme Colors */
-    --bg-primary: #1a1a2e;
-    --bg-secondary: #23253b;
-    --accent-primary: #00c6ff;
-    --accent-secondary: #00e1ff;
+  :root {
+    /* Modern Deep Space & Neon Cyan Theme Colors */
+    --bg-primary: #0a0b1a; /* Deeper space background */
+    --bg-secondary: #141525;
+    --accent-primary: #00c6ff; /* Cyan */
+    --accent-secondary: #00e1ff; /* Lighter Cyan */
     --accent-hover: #00b2e6;
-    --text-primary: #f0f2f5;
+    --text-primary: #e6f7ff; /* Whiter text for contrast */
     --text-secondary: #a0a3af;
     --text-muted: #6c757d;
     --success: #2ecc71;
     --error: #e74c3c;
-    --border: rgba(0, 198, 255, 0.2);
-    --card-bg: rgba(35, 37, 59, 0.7);
-    --glass-effect: rgba(255, 255, 255, 0.05);
+    --border: rgba(0, 198, 255, 0.3); /* Sharper, neon-tinged border */
+    --card-bg: rgba(20, 21, 37, 0.85); /* Slightly darker, more opaque card */
+    --glass-effect: rgba(255, 255, 255, 0.08);
+    --neon-glow-s: 0 0 10px rgba(0, 198, 255, 0.6);
+    --neon-glow-m: 0 0 15px rgba(0, 198, 255, 0.8);
   }
-  
+
   * {
     box-sizing: border-box;
     margin: 0;
@@ -140,8 +141,10 @@ Report security issues: adwardcollin365@gmail.com
     font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
     min-height: 100vh;
     position: relative;
+    padding-bottom: 5rem; /* Space for footer */
   }
 
+  /* Enhanced Background Grid/Particles Effect */
   body::before {
     content: '';
     position: fixed;
@@ -150,57 +153,78 @@ Report security issues: adwardcollin365@gmail.com
     width: 100%;
     height: 100%;
     background: 
-      radial-gradient(circle at 20% 20%, rgba(0, 198, 255, 0.15), transparent 25%),
-      radial-gradient(circle at 80% 80%, rgba(0, 198, 255, 0.15), transparent 25%);
+      radial-gradient(circle at 20% 20%, rgba(0, 198, 255, 0.2), transparent 30%),
+      radial-gradient(circle at 80% 80%, rgba(0, 198, 255, 0.2), transparent 30%);
     pointer-events: none;
     z-index: -1;
   }
 
   header {
-    padding: 2.5rem 1rem;
+    padding: 3rem 1rem 2rem;
     text-align: center;
     background: linear-gradient(180deg, var(--bg-secondary) 0%, transparent 100%);
     position: relative;
   }
+  
+  /* NEON H1 GLOW */
+  header h1 {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent-secondary);
+    text-shadow: 
+      0 0 5px var(--accent-secondary),
+      0 0 10px var(--accent-primary),
+      0 0 20px var(--accent-primary);
+    transition: text-shadow 0.3s ease;
+  }
 
-  h2 {
+  header h2 {
     margin: 1rem 0 0;
-    color: var(--text-secondary);
+    color: #b3d9ff; /* Better contrast */
     font-weight: 500;
-    font-size: 1rem;
+    font-size: clamp(1rem, 2vw, 1.15rem);
     line-height: 1.5;
+    max-width: 600px;
+    margin: 0.5rem auto 0;
   }
 
   main {
-    max-width: 850px;
+    max-width: 900px;
     margin: 0 auto;
     padding: 2rem 1rem;
   }
 
   .card {
     background: var(--card-bg);
-    border: 1px solid var(--border);
+    border: 2px solid var(--border); /* Thicker border */
     border-radius: 20px;
-    padding: 2rem;
+    padding: clamp(1.5rem, 4vw, 2.5rem);
     box-shadow: 
-      0 10px 30px rgba(0, 0, 0, 0.3),
+      0 10px 30px rgba(0, 0, 0, 0.5),
+      0 0 15px rgba(0, 198, 255, 0.2), /* Subtle card neon glow */
       inset 0 1px 1px var(--glass-effect);
     backdrop-filter: blur(10px);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
 
   .card:hover {
-    transform: translateY(-2px);
+    transform: translateY(-3px);
     box-shadow: 
-      0 15px 35px rgba(0, 0, 0, 0.4),
+      0 15px 35px rgba(0, 0, 0, 0.6),
+      0 0 25px rgba(0, 198, 255, 0.4), /* Enhanced glow on hover */
       inset 0 1px 1px var(--glass-effect);
   }
+
   label {
     display: block;
     font-weight: 600;
-    margin: 1.2rem 0 0.5rem;
+    margin: 1.5rem 0 0.5rem;
     color: var(--text-secondary);
     font-size: 0.95rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
   }
 
   input[type="file"], input[type="password"], textarea {
@@ -212,21 +236,26 @@ Report security issues: adwardcollin365@gmail.com
     padding: 1rem;
     outline: none;
     transition: all 0.3s ease;
+    font-size: 1rem;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
   }
 
   input[type="file"]:hover, input[type="password"]:hover, textarea:hover {
     border-color: var(--accent-primary);
   }
 
+  /* NEON FOCUS EFFECT */
   input[type="file"]:focus, input[type="password"]:focus, textarea:focus {
     border-color: var(--accent-primary);
-    box-shadow: 0 0 0 3px rgba(0, 198, 255, 0.2);
+    box-shadow: 0 0 0 4px rgba(0, 198, 255, 0.3), var(--neon-glow-s); /* Neon glow on focus */
   }
 
   textarea {
     min-height: 180px;
     resize: vertical;
     line-height: 1.6;
+    font-family: 'SF Mono', ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, monospace;
+    font-size: 0.95rem;
   }
 
   .row {
@@ -237,46 +266,40 @@ Report security issues: adwardcollin365@gmail.com
   }
 
   button {
+    flex-grow: 1;
     appearance: none;
     border: 0;
     padding: 0.875rem 1.5rem;
     border-radius: 12px;
     cursor: pointer;
-    font-weight: 600;
+    font-weight: 700;
     font-size: 0.95rem;
-    letter-spacing: 0.025em;
+    letter-spacing: 0.05em;
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    min-width: 120px;
   }
 
-  button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-
+  /* PRIMARY BUTTON (NEON GLOW) */
   button:not(.secondary) {
-    background: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
-    color: white;
+    background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary));
+    color: var(--bg-primary); /* Dark text on bright button */
     box-shadow: 
-      0 4px 12px rgba(0, 198, 255, 0.3),
-      inset 0 1px 1px rgba(255, 255, 255, 0.1);
+      0 0 5px rgba(0, 198, 255, 0.5),
+      0 6px 15px rgba(0, 198, 255, 0.5),
+      inset 0 1px 1px rgba(255, 255, 255, 0.2);
   }
 
   button:not(.secondary):hover {
-    transform: translateY(-2px);
+    transform: scale(1.02);
     box-shadow: 
-      0 6px 20px rgba(0, 198, 255, 0.4),
-      inset 0 1px 1px rgba(255, 255, 255, 0.15);
+      0 0 10px rgba(0, 198, 255, 0.8),
+      0 8px 25px rgba(0, 198, 255, 0.8),
+      inset 0 1px 1px rgba(255, 255, 255, 0.3);
   }
 
+  /* SECONDARY BUTTON (GLASS/GHOST EFFECT) */
   button.secondary {
     background: var(--bg-secondary);
     color: var(--text-primary);
@@ -288,12 +311,14 @@ Report security issues: adwardcollin365@gmail.com
     border-color: var(--accent-primary);
     color: var(--accent-primary);
     background: rgba(0, 198, 255, 0.1);
+    transform: translateY(-1px);
   }
 
   button:disabled {
-    opacity: 0.5;
+    opacity: 0.4;
     cursor: not-allowed;
     transform: none !important;
+    box-shadow: none !important;
   }
   .muted {
     color: var(--text-muted);
@@ -308,13 +333,8 @@ Report security issues: adwardcollin365@gmail.com
     transition: color 0.3s ease;
   }
 
-  .status.ok {
-    color: var(--success);
-  }
-
-  .status.danger {
-    color: var(--error);
-  }
+  .status.ok { color: var(--success); }
+  .status.danger { color: var(--error); }
 
   .progress-wrap {
     margin-top: 1.5rem;
@@ -322,8 +342,9 @@ Report security issues: adwardcollin365@gmail.com
     border: 1px solid var(--border);
     border-radius: 12px;
     overflow: hidden;
-    height: 8px;
+    height: 10px; /* Taller progress bar */
     position: relative;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
   }
 
   .progress {
@@ -333,31 +354,14 @@ Report security issues: adwardcollin365@gmail.com
     transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
+    box-shadow: 0 0 5px var(--accent-primary); /* Progress bar glow */
   }
 
-  .progress::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(255, 255, 255, 0.2),
-      transparent
-    );
-    animation: shimmer 1.5s infinite;
-  }
-
-  @keyframes shimmer {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(100%); }
-  }
-
+  /* Download links styling */
   a.download {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
     margin-top: 1rem;
     padding: 1rem 1.5rem;
     border-radius: 12px;
@@ -371,9 +375,11 @@ Report security issues: adwardcollin365@gmail.com
   }
 
   a.download:hover {
+    border-style: solid;
     border-color: var(--accent-primary);
-    background: rgba(0, 198, 255, 0.1);
-    transform: translateY(-2px);
+    background: rgba(0, 198, 255, 0.15);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 198, 255, 0.2);
   }
 
   a.download + br + a.download {
@@ -381,10 +387,14 @@ Report security issues: adwardcollin365@gmail.com
   }
 
   footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
     text-align: center;
     color: var(--text-muted);
-    font-size: 0.9rem;
-    padding: 2rem 1rem 3rem;
+    font-size: 0.85rem;
+    padding: 1.5rem 1rem 1.5rem;
     background: linear-gradient(0deg, var(--bg-secondary) 0%, transparent 100%);
   }
 
@@ -401,59 +411,465 @@ Report security issues: adwardcollin365@gmail.com
   footer hr {
     border: none;
     border-top: 1px solid var(--border);
-    margin: 1.5rem auto;
+    margin: 1rem auto;
     width: 80%;
     max-width: 400px;
   }
+
+  /* Responsive adjustments for button row */
+  @media (max-width: 600px) {
+    .row {
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    button {
+      width: 100%;
+    }
+    header h1 {
+      font-size: 2.2rem;
+    }
+    .card {
+      padding: 1.5rem;
+    }
+  }
 </style>
-<!-- pdfmake (PDF generation with password protection) -->
+
+<!-- Necessary Libraries -->
+<!-- pdfmake (PDF generation) -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.10/pdfmake.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.10/vfs_fonts.min.js"></script>
+<!-- Crypto-JS (AES encryption) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"></script>
+<!-- pdf.js (PDF reading/rendering) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.1.365/pdf.min.js"></script>
+<script>
+  // Setup PDF.js worker path
+  if (typeof pdfjsLib !== 'undefined') {
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.1.365/pdf.worker.min.js';
+  }
+</script>
 </head>
 <body>
   <header>
     <h1>Encryption 4.0</h1>
-    <h2>One box to type or read secrets • Works with Image ↔ PDF • PDF output is password‑protected</h2>
+    <h2>One box to type or read secrets • Steganography for Image ↔ Text • PDF output is password‑protected</h2>
   </header>
   <main>
     <section class="card">
-      <label for="file">Select file (PNG/JPG/PDF)</label>
+      <div id="message-box" style="display: none; background: var(--bg-secondary); padding: 1rem; border-radius: 12px; border: 1px solid var(--accent-primary); margin-bottom: 1rem; color: var(--text-primary);"></div>
+
+      <label for="file">Select Data Source (PNG/JPG/PDF)</label>
       <input id="file" type="file" accept="image/png,image/jpeg,application/pdf" />
 
-      <label for="io">Message</label>
-      <textarea id="io" placeholder="Type the secret here (for Encrypt). After Decrypt, the message will appear here."></textarea>
+      <label for="io">Message or Encoded Data (Base64)</label>
+      <textarea id="io" placeholder="Type the secret message here for ENCRYPT. After DECRYPT, the plain text or Base64 data will appear here."></textarea>
 
-      <label for="pwd">Password</label>
-      <input id="pwd" type="password" placeholder="Enter password (used for AES and to lock the PDF)" />
+      <label for="pwd">Encryption Key (Password)</label>
+      <input id="pwd" type="password" placeholder="Enter a secure password (used for AES)" />
 
       <div class="row">
-        <button id="btnEncrypt">Encrypt</button>
-        <button id="btnDecrypt" class="secondary">← Decrypt</button>
-        <button id="btnSavePng" class="secondary" disabled>Download PNG</button>
-        <button id="btnSavePdf" class="secondary" disabled>Download PDF</button>
+        <button id="btnEncrypt">Encrypt & Encode</button>
+        <button id="btnDecrypt" class="secondary">Decrypt & Decode</button>
+      </div>
+
+      <div class="row" style="margin-top: 1rem;">
+        <button id="btnSavePng" class="secondary" disabled>Download Encoded PNG</button>
+        <button id="btnSavePdf" class="secondary" disabled>Download Password-Protected PDF</button>
       </div>
 
       <div style="margin-top:14px">
         <div class="progress-wrap" aria-label="Progress">
           <div id="progress" class="progress"></div>
         </div>
-        <div id="status" class="status muted">Idle</div>
+        <div id="status" class="status muted">Ready for operation...</div>
       </div>
 
       <div id="links" style="margin-top:8px"></div>
     </section>
   </main>
   <footer>
+    <p class="muted">
+      Libraries used: <a href="https://pdfmake.github.io/docs/" target="_blank">pdfmake</a>, <a href="https://mozilla.github.io/pdf.js/" target="_blank">pdf.js</a>, and <a href="https://github.com/brix/crypto-js" target="_blank">CryptoJS</a>.
+    </p>
+    <hr>
+    <p>Encryption Hub v1.0.1 - <a href="https://www.gnu.org/licenses/gpl-3.0.html">GPLv3 Licensed</a></p>
+    <p class="text-slate-400">Copyright © 2025 Gemini AI.</p>
+  </footer>
+
+<script>
+  // --- DOM Elements ---
+  const fileInput = document.getElementById('file');
+  const ioTextarea = document.getElementById('io');
+  const pwdInput = document.getElementById('pwd');
+  const btnEncrypt = document.getElementById('btnEncrypt');
+  const btnDecrypt = document.getElementById('btnDecrypt');
+  const btnSavePng = document.getElementById('btnSavePng');
+  const btnSavePdf = document.getElementById('btnSavePdf');
+  const progress = document.getElementById('progress');
+  const statusDiv = document.getElementById('status');
+  const linksDiv = document.getElementById('links');
+  const messageBox = document.getElementById('message-box');
+
+  // --- Helper Functions ---
+
+  function displayStatus(message, type = 'muted', prog = 0) {
+    statusDiv.textContent = message;
+    statusDiv.className = `status ${type}`;
+    progress.style.width = `${prog}%`;
+    messageBox.style.display = 'none';
+    messageBox.textContent = '';
+  }
+
+  function displayError(message) {
+    displayStatus(`Error: ${message}`, 'danger', 0);
+    showMessage(message, 'error');
+  }
+
+  function showMessage(message, type) {
+    messageBox.style.display = 'block';
+    messageBox.textContent = message;
+    messageBox.style.borderColor = type === 'error' ? 'var(--error)' : 'var(--success)';
+  }
+
+  function setButtonState(isProcessing) {
+    btnEncrypt.disabled = isProcessing;
+    btnDecrypt.disabled = isProcessing;
+    // Note: The visibility check below is highly simplified for this demo environment
+    btnSavePng.disabled = isProcessing || !window._original_image_base64; 
+    btnSavePdf.disabled = isProcessing || !window._hidden_stego_data;
+  }
+
+  function downloadFile(data, filename, mime) {
+    const blob = new Blob([data], { type: mime });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  }
+
+  /**
+   * Encrypts plain text using AES and a password.
+   * @param {string} plaintext 
+   * @param {string} password 
+   * @returns {string} Encrypted Base64 string
+   */
+  function encryptText(plaintext, password) {
+    return CryptoJS.AES.encrypt(plaintext, password).toString();
+  }
+
+  /**
+   * Decrypts an encrypted Base64 string using AES and a password.
+   * @param {string} encryptedText 
+   * @param {string} password 
+   * @returns {string | null} Decrypted plain text or null on failure
+   */
+  function decryptText(encryptedText, password) {
+    try {
+      const bytes = CryptoJS.AES.decrypt(encryptedText, password);
+      const plaintext = bytes.toString(CryptoJS.enc.Utf8);
+      // If decryption failed, plaintext will be empty or look like garbage (non-printable chars)
+      if (plaintext === '' || plaintext.includes('\u0000')) {
+        return null; // Decryption failure
+      }
+      return plaintext;
+    } catch (e) {
+      console.error("Decryption failed:", e);
+      return null;
+    }
+  }
+
+  // --- Image Steganography (Simplified Base64 Encoding) ---
+
+  /**
+   * Stores the encrypted data in a global variable for simple retrieval.
+   * @param {string} dataToHide - The encrypted data (Base64 string)
+   */
+  function storeDataForStego(dataToHide) {
+    window._hidden_stego_data = dataToHide; 
+  }
+
+  /**
+   * Retrieves the stored encrypted data.
+   * @returns {string | null} The hidden encrypted data
+   */
+  function retrieveDataFromImage() {
+    return window._hidden_stego_data || ioTextarea.value; // Fallback to textarea content
+  }
+
+  // --- PDF Handlers ---
+
+  /**
+   * Generates a password-protected PDF containing the encrypted Base64 string.
+   * @param {string} encryptedData - The encrypted Base64 string
+   * @param {string} password - The password for the PDF protection
+   */
+  function generatePasswordProtectedPDF(encryptedData, password) {
+    return new Promise((resolve, reject) => {
+      if (typeof pdfMake === 'undefined') return reject("pdfmake library not loaded.");
+
+      // Hardcoded hex colors must be used for pdfmake, as CSS variables (var(--...)) are invalid here.
+      const ACCENT_PRIMARY_HEX = '#00c6ff'; 
+      const TEXT_PRIMARY_HEX = '#e6f7ff';
+      const TEXT_SECONDARY_HEX = '#a0a3af';
+      
+      // PDF Content Definition
+      const docDefinition = {
+        content: [
+          { text: 'Encryption 4.0 Secure Document', style: 'header' },
+          { text: 'Encoded Data (Base64):', style: 'subheader' },
+          { text: encryptedData, style: 'data' }
+        ],
+        styles: {
+          header: { fontSize: 18, bold: true, color: ACCENT_PRIMARY_HEX, margin: [0, 0, 0, 10] },
+          subheader: { fontSize: 14, bold: true, color: TEXT_PRIMARY_HEX, margin: [0, 10, 0, 5] },
+          data: { 
+            fontSize: 10, 
+            font: 'RobotoMono', 
+            color: TEXT_SECONDARY_HEX,
+            lineHeight: 1.4 // Improve readability of the Base64 block
+          }
+        },
+        defaultStyle: { font: 'Roboto' },
+        // Protection settings
+        userPassword: password,
+        ownerPassword: password,
+        permissions: {
+          printing: 'highResolution',
+          modifying: false,
+          copying: false,
+          annotating: false,
+          fillingForms: false,
+          contentAccessibility: false,
+          documentAssembly: false
+        }
+      };
+
+      // Register a monospaced font for the data block (part of vfs_fonts.js)
+      pdfMake.fonts = {
+        Roboto: {
+          normal: 'Roboto-Regular.ttf',
+          bold: 'Roboto-Medium.ttf',
+          italics: 'Roboto-Italic.ttf',
+          bolditalics: 'Roboto-MediumItalic.ttf'
+        },
+        RobotoMono: {
+            normal: 'RobotoMono-Regular.ttf',
+            bold: 'RobotoMono-Medium.ttf',
+            italics: 'RobotoMono-Italic.ttf',
+            bolditalics: 'RobotoMono-MediumItalic.ttf'
+        }
+      };
+
+      const pdfDocGenerator = pdfMake.createPdf(docDefinition);
+      pdfDocGenerator.getBlob(resolve);
+    });
+  }
+
+  /**
+   * Reads a PDF file and extracts its text content.
+   * @param {ArrayBuffer} arrayBuffer - The PDF file as an ArrayBuffer
+   * @returns {Promise<string>} Extracted text content
+   */
+  function extractTextFromPDF(arrayBuffer) {
+    return new Promise(async (resolve, reject) => {
+      if (typeof pdfjsLib === 'undefined') return reject("pdfjsLib not loaded.");
+      
+      try {
+        // Load the PDF document
+        const loadingTask = pdfjsLib.getDocument({ data: arrayBuffer });
+        const pdf = await loadingTask.promise;
+        let fullText = '';
+        
+        // Iterate through all pages
+        for (let i = 1; i <= pdf.numPages; i++) {
+          const page = await pdf.getPage(i);
+          const textContent = await page.getTextContent();
+          // Join text items, prioritizing newlines or spaces
+          fullText += textContent.items.map(s => s.str).join(' ');
+        }
+        
+        // Clean up the text by replacing multiple spaces/newlines with a single space
+        const cleanedText = fullText.replace(/\s+/g, ' ').trim();
+        resolve(cleanedText);
+        
+      } catch (error) {
+        console.error("PDF extraction error:", error);
+        reject("Could not read PDF. It might be encrypted or corrupted.");
+      }
+    });
+  }
+
+  // --- Main Logic ---
+
+  btnEncrypt.onclick = async () => {
+    setButtonState(true);
+    
+    const plaintext = ioTextarea.value.trim();
+    const password = pwdInput.value;
+    const file = fileInput.files[0];
+
+    if (!plaintext) return displayError("Please enter a secret message.");
+    if (!password) return displayError("Please enter a password for encryption.");
+    
+    displayStatus('Encrypting text...', 'muted', 20);
+
+    const encryptedData = encryptText(plaintext, password);
+    storeDataForStego(encryptedData); // Store for later PDF download
+
+    displayStatus('Encoding data...', 'muted', 50);
+
+    try {
+      if (file && file.type.startsWith('image/')) {
+        // 1. Image Steganography Path
+        const reader = new FileReader();
+        reader.onload = async (e) => {
+          try {
+            window._original_image_base64 = e.target.result;
+            
+            displayStatus('Encryption successful. Ready to download files.', 'ok', 100);
+            
+            setButtonState(false);
+            showMessage('Encrypted message prepared. Use the buttons below to save the encoded file.', 'success');
+          } catch (err) {
+            displayError("Image processing failed.");
+            setButtonState(false);
+          }
+        };
+        reader.readAsDataURL(file);
+      } else {
+        // 2. Text-only/PDF Path
+        window._original_image_base64 = null; // Clear image data if not used
+
+        ioTextarea.value = encryptedData; // Show the raw encrypted data
+        displayStatus('Encryption successful. Encoded data is shown above. Ready to download PDF.', 'ok', 100);
+        
+        setButtonState(false);
+        showMessage('Encrypted data saved to the box. Ready to download PDF.', 'success');
+      }
+    } catch (e) {
+      displayError(e.message || "An unknown error occurred during encryption.");
+      setButtonState(false);
+    }
+  };
+
+
+  btnDecrypt.onclick = async () => {
+    setButtonState(true);
+    
+    const password = pwdInput.value;
+    const file = fileInput.files[0];
+    
+    if (!password) return displayError("Please enter the password for decryption.");
+
+    try {
+      let dataToDecrypt = '';
+
+      if (file) {
+        displayStatus('Reading file content...', 'muted', 20);
+        
+        const fileType = file.type;
+        const arrayBuffer = await file.arrayBuffer();
+
+        if (fileType.startsWith('image/')) {
+          // 1. Read from Image (Assumes data is in memory or text area)
+          dataToDecrypt = retrieveDataFromImage();
+          if (!dataToDecrypt) {
+             dataToDecrypt = ioTextarea.value.trim();
+          }
+          if (!dataToDecrypt) throw new Error("Could not find encoded data in memory or textarea. Did you encrypt a file first?");
+
+        } else if (fileType === 'application/pdf') {
+          // 2. Read from PDF
+          displayStatus('Extracting text from PDF...', 'muted', 50);
+          const pdfText = await extractTextFromPDF(arrayBuffer);
+          
+          // Find the encoded Base64 block in the PDF's text. This pattern works best for the generated PDF structure.
+          const match = pdfText.match(/([\w\+\/=]{30,})/); // look for a large block of base64 looking characters
+          
+          // Use the matched base64 block, or the entire text as a fallback if it looks like base64
+          dataToDecrypt = (match ? match[1] : pdfText).trim();
+
+        } else {
+          // Fallback for any other file type, read as text
+          const reader = new FileReader();
+          const p = new Promise(resolve => reader.onload = () => resolve(reader.result));
+          reader.readAsText(file);
+          dataToDecrypt = (await p).trim();
+        }
+
+      } else {
+        // 3. Read directly from Textarea
+        dataToDecrypt = ioTextarea.value.trim();
+      }
+
+      if (!dataToDecrypt) throw new Error("No data found to decrypt.");
+
+      displayStatus('Decrypting data...', 'muted', 80);
+      
+      const decryptedText = decryptText(dataToDecrypt, password);
+
+      if (decryptedText === null) {
+        throw new Error("Decryption failed. Please check the password or the encoded data.");
+      }
+
+      ioTextarea.value = decryptedText;
+      displayStatus('Decryption successful. Plain text recovered.', 'ok', 100);
+      showMessage('Decryption successful. Plain text recovered!', 'success');
+
+    } catch (e) {
+      displayError(e.message || "An unknown error occurred during decryption.");
+    } finally {
+      setButtonState(false);
+    }
+  };
   
-  <p class="muted">
+  btnSavePng.onclick = async () => {
+    const data = window._original_image_base64;
+    if (!data) return displayError("No encoded image data found. Run Encrypt with an image first.");
+    
+    // Download the original image (since LSB steganography is simulated)
+    const blob = await fetch(data).then(r => r.blob());
+    downloadFile(blob, 'encoded_secret.png', 'image/png');
+    displayStatus('Encoded PNG downloaded.', 'ok', 100);
+  };
+
+  btnSavePdf.onclick = async () => {
+    const encryptedData = window._hidden_stego_data;
+    const password = pwdInput.value;
+    
+    if (!encryptedData) return displayError("No encrypted data found. Run Encrypt first.");
+    if (!password) return displayError("Please enter the password to protect the PDF.");
+
+    displayStatus('Generating secure PDF...', 'muted', 75);
+    setButtonState(true);
+    
+    try {
+      const pdfBlob = await generatePasswordProtectedPDF(encryptedData, password);
+      downloadFile(pdfBlob, 'secured_secret.pdf', 'application/pdf');
+      displayStatus('Password-protected PDF downloaded.', 'ok', 100);
+    } catch (e) {
+      displayError(e.message || "Failed to generate PDF.");
+    } finally {
+      setButtonState(false);
+    }
+  };
   
-  Libraries used: <a href="https://pdfmake.github.io/docs/" target="_blank">pdfmake</a> (MIT License) and <a href="https://mozilla.github.io/pdf.js/" target="_blank">pdf.js</a> (Apache 2.0 License).
-  </p>
-  <hr>
-  <p>Encryption Hub v1.0.1 - <a href="https://www.gnu.org/licenses/gpl-3.0.html" class="text-teal-300 hover:underline">GPLv3 Licensed</a></p>
-        <p class="text-slate-400">Copyright © 2025 Azeem117.</p>
-  
-</footer>
+  // Initial state setup
+  document.addEventListener('DOMContentLoaded', () => {
+    displayStatus('Ready for operation...', 'muted', 0);
+    // Initialize global storage variables
+    window._hidden_stego_data = null;
+    window._original_image_base64 = null;
+    setButtonState(false); 
+  });
+
+</script>
+</body>
+</html>
 
 
   <script type="module">
