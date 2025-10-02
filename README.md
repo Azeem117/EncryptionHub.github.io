@@ -1,132 +1,136 @@
-# 🔗[Encryption Hub](https://azeem117.github.io/EncryptionHub.github.io/)  
+# 🔗 [Encryption Hub](https://azeem117.github.io/EncryptionHub.github.io/)  
 
-# 🚀 Release V.1.0.1 – Simple Encryption Portal
+# 🚀 Simple Encryption Portal – Release V.1.0.3
 
 ## 🔐 Project Overview
-The **Simple Encryption Portal** is a comprehensive web application designed for secure message, image, and file encryption.  
-It provides users with advanced cryptography, steganography, and file-level protection, all **executed client-side in the browser**, ensuring **maximum privacy**.  
+**Simple Encryption Portal** is a comprehensive, client-side web application for secure message, image, and file encryption.  
+All cryptographic operations occur in the browser, ensuring **maximum privacy**.  
 
-Key functionalities include:  
-- Encrypt and decrypt text messages using passwords  
-- Hide secret messages inside images (steganography)  
-- Encrypt files of any format (images, videos, audio, documents, etc.)  
+**Key capabilities:**  
+- Encrypt and decrypt text messages using passwords.  
+- Hide secret messages inside images (steganography).  
+- Encrypt files of any format (images, videos, audio, documents).  
+- Generate **strong passwords from weak passwords** using PBKDF2 with **10,000,000 iterations** (Encryption 5.0).  
 
-The portal is organized into **four modules**: **Encryption**, **Encryption 2.0**, **Encryption 3.0**, and **Encryption 4.0**, each offering a unique encryption capability.
+The portal includes **five modules**, each offering unique encryption functionality.
 
 ---
 
 ## 🏗️ Modules & Features
 
 ### 🔹 1. Encryption (Basic Text Encryption)
-- Encrypt messages with a password; only those with the correct password can decrypt them.  
-- **Client-Side Security:** All operations happen locally in the browser; no data is sent to a server.  
-- **Strong Cryptography:** Uses AES-GCM via Web Crypto API for both confidentiality and integrity.  
-- **Robust Password Protection:** PBKDF2 with 100,000 iterations and a randomly generated salt prevents brute-force attacks.  
-- **Randomized Encryption:** Unique Initialization Vector (IV) ensures identical messages encrypted with the same password produce different outputs.  
-- **User-Friendly Interface:** Includes password visibility toggle, copy-to-clipboard, and smooth loading spinner.  
-- **Portable Output:** Encodes salt, IV, and ciphertext into a single Base64 string for easy sharing and storage.  
+- Encrypt messages with AES-GCM using a password.  
+- **Client-Side Security:** All operations happen locally; no data leaves the browser.  
+- **Robust Key Derivation:** PBKDF2 with 100,000 iterations and random salt.  
+- Random IV ensures identical messages encrypted with the same password produce different outputs.  
+- User-friendly interface with password toggle, copy-to-clipboard, and loading spinner.  
+- Portable Base64 output combining salt, IV, and ciphertext.  
 
 ---
 
 ### 🔹 2. Encryption 2.0 (Steganography)
-- Hide encrypted messages inside images, making the message visually undetectable.  
-- ⚠️ **Important:** Image quality must remain unchanged; compression or alteration may destroy the hidden message.  
-- **Enhanced Security:** Combines AES encryption with pixel-level message hiding for a second layer of protection.  
-- **Asynchronous & Responsive:** Processes large images using `requestAnimationFrame` to prevent browser freezing. Includes a progress bar for real-time feedback.  
-- **Modern UI/UX:** Dark theme with vibrant accent colors, custom modals for alerts, password toggles, and clear instructions for users.  
-- **Self-Contained:** HTML, CSS, and JavaScript are integrated into a single file for portability and easy hosting.  
+- Hide encrypted messages inside images without altering quality.  
+- Combines AES encryption with pixel-level message embedding.  
+- Asynchronous processing prevents browser freezing; includes progress bar.  
+- Modern, dark-themed UI with vibrant accents.  
+- Self-contained HTML, CSS, and JS for easy portability.  
 
 ---
 
 ### 🔹 3. Encryption 3.0 (File Encryption)
-- Encrypts **any file type**, including photos, videos, audio, and documents.  
-- To restore usability, rename the encrypted package back to its original format (e.g., `.jpg`, `.mp3`, `.mp4`).  
-- **Strong Cryptography:** Uses AES-GCM to ensure confidentiality and integrity.  
-- **Secure Key Derivation:** PBKDF2 with high iteration count protects passwords from brute-force attacks.  
-- **Client-Side Operation:** No files leave the user’s browser; full privacy maintained.  
-- **Responsive & Intuitive UI:** Tailwind CSS ensures usability across devices; clear file input, password field, and dedicated "Encrypt"/"Decrypt" buttons.  
-- **Dynamic Feedback:** Real-time status messages and a loading spinner inform users of ongoing processes.  
-- **Error Handling:** Provides user-friendly messages for incorrect passwords or corrupted files.  
-- **Password Visibility Toggle:** Prevents input errors, enhancing usability.  
+- Encrypts any file type (images, videos, audio, documents).  
+- AES-GCM ensures confidentiality and integrity.  
+- PBKDF2 with high iteration counts for password security.  
+- Client-side operation; files never leave the browser.  
+- Responsive UI with clear buttons, file input, and password toggle.  
+- Real-time status messages, loading spinner, and error handling.  
 
 ---
 
 ### 🔹 4. Encryption 4.0 (Unified Modern Encryption)
-- Combines **text encryption, steganography, and PDF export** into a single, unified interface.  
-- **Password-Protected PDFs:** Embed encrypted messages directly into PDFs for secure sharing.  
-- **LSB Image Steganography:** Hide encrypted payloads inside PNG/JPG images without altering visible quality.  
-- **Enhanced AES-GCM:** Strong cryptography with 1,000,000 PBKDF2 iterations, unique IVs, and random salts.  
-- **Client-Side Processing:** All operations occur locally in the browser for full privacy.  
-- **Progress Indicators:** Real-time status messages and progress bar for large files and images.  
-- **Download Options:** Save stego images and encrypted PDFs with a single password.  
-- **Modern UI/UX:** Dark theme, gradient accents, smooth hover/focus effects, glassmorphism-style cards, and inline error handling.  
+- Combines text encryption, steganography, and PDF export.  
+- Password-protected PDFs embed encrypted messages.  
+- LSB image steganography hides payloads without altering visual quality.  
+- AES-GCM with **1,000,000 PBKDF2 iterations**, unique IVs, and random salts.  
+- Client-side processing with progress indicators.  
+- Modern, responsive UI with dark theme, gradient accents, glassmorphism cards, hover/focus effects, and inline error handling.  
+
+---
+
+### 🔹 5. Encryption 5.0 (Ultra-Strong Password Generation)
+- Converts weak passwords into **high-entropy, strong passwords**.  
+- Uses **PBKDF2 with 10,000,000 iterations** and random salt.  
+- Derived passwords can be used to encrypt messages, files, and PDFs.  
+- AES-GCM ensures secure encryption using generated strong passwords.  
+- Client-side operation guarantees privacy.  
+- Real-time progress feedback for high iteration counts.  
+- Base64 output for easy copying and storage.  
 
 ---
 
 ## 🎯 Project Goal
-The project aims to provide a **versatile, secure, and user-friendly encryption solution**, combining:  
-- Password-protected message encryption  
+Provide a **secure, versatile, and user-friendly encryption platform** that combines:  
+- Strong password generation  
+- Text encryption  
 - Hidden message embedding in images  
 - Password-protected PDF export  
 - Full file encryption  
-- A modern, responsive, and intuitive user interface  
+- Modern, responsive UI  
 
 ---
 
 ## 📦 Full Release Summary
 | Module             | Features                                                                                             |
 |-------------------|-----------------------------------------------------------------------------------------------------|
-| **Encryption**     | Password-protected text messages, AES-GCM, PBKDF2, client-side security, copy-to-clipboard          |
-| **Encryption 2.0** | Hidden messages inside images, AES encryption, asynchronous processing, progress bar, self-contained|
-| **Encryption 3.0** | File encryption for all formats, AES-GCM, PBKDF2, client-side, responsive UI, dynamic feedback      |
-| **Encryption 4.0** | Unified modern encryption, password-protected PDFs, LSB steganography, AES-GCM with PBKDF2, client-side, progress feedback, modern UI |
+| **Encryption**     | Text encryption, AES-GCM, PBKDF2, client-side security, copy-to-clipboard                            |
+| **Encryption 2.0** | Image steganography, AES encryption, asynchronous processing, progress bar, self-contained         |
+| **Encryption 3.0** | File encryption (all formats), AES-GCM, PBKDF2, client-side, responsive UI, dynamic feedback        |
+| **Encryption 4.0** | Unified encryption, PDF export, LSB steganography, AES-GCM with PBKDF2, client-side, progress feedback, modern UI |
+| **Encryption 5.0** | Weak-to-strong password generation, AES-GCM encryption, PBKDF2 (10M iterations), client-side, progress feedback |
 
 ---
 
-## 🔑 Key Technical Highlights
-- **Client-Side Security:** Ensures private data and passwords never leave the browser.  
+## 🔑 Technical Highlights
+- **Client-Side Security:** All operations occur in-browser; no data is transmitted.  
 - **AES-GCM Encryption:** Provides secure and authenticated encryption.  
-- **PBKDF2 Key Derivation:** Protects passwords using 1,000,000 iterations and random salt.  
-- **Randomized Initialization Vector:** Guarantees unique ciphertext for identical inputs.  
-- **Responsive & Modern Design:** Tailwind CSS, hover effects, dark theme, and accessible layout.  
-- **User-Friendly Features:** Copy-to-clipboard, password toggles, progress indicators, clear status, and error messages.  
-- **Self-Contained & Portable:** Entire application (HTML, CSS, JS) is in one file for easy sharing or hosting.  
-- **Robust Steganography:** Encryption 2.0 & 4.0 ensure hidden messages remain secure within images.  
-- **Asynchronous Processing:** Handles large files and images without freezing the browser.  
-- **PDF Security:** Password-protected PDFs allow secure sharing of encrypted messages.  
+- **PBKDF2 Key Derivation:** Up to 10,000,000 iterations with random salt.  
+- **Random IVs:** Ensures unique ciphertext even for identical inputs.  
+- **Responsive Design:** Tailwind CSS, dark theme, hover effects, accessible layout.  
+- **User-Friendly Features:** Copy-to-clipboard, password toggles, progress indicators, clear error messages.  
+- **Self-Contained & Portable:** Entire app is in one HTML file.  
+- **Robust Steganography & PDF Security:** Hidden payloads in images and password-protected PDFs.  
+- **Asynchronous Processing:** Handles large files and images without freezing.  
 
 ---
 
 ## 📜 License
-This project is licensed under the **GNU General Public License v3.0 (GPL-3.0)**.  
+Licensed under **GNU GPL v3.0**.  
+- Free to use, modify, and distribute.  
+- All derivatives must also use GPL-3.0 license.  
 
-You are free to:  
-- Use, modify, and distribute the software  
-- Share and improve upon the work  
+Full license: [GNU GPL 3.0](https://www.gnu.org/licenses/gpl-3.0.en.html)  
 
-All derivative works must also be distributed under the **GPL-3.0 license**, ensuring the project remains open and free for the community.  
+---
 
-For full license details, see: [GNU GPL 3.0](https://www.gnu.org/licenses/gpl-3.0.en.html)  
-
-### ⚖️ Third-Party Licenses
-
-This project uses the following third-party libraries, which are subject to their respective licenses:
+## ⚖️ Third-Party Libraries
 
 | Library        | Purpose                      | License | Website |
 |----------------|------------------------------|---------|---------|
 | Tailwind CSS   | Styling & UI                 | MIT     | [https://tailwindcss.com](https://tailwindcss.com) |
 | Google Fonts - Inter | Font                   | SIL Open Font License | [https://fonts.google.com/specimen/Inter](https://fonts.google.com/specimen/Inter) |
 | CryptoJS       | AES encryption               | MIT     | [https://cdnjs.com/libraries/crypto-js](https://cdnjs.com/libraries/crypto-js) |
-| pdfmake        | PDF generation & password-protection | MIT     | [pdfmake](https://pdfmake.github.io/docs/) |
+| pdfmake        | PDF generation & password protection | MIT     | [pdfmake](https://pdfmake.github.io/docs/) |
 | PDF.js         | PDF reading & payload extraction | Apache 2.0 | [PDF.js](https://mozilla.github.io/pdf.js/) |
-| Inter Font     | Typography                   | SIL Open Font License | [Inter](https://fonts.google.com/specimen/Inter) |
-
-All included third-party code retains its original license, and this project distributes it in compliance with those terms.
 
 ---
 
 ## ✅ Conclusion
-This release of the **Simple Encryption Portal** demonstrates a **secure, modern, and portable web application** for encryption enthusiasts, developers, and casual users alike.  
-It combines **robust cryptography**, **user-friendly design**, **cutting-edge steganography**, and **password-protected PDF export** to provide a comprehensive encryption platform.  
+**Simple Encryption Portal V1.0.3** is a secure, modern, and portable encryption platform combining:  
+- Robust cryptography  
+- Steganography  
+- Strong password generation  
+- Password-protected PDF export  
+- File encryption  
+- Responsive, user-friendly design  
 
-Visit the live portal here: 🔗 [Encryption Hub](https://azeem117.github.io/EncryptionHub.github.io/)
+Visit the live portal: 🔗 [Encryption Hub](https://azeem117.github.io/EncryptionHub.github.io/)  
