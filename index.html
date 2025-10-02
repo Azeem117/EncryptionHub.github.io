@@ -55,95 +55,104 @@ Special Notes:
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Encryption Hub</title>
- <link rel="icon" type="image/png" sizes="16x16" href="logo/icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="logo/icon.png">
-    <link rel="icon" type="image/png" sizes="48x48" href="logo/icon.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="logo/icon.png">
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#111827">
+    <!-- Placeholder favicon links updated to primary theme color (Violet) -->
+    <link rel="icon" type="image/png" sizes="32x32" href="https://placehold.co/32x32/8b5cf6/ffffff?text=E">
+    <meta name="theme-color" content="#000005">
 
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        /* Ultra-dark, high-contrast background for a futuristic feel (Deeper Black/Purple) */
         body {
             font-family: 'Inter', sans-serif;
-            background: radial-gradient(ellipse at top, #111827 0%, #0f172a 100%);
+            background: radial-gradient(ellipse at bottom, #070314 0%, #000005 100%);
         }
+        /* Custom card styling for depth and polished interaction */
         .card {
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            /* Subtle inner shadow for depth on dark background */
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 4px 10px rgba(0, 0, 0, 0.5);
         }
+        /* Enhanced hover effect with Violet/Indigo glow */
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transform: translateY(-10px);
+            /* Stronger glow and lifted shadow on hover */
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 35px rgba(139, 92, 246, 0.5); /* Increased glow intensity */
         }
     </style>
 </head>
 <body class="text-white min-h-screen flex flex-col items-center p-4">
     <div class="flex-grow flex items-center justify-center w-full">
-        <div class="bg-slate-800/50 backdrop-blur-lg p-8 md:p-12 rounded-2xl shadow-2xl border border-slate-700 w-full max-w-4xl text-center">
-            <h1 class="text-4xl md:text-5xl font-extrabold mb-4 text-sky-400">Encryption Hub</h1>
-            <p class="text-gray-300 mb-10 max-w-prose mx-auto text-lg">
+        <!-- Main Container: Darker slate background with less transparency for contrast -->
+        <div class="bg-gray-900/90 backdrop-blur-xl p-8 md:p-14 rounded-3xl shadow-2xl border border-violet-500/50 w-full max-w-5xl text-center">
+            <!-- Primary accent color maintained, using text-violet-400 for maximum brightness -->
+            <h1 class="text-5xl md:text-6xl font-extrabold mb-4 text-violet-400">
+                <span class="text-indigo-300">Encryption</span> Hub
+            </h1>
+            <!-- Intro text changed to a slightly brighter gray for readability -->
+            <p class="text-gray-300 mb-12 max-w-prose mx-auto text-xl opacity-90">
                 Your privacy is our priority. Explore our suite of modern, browser-based encryption tools to protect your messages and files.
             </p>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Card for Text Encryption -->
-                <a href="page1.html" class="card group flex flex-col items-center p-6 bg-slate-700/50 rounded-xl shadow-lg border border-slate-600 hover:border-sky-500">
-                    <svg class="w-16 h-16 mb-4 text-sky-400 group-hover:text-sky-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+                <!-- Card 1: Encryption 1.0 (Text) - Primary Indigo/Violet Theme -->
+                <a href="page1.html" class="card group flex flex-col items-center p-6 bg-slate-900/50 rounded-xl border border-indigo-700/50 hover:border-violet-500">
+                    <svg class="w-16 h-16 mb-4 text-violet-400 group-hover:text-violet-300 transition duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                     </svg>
-                    <h2 class="text-2xl font-bold mb-2 text-white group-hover:text-sky-400">Encryption 1.0</h2>
-                    <p class="text-sm text-gray-400 mb-6">
+                    <h2 class="text-xl font-bold mb-2 text-white group-hover:text-violet-400">Encryption 1.0</h2>
+                    <p class="text-sm text-indigo-200 mb-6 flex-grow opacity-80">
                         Encrypt and send secure text messages using modern, robust algorithms.
                     </p>
-                    <span class="inline-block px-8 py-3 bg-sky-600 text-white font-bold rounded-full shadow-lg hover:bg-sky-700 transform hover:scale-105 transition">
+                    <span class="w-full px-4 py-3 bg-violet-600 text-white font-bold rounded-lg shadow-xl hover:bg-violet-700 transform transition duration-300 text-center">
                         Encryption 1.0
                     </span>
                 </a>
                 
-                <!-- Card for Image Steganography -->
-                <a href="page2.html" class="card group flex flex-col items-center p-6 bg-slate-700/50 rounded-xl shadow-lg border border-slate-600 hover:border-teal-500">
-                    <svg class="w-16 h-16 mb-4 text-teal-400 group-hover:text-teal-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <!-- Card 2: Encryption 2.0 (Steganography) - Vibrant Pink/Rose Theme -->
+                <a href="page2.html" class="card group flex flex-col items-center p-6 bg-slate-900/50 rounded-xl border border-pink-700/50 hover:border-pink-500">
+                    <svg class="w-16 h-16 mb-4 text-pink-400 group-hover:text-pink-300 transition duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                     </svg>
-                    <h2 class="text-2xl font-bold mb-2 text-white group-hover:text-teal-400">Encryption 2.0</h2>
-                    <p class="text-sm text-gray-400 mb-6">
+                    <h2 class="text-xl font-bold mb-2 text-white group-hover:text-pink-400">Encryption 2.0</h2>
+                    <p class="text-sm text-pink-200 mb-6 flex-grow opacity-80">
                         Hide your secret messages within an image file for discreet communication.
                     </p>
-                    <span class="inline-block px-8 py-3 bg-teal-600 text-white font-bold rounded-full shadow-lg hover:bg-teal-700 transform hover:scale-105 transition">
+                    <span class="w-full px-4 py-3 bg-pink-600 text-white font-bold rounded-lg shadow-xl hover:bg-pink-700 transform transition duration-300 text-center">
                         Encryption 2.0
                     </span>
                 </a>
 
-                <!-- Card for File Encryption -->
-                <a href="page3.html" class="card group flex flex-col items-center p-6 bg-slate-700/50 rounded-xl shadow-lg border border-slate-600 hover:border-purple-500">
-                    <svg class="w-16 h-16 mb-4 text-purple-400 group-hover:text-purple-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <!-- Card 3: Encryption 3.0 (File) - Electric Cyan Theme -->
+                <a href="page3.html" class="card group flex flex-col items-center p-6 bg-slate-900/50 rounded-xl border border-cyan-700/50 hover:border-cyan-500">
+                    <svg class="w-16 h-16 mb-4 text-cyan-400 group-hover:text-cyan-300 transition duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                     </svg>
-                    <h2 class="text-2xl font-bold mb-2 text-white group-hover:text-purple-400">Encryption 3.0</h2>
-                    <p class="text-sm text-gray-400 mb-6">
+                    <h2 class="text-xl font-bold mb-2 text-white group-hover:text-cyan-400">Encryption 3.0</h2>
+                    <p class="text-sm text-cyan-200 mb-6 flex-grow opacity-80">
                         Encrypt and decrypt any file type (images, videos, audio) in your browser.
                     </p>
-                    <span class="inline-block px-8 py-3 bg-purple-600 text-white font-bold rounded-full shadow-lg hover:bg-purple-700 transform hover:scale-105 transition">
+                    <span class="w-full px-4 py-3 bg-cyan-600 text-white font-bold rounded-lg shadow-xl hover:bg-cyan-700 transform transition duration-300 text-center">
                         Encryption 3.0
                     </span>
                 </a>
 
-                <!-- Card for Encryption 4.0 -->
-                <a href="page4.html" class="card group flex flex-col items-center p-6 bg-slate-700/50 rounded-xl shadow-lg border border-slate-600 hover:border-red-500">
-                    <!-- New SVG for Encryption 4.0 -->
-                    <svg class="w-16 h-16 mb-4 text-red-400 group-hover:text-red-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15h2m-2-3h.01M17 14v1a2 2 0 01-2 2H9a2 2 0 01-2-2v-3a2 2 0 012-2h2" />
+                <!-- Card 4: Encryption 4.0 (Advanced Export) - Dark Blue Theme -->
+                <a href="page4.html" class="card group flex flex-col items-center p-6 bg-slate-900/50 rounded-xl border border-blue-700/50 hover:border-blue-500">
+                    <svg class="w-16 h-16 mb-4 text-blue-400 group-hover:text-blue-300 transition duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 10v4h4v-4h-4zM10 14h4v-4h-4z" />
                     </svg>
-                    <h2 class="text-2xl font-bold mb-2 text-white group-hover:text-red-400">Encryption 4.0</h2>
-                    <p class="text-sm text-gray-400 mb-6">
-                        Encrypt and hide files in an image, then export to a password-protected PDF.
+                    <h2 class="text-xl font-bold mb-2 text-white group-hover:text-blue-400">Encryption 4.0</h2>
+                    <p class="text-sm text-blue-200 mb-6 flex-grow opacity-80">
+                        Encrypt, hide files in an image, then export to a password-protected PDF.
                     </p>
-                    <span class="inline-block px-8 py-3 bg-red-600 text-white font-bold rounded-full shadow-lg hover:bg-red-700 transform hover:scale-105 transition">
+                    <!-- IMPORTANT CONTRAST FIX: Changed to dark blue button with white text for contrast -->
+                    <span class="w-full px-4 py-3 bg-blue-600 text-white font-bold rounded-lg shadow-xl hover:bg-blue-700 transform transition duration-300 text-center">
                         Encryption 4.0
                     </span>
                 </a>
@@ -152,9 +161,9 @@ Special Notes:
     </div>
     
     <!-- Footer -->
-    <footer class="bg-gray-800 text-center p-6 mt-8 w-full">
-        <p>Encryption Hub v1.0.1 - <a href="https://www.gnu.org/licenses/gpl-3.0.html" class="text-blue-400 hover:underline">GPLv3 Licensed</a></p>
-        <p class="text-gray-400">Copyright © 2025 Azeem117.</p>
+    <footer class="text-center p-6 mt-12 w-full border-t border-slate-800">
+        <p class="text-gray-500">Encryption Hub v3.0 - <a href="https://www.gnu.org/licenses/gpl-3.0.html" class="text-violet-400 hover:text-violet-300 transition">GPLv3 Licensed</a></p>
+        <p class="text-gray-500 text-sm mt-1">Copyright © 2025 Azeem117.</p>
     </footer>
 </body>
 </html>
