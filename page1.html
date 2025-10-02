@@ -56,19 +56,18 @@ Special Notes:
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Encryption 1.0</title>
-     <link rel="icon" type="image/png" sizes="16x16" href="logo/icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="logo/icon.png">
-    <link rel="icon" type="image/png" sizes="48x48" href="logo/icon.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="logo/icon.png">
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#111827">
+    <!-- Removed local icon links as they won't resolve in this environment -->
+    <meta name="theme-color" content="#15151F">
 
     <style>
-       
+        /* Import Inter font and a monospace font for results */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap');
+
+        /* Updated Global Styles for a Deep Cyber Theme */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #000000;
+            background-color: #0A0A0E; /* Very dark background */
             color: #ffffff;
             display: flex;
             justify-content: center;
@@ -76,15 +75,30 @@ Special Notes:
             min-height: 100vh;
             padding: 1rem;
             flex-direction: column;
+            /* Subtle radial gradient for depth and atmosphere (Now with Blue accent) */
+            background-image: radial-gradient(circle at 50% 50%, rgba(14, 165, 233, 0.05) 1px, transparent 1px),
+                              radial-gradient(circle at 0% 100%, #15151F 5%, #0A0A0E 100%);
+            background-size: 50px 50px, 100% 100%;
         }
         .container {
             width: 100%;
             max-width: 600px;
-            background-color: #1a1a1a;
+            /* Sharper, more defined container background */
+            background-color: #15151F;
             padding: 2rem;
             border-radius: 1rem;
-            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+            /* Subtle border and a strong, but soft glow shadow (Now with Blue accent) */
+            border: 1px solid #28283d;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6),
+                        0 0 40px rgba(14, 165, 233, 0.3); 
             animation: fadeIn 0.5s ease-in-out;
+        }
+        /* Neon Title Style */
+        .neon-title {
+            color: #0ea5e9; /* Neon Blue color */
+            /* Text shadow creates the glow effect */
+            text-shadow: 0 0 5px #0ea5e9, 0 0 10px #0ea5e9, 0 0 20px #0ea5e9, 0 0 40px rgba(14, 165, 233, 0.5);
+            transition: text-shadow 0.3s ease-in-out;
         }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(-10px); }
@@ -97,21 +111,25 @@ Special Notes:
             display: block;
             margin-bottom: 0.5rem;
             font-weight: 500;
-            color: #a0a0a0;
+            color: #bae6fd; /* Light Cyan for better contrast */
+            text-transform: uppercase;
+            font-size: 0.85rem;
         }
+        /* Input and Textarea Styling */
         .input, .textarea {
             width: 100%;
             padding: 0.75rem;
             border-radius: 0.5rem;
-            background-color: #333333;
-            border: 1px solid #444444;
+            background-color: #1f1f2e; /* Darker input background */
+            border: 1px solid #3d3d52;
             color: #ffffff;
             transition: border-color 0.3s, box-shadow 0.3s;
         }
         .input:focus, .textarea:focus {
             outline: none;
-            border-color: #6d28d9;
-            box-shadow: 0 0 0 2px rgba(109, 40, 217, 0.5);
+            border-color: #0ea5e9; /* Vibrant Blue focus border */
+            /* Stronger, glowing focus shadow */
+            box-shadow: 0 0 8px rgba(14, 165, 233, 0.8);
         }
         .textarea {
             resize: vertical;
@@ -132,27 +150,33 @@ Special Notes:
             transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
             border: none;
         }
+        /* Primary Button (Encrypt) - Vibrant, Glowing Accent (Neon Blue) */
         .btn-primary {
-            background-color: #6d28d9;
-            color: #ffffff;
+            background-color: #0ea5e9;
+            color: #1f1f2e; /* Dark text for contrast on bright blue */
+            box-shadow: 0 2px 8px rgba(14, 165, 233, 0.5);
         }
         .btn-primary:hover {
-            background-color: #5b21aa;
+            background-color: #0284c7;
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(109, 40, 217, 0.3);
+            /* Stronger glow on hover */
+            box-shadow: 0 0 18px rgba(14, 165, 233, 1.0), 0 4px 10px rgba(0, 0, 0, 0.5);
         }
+        /* Secondary Buttons (Decrypt, Clear) - Darker, Discrete */
         .btn-secondary {
-            background-color: #3f3f46;
-            color: #ffffff;
+            background-color: #333345;
+            color: #e0e0e0;
         }
         .btn-secondary:hover {
-            background-color: #52525b;
+            background-color: #4f4f65;
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(63, 63, 70, 0.3);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
         }
+        /* Result Box - Emphasize as an output data block */
         .result-box {
-            background-color: #0d0d0d;
-            border: 1px solid #2a2a2a;
+            background-color: #0d0d15;
+            /* Dashed border for a "locked data" look */
+            border: 1px dashed #4f4f65;
             padding: 1rem;
             border-radius: 0.5rem;
             margin-top: 1.5rem;
@@ -165,15 +189,20 @@ Special Notes:
         .result-title {
             font-weight: 500;
             margin-bottom: 0.5rem;
-            color: #a0a0a0;
+            color: #bae6fd; /* Matching label color (Light Cyan) */
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
         .result-text {
-            color: #cccccc;
+            /* Monospaced font for code/encrypted output */
+            font-family: 'Fira Code', 'Consolas', monospace;
+            color: #a7f3d0; /* Neon green/cyan for result text */
             word-break: break-all;
+            font-size: 0.9rem;
+            white-space: pre-wrap; /* Preserve line breaks if any */
         }
+        /* Message Box - Thematic colors for feedback */
         .message-box {
             background-color: #2c2c2c;
             color: #ffffff;
@@ -184,25 +213,29 @@ Special Notes:
             animation: slideIn 0.3s ease-out;
             display: none;
         }
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        /* Copy/Visibility Buttons */
         .copy-btn, .visibility-btn {
             background-color: transparent;
-            border: 1px solid #444444;
+            border: 1px solid #3d3d52;
             color: #a0a0a0;
             padding: 0.5rem 0.75rem;
             border-radius: 0.5rem;
             cursor: pointer;
-            transition: background-color 0.2s, transform 0.2s;
+            transition: background-color 0.2s, transform 0.2s, color 0.2s;
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
         .copy-btn:hover, .visibility-btn:hover {
-            background-color: #333333;
+            background-color: #28283d;
+            color: #ffffff;
             transform: scale(1.05);
+        }
+        
+        /* Utility Classes from original CSS */
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         .password-input-group {
             position: relative;
@@ -220,7 +253,7 @@ Special Notes:
         }
         .loading-spinner {
             border: 4px solid rgba(255, 255, 255, 0.3);
-            border-top: 4px solid #6d28d9;
+            border-top: 4px solid #0ea5e9; /* Updated spinner color (Neon Blue) */
             border-radius: 50%;
             width: 24px;
             height: 24px;
@@ -235,79 +268,62 @@ Special Notes:
         .hidden {
             display: none;
         }
-        .bg-black {
-            background-color: #000;
-        }
-        .text-white {
-            color: #fff;
-        }
-        .text-3xl {
-            font-size: 1.875rem; /* 30px */
-            line-height: 2.25rem; /* 36px */
-        }
-        .font-bold {
-            font-weight: 700;
-        }
-        .text-center {
-            text-align: center;
-        }
-        .mb-8 {
-            margin-bottom: 2rem; /* 32px */
-        }
-        .mt-6 {
-            margin-top: 1.5rem; /* 24px */
-        }
-        .flex {
-            display: flex;
-        }
-        .items-center {
-            align-items: center;
-        }
-        .justify-between {
-            justify-content: space-between;
-        }
-        .flex-grow {
-            flex-grow: 1;
-        }
-        .h-5 {
-            height: 1.25rem; /* 20px */
-        }
-        .w-5 {
-            width: 1.25rem; /* 20px */
-        }
-        .animate-spin {
-            animation: spin 1s linear infinite;
-        }
+        /* Footer Styling */
         footer {
             margin-top: auto;
             padding-top: 2rem;
             text-align: center;
+            color: #4f4f65; /* Subtler footer text */
         }
         footer p {
             margin: 0;
             padding: 0;
         }
+        footer p a {
+             color: #0ea5e9; /* Vibrant link color (Neon Blue) */
+             transition: color 0.2s;
+        }
+        footer p a:hover {
+            color: #7dd3fc; /* Lighter on hover */
+        }
+
+        /* Re-mapping original utility classes for consistency, though not strictly needed now */
+        .bg-black { background-color: #0A0A0E; }
+        .text-white { color: #fff; }
+        .text-3xl { font-size: 1.875rem; }
+        .font-bold { font-weight: 700; }
+        .text-center { text-align: center; }
+        .mb-8 { margin-bottom: 2rem; }
+        .mt-6 { margin-top: 1.5rem; }
+        .flex { display: flex; }
+        .items-center { align-items: center; }
+        .justify-between { justify-content: space-between; }
+        .flex-grow { flex-grow: 1; }
+        .h-5 { height: 1.25rem; }
+        .w-5 { width: 1.25rem; }
     </style>
 </head>
 <body class="bg-black text-white">
 
 <div class="container">
-    <h1 class="text-3xl font-bold text-center mb-8">Encryption 1.0</h1>
+    <h1 class="text-3xl font-bold text-center mb-8"><span class="neon-title">Encryption Hub</span> 💾</h1>
 
     <div class="form-group">
-        <label for="message" class="label">Message : </label>
-        <textarea id="message" class="textarea" placeholder="Enter your message here..."></textarea>
+        <label for="message" class="label">Input Message / Ciphertext</label>
+        <textarea id="message" class="textarea" placeholder="Enter your secret data or encrypted cipher here..."></textarea>
     </div>
 
     <div class="form-group">
-        <label for="password" class="label">Password : </label>
+        <label for="password" class="label">Secret Key / Password</label>
         <div class="password-input-group">
-            <input type="password" id="password" class="input flex-grow" placeholder="Enter a password...">
-            <button id="passwordToggle" class="visibility-btn">
+            <input type="password" id="password" class="input flex-grow" placeholder="Enter a secure password for key derivation...">
+            <button id="passwordToggle" class="visibility-btn" title="Toggle password visibility" aria-label="Toggle password visibility">
+                <!-- Eye Icon (Visible) -->
                 <svg id="eye-icon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                     <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
                     <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
                 </svg>
+                <!-- Eye Slash Icon (Hidden) -->
                 <svg id="eye-slash-icon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hidden" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd" d="M3.707 2.293A1 1 0 002.293 3.707l14 14a1 1 0 001.414-1.414l-14-14z" clip-rule="evenodd" />
                     <path d="M10 13a3 3 0 100-6 3 3 0 000 6z" />
@@ -320,7 +336,7 @@ Special Notes:
     <div class="flex items-center justify-between">
         <div class="btn-group flex-grow">
             <button id="encryptBtn" class="btn btn-primary">Encrypt</button>
-            <button id="decryptBtn" class="btn btn-secondary">Decrypt</button>
+            <button id="decryptBtn" class="btn btn-secondary"> Decrypt</button>
             <button id="clearBtn" class="btn btn-secondary">Clear</button>
         </div>
         <div id="loadingSpinner" class="loading-spinner hidden"></div>
@@ -328,7 +344,7 @@ Special Notes:
 
     <div id="resultBox" class="result-box hidden mt-6">
         <div class="result-title">
-            Result:
+            Output Console:
             <button id="copyBtn" class="copy-btn">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                     <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
@@ -346,7 +362,7 @@ Special Notes:
 <footer>
     <p>Encryption Hub v1.0.1 - <a href="https://www.gnu.org/licenses/gpl-3.0.html" class="text-blue-400 hover:underline">GPLv3 Licensed</a></p>
     <p class="text-gray-400">Copyright © 2025 Azeem117.</p>
-</footer> 
+</footer>    
 
 <script>
     // --- Helper Functions ---
@@ -369,6 +385,7 @@ Special Notes:
         for (let i = 0; i < len; i++) {
             binary += String.fromCharCode(bytes[i]);
         }
+        // Use btoa for Base64 encoding
         return window.btoa(binary);
     }
 
@@ -383,22 +400,26 @@ Special Notes:
         return bytes.buffer;
     }
 
-    // Displays a temporary message to the user.
+    // Displays a temporary message to the user with updated thematic colors.
     function showMessage(text, isError = false) {
         const messageBox = document.getElementById('messageBox');
         messageBox.textContent = text;
         messageBox.style.display = 'block';
         if (isError) {
-            messageBox.style.backgroundColor = '#ef4444'; // Red for errors
+            // Error color: Soft Red
+            messageBox.style.backgroundColor = '#f87171'; 
+            messageBox.style.color = '#1f1f2e';
         } else {
-            messageBox.style.backgroundColor = '#2c2c2c'; // Dark gray for success/info
+            // Success/Info color: Neon Green
+            messageBox.style.backgroundColor = '#34d399'; 
+            messageBox.style.color = '#1f1f2e';
         }
         setTimeout(() => {
             messageBox.style.display = 'none';
         }, 3000);
     }
 
-    // --- Core Cryptographic Functions ---
+    // --- Core Cryptographic Functions (Unchanged as requested by user) ---
 
     // Derives a key from the user's password using PBKDF2 with a random salt.
     async function getKey(password, salt) {
@@ -520,6 +541,8 @@ Special Notes:
         document.getElementById('password').value = '';
         document.getElementById('resultBox').classList.add('hidden');
         document.getElementById('resultText').textContent = '';
+        document.getElementById('messageBox').style.display = 'none'; // Hide message box on clear
+        showMessage("Input cleared successfully.", false);
     }
 
     // --- Event Listeners ---
@@ -557,7 +580,9 @@ Special Notes:
         if (encryptedData) {
             resultText.textContent = encryptedData;
             resultBox.classList.remove('hidden');
-            showMessage("Message encrypted successfully!");
+            showMessage("Message encrypted successfully! Use the 'Copy' button.", false);
+        } else {
+             resultBox.classList.add('hidden');
         }
         toggleLoading(false);
     });
@@ -579,7 +604,9 @@ Special Notes:
         if (decryptedData) {
             resultText.textContent = decryptedData;
             resultBox.classList.remove('hidden');
-            showMessage("Message decrypted successfully!");
+            showMessage("Message decrypted successfully!", false);
+        } else {
+            resultBox.classList.add('hidden');
         }
         toggleLoading(false);
     });
@@ -597,7 +624,7 @@ Special Notes:
             tempInput.select();
             document.execCommand('copy');
             document.body.removeChild(tempInput);
-            showMessage("Copied to clipboard!");
+            showMessage("Copied to clipboard!", false);
         } catch (err) {
             showMessage("Failed to copy. Please try again.", true);
         }
