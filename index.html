@@ -212,5 +212,21 @@ Report security issues: adwardcollin365@gmail.com
         <p class="text-gray-500">Encryption Hub v.1.0.3 - <a href="https://www.gnu.org/licenses/gpl-3.0.html" class="text-violet-400 hover:text-violet-300 transition">GPLv3 Licensed</a></p>
         <p class="text-gray-500 text-sm mt-1">Copyright © 2025 Azeem117.</p>
     </footer>
+   <script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      // The scope path is crucial for GitHub Pages subdirectories!
+      navigator.serviceWorker.register('/EncryptionHub.github.io/sw.js', {
+          scope: '/EncryptionHub.github.io/' 
+        })
+        .then(registration => {
+          console.log('Service Worker registered with scope:', registration.scope);
+        })
+        .catch(error => {
+          console.error('Service Worker registration failed:', error);
+        });
+    });
+  }
+</script>
 </body>
 </html>
