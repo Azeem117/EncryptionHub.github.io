@@ -55,33 +55,36 @@ Special Notes:
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Encryption 3.0</title>
- <link rel="icon" type="image/png" sizes="16x16" href="logo/icon.png">
+    <!-- Placeholder favicons removed as they point to local paths -->
+         <link rel="icon" type="image/png" sizes="16x16" href="logo/icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="logo/icon.png">
     <link rel="icon" type="image/png" sizes="48x48" href="logo/icon.png">
     <link rel="apple-touch-icon" sizes="180x180" href="logo/icon.png">
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#111827">
 
-    
+    <meta name="theme-color" content="#1D222B">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    
     <style>
+        /* Deep space background and sophisticated container */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #0f172a; /* Slate 950 */
+            background-color: #0d1117; /* Deep Navy/Black */
         }
-        .container {
-            background-color: #1e293b; /* Slate 800 */
-            border: 2px solid #475569; /* Slate 600 */
+        .container-card {
+            background-color: #1d222b; /* Dark Gray-Blue */
+            box-shadow: 0 10px 30px rgba(0, 255, 128, 0.1); /* Subtle Emerald glow */
+            border: 1px solid #34d39966; /* Subtle Emerald border */
         }
-        .btn {
-            @apply px-14 py-7 font-bold rounded-full shadow-xl text-3xl transition duration-300 ease-in-out transform hover:scale-105;
-        }
+        
+        /* Custom loader for the Emerald theme */
         #loader {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #2dd4bf; /* Teal 400 */
+            border: 4px solid #374151; /* Dark Gray */
+            border-top: 4px solid #10b981; /* Emerald 500 */
             border-radius: 50%;
             width: 24px;
             height: 24px;
@@ -95,41 +98,47 @@ Special Notes:
 </head>
 <body class="flex items-center justify-center min-h-screen p-4 text-white">
 
-    <div class="container w-full max-w-xl mx-auto rounded-xl p-8 shadow-2xl">
-        <h1 class="text-3xl font-bold text-center text-teal-400 mb-2">Encryption 3.0</h1>
-        <p class="text-center text-sm text-slate-400 mb-6">Uses AES-GCM and PBKDF2 for strong encryption.</p>
+    <div class="container-card w-full max-w-lg mx-auto rounded-xl p-8 shadow-2xl transition duration-300">
+        <h1 class="text-4xl font-extrabold text-center text-emerald-400 mb-2 tracking-wide">
+            Encryption3.0
+        </h1>
+        <p class="text-center text-md text-gray-400 mb-8">
+            Uses <span class="text-emerald-300">AES-GCM</span> and <span class="text-emerald-300">PBKDF2</span> for military-grade security.
+        </p>
 
         <!-- Main application area -->
         <div class="space-y-6">
+            
             <!-- File input section -->
             <div>
-                <label for="fileInput" class="block text-slate-300 font-medium mb-2">
-                    Select a file to encrypt or decrypt:
+                <label for="fileInput" class="block text-gray-300 font-medium mb-2">
+                    Select a file:
                 </label>
                 <input type="file" id="fileInput"
-                        class="block w-full text-sm text-slate-500
-                                file:mr-4 file:py-2 file:px-4
-                                file:rounded-full file:border-0
-                                file:text-sm file:font-semibold
-                                file:bg-slate-600 file:text-white
-                                hover:file:bg-slate-700 cursor-pointer">
+                        class="block w-full text-sm text-gray-400 p-2 border border-gray-600 rounded-lg bg-gray-700 
+                                file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0
+                                file:text-sm file:font-semibold file:bg-emerald-600 file:text-white
+                                hover:file:bg-emerald-700 cursor-pointer transition duration-200">
             </div>
 
             <!-- Key input section -->
             <div>
-                <label for="keyInput" class="block text-slate-300 font-medium mb-2">
+                <label for="keyInput" class="block text-gray-300 font-medium mb-2">
                     Enter your secret key:
                 </label>
                 <div class="relative">
-                    <input type="password" id="keyInput" placeholder="Enter your key..."
-                               class="w-full p-3 pr-10 rounded-full bg-slate-700 text-white placeholder-slate-400
-                                     focus:outline-none focus:ring-2 focus:ring-teal-500">
-                    <button id="togglePassword" class="absolute inset-y-0 right-0 px-3 flex items-center text-slate-400 hover:text-white">
-                         <svg id="eye-icon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <input type="password" id="keyInput" placeholder="Strong, memorable key..."
+                            class="w-full p-3 pr-10 rounded-full bg-gray-700 text-white placeholder-gray-400
+                                   focus:outline-none focus:ring-4 focus:ring-emerald-500/50 transition duration-150 border border-gray-600">
+                    <button id="togglePassword" class="absolute inset-y-0 right-0 px-3 flex items-center text-gray-400 hover:text-emerald-400 transition"
+                            aria-label="Toggle password visibility">
+                         <!-- Eye Icon -->
+                         <svg id="eye-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                         </svg>
-                        <svg id="eye-off-icon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <!-- Eye Off Icon -->
+                        <svg id="eye-off-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.879 10.121A4.989 4.989 0 0112 15a4.989 4.989 0 01-1.879-4.879m3.758 3.758a.5.5 0 11-.707-.707m.707.707a.5.5 0 10-.707-.707" />
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m2-2l2-2" />
@@ -139,39 +148,46 @@ Special Notes:
             </div>
 
             <!-- Action buttons -->
-<div class="flex flex-col sm:flex-row gap-4">
-  <button id="encryptBtn" 
-    class="btn bg-teal-600 hover:bg-teal-700 flex-1 rounded-full 
-           px-6 py-4 text-lg font-semibold shadow-md">
-    Encrypt File
-  </button>
+            <div class="flex flex-col sm:flex-row gap-4 pt-4">
+                <button id="encryptBtn"
+                    class="w-full px-6 py-4 text-xl font-bold rounded-full shadow-lg 
+                           bg-emerald-600 text-white hover:bg-emerald-700 transition duration-300 
+                           transform hover:scale-[1.01] active:scale-95">
+                    Encrypt File
+                </button>
 
-  <button id="decryptBtn" 
-    class="btn bg-teal-600 hover:bg-teal-700 flex-1 rounded-full 
-           px-6 py-4 text-lg font-semibold shadow-md">
-    Decrypt File
-  </button>
-</div>
+                <button id="decryptBtn"
+                    class="w-full px-6 py-4 text-xl font-bold rounded-full shadow-lg 
+                           bg-gray-600 text-white hover:bg-gray-700 hover:shadow-emerald-500/30 transition duration-300 
+                           transform hover:scale-[1.01] active:scale-95">
+                    Decrypt File
+                </button>
+            </div>
 
             <!-- Status and download area -->
-            <div class="mt-6 text-center">
-                <p id="statusMessage" class="text-sm text-slate-400 min-h-[20px]"></p>
+            <div class="mt-8 text-center min-h-[100px] flex flex-col items-center justify-center space-y-4">
+                <p id="statusMessage" class="text-base text-gray-300 min-h-[20px]"></p>
                 <div id="loader" class="mx-auto hidden"></div>
-                <a id="downloadLink" href="#" download class="hidden mt-4 inline-block btn bg-teal-500 hover:bg-teal-600 rounded-full">Download File</a>
+                <a id="downloadLink" href="#" download 
+                   class="hidden mt-4 inline-block px-8 py-3 text-lg font-bold rounded-full shadow-xl 
+                          bg-emerald-500 hover:bg-emerald-600 text-white transition duration-300">
+                    Download File
+                </a>
             </div>
 
             <!-- Disclaimer -->
-            <div class="mt-8 pt-4 border-t border-slate-600 text-sm text-slate-400 text-center">
+            <div class="mt-8 pt-6 border-t border-gray-700 text-sm text-gray-500 text-center">
                 <p>
-                    <span class="font-bold text-teal-400">Disclaimer:</span> This tool uses cryptographically secure algorithms (AES-GCM and PBKDF2) but is a client-side implementation. For maximum security, always use a dedicated, server-side cryptographic solution and a strong, unique password for each file.
+                    <span class="font-bold text-emerald-400">Disclaimer:</span> This tool is client-side. Your key never leaves your browser.
+                    For absolute maximum security, ensure your environment is clean and use a dedicated, unique key.
                 </p>
             </div>
-            <!-- Footer -->
-    <footer class="bg-slate-900 text-center p-6 mt-8">
-        <p>Encryption Hub v1.0.1 - <a href="https://www.gnu.org/licenses/gpl-3.0.html" class="text-teal-300 hover:underline">GPLv3 Licensed</a></p>
-        <p class="text-slate-400">Copyright © 2025 Azeem117.</p>
-    </footer> 
         </div>
+        
+        <!-- Footer moved and restyled to be inside the card -->
+        <footer class="mt-8 pt-4 border-t border-gray-700 text-center text-sm text-gray-500">
+            <p>Encryption Hub v1.0.1 - Licensed <a href="#" class="text-emerald-400 hover:underline">GPLv3</a> | Copyright © 2025</p>
+        </footer>
     </div>
 
     <script>
@@ -187,12 +203,13 @@ Special Notes:
             const downloadLink = document.getElementById('downloadLink');
             const loader = document.getElementById('loader');
 
-            const iterations = 1000000;
+            const iterations = 10000000;
             const keyLength = 256;
             let originalFile = null;
 
             // Toggle password visibility
-            togglePasswordBtn.addEventListener('click', () => {
+            togglePasswordBtn.addEventListener('click', (e) => {
+                e.preventDefault(); // Prevent button from submitting a form if it were in one
                 const type = keyInput.getAttribute('type') === 'password' ? 'text' : 'password';
                 keyInput.setAttribute('type', type);
                 eyeIcon.classList.toggle('hidden');
@@ -217,10 +234,15 @@ Special Notes:
                 decryptBtn.disabled = isProcessing;
                 fileInput.disabled = isProcessing;
                 keyInput.disabled = isProcessing;
+                
                 if (isProcessing) {
+                    encryptBtn.classList.add('opacity-50');
+                    decryptBtn.classList.add('opacity-50');
                     loader.classList.remove('hidden');
                     downloadLink.classList.add('hidden');
                 } else {
+                    encryptBtn.classList.remove('opacity-50');
+                    decryptBtn.classList.remove('opacity-50');
                     loader.classList.add('hidden');
                 }
             }
@@ -262,7 +284,7 @@ Special Notes:
                 }
 
                 setUIState(true);
-                statusMessage.textContent = "Deriving key with PBKDF2...";
+                statusMessage.textContent = "Deriving key with PBKDF2 (This may take a moment)...";
 
                 try {
                     const salt = crypto.getRandomValues(new Uint8Array(16));
@@ -282,9 +304,7 @@ Special Notes:
                     );
 
                     // --- NEW LOGIC: PREPEND FILENAME METADATA ---
-                    // Encode the original filename
                     const fileNameBuffer = new TextEncoder().encode(originalFile.name);
-                    // Ensure filename is not too long to store in a single byte
                     if (fileNameBuffer.byteLength > 255) {
                         statusMessage.textContent = "Filename is too long.";
                         setUIState(false);
@@ -292,17 +312,17 @@ Special Notes:
                     }
                     const fileNameLength = new Uint8Array([fileNameBuffer.byteLength]);
 
-                    // Combine filename metadata, salt, iv, and encrypted data
+                    // Combine filename length (1 byte), filename, salt (16 bytes), iv (12 bytes), and encrypted data
                     const combined = new Uint8Array(1 + fileNameBuffer.byteLength + salt.length + iv.length + encryptedBuffer.byteLength);
-                    combined.set(fileNameLength, 0);
-                    combined.set(fileNameBuffer, 1);
-                    combined.set(salt, 1 + fileNameBuffer.byteLength);
-                    combined.set(iv, 1 + fileNameBuffer.byteLength + salt.length);
-                    combined.set(new Uint8Array(encryptedBuffer), 1 + fileNameBuffer.byteLength + salt.length + iv.length);
+                    let offset = 0;
+                    combined.set(fileNameLength, offset); offset += 1;
+                    combined.set(fileNameBuffer, offset); offset += fileNameBuffer.byteLength;
+                    combined.set(salt, offset); offset += salt.length;
+                    combined.set(iv, offset); offset += iv.length;
+                    combined.set(new Uint8Array(encryptedBuffer), offset);
                     
                     const encryptedBlob = new Blob([combined], { type: 'application/octet-stream' });
                     
-                    // The download link will always have a generic .enc extension
                     const newFileName = originalFile.name + '.enc';
 
                     const url = URL.createObjectURL(encryptedBlob);
@@ -313,14 +333,14 @@ Special Notes:
                     
                     downloadLink.addEventListener('click', () => {
                         setTimeout(() => URL.revokeObjectURL(url), 500);
-                    });
+                    }, { once: true }); // Use { once: true } to auto-remove listener
 
-                    statusMessage.textContent = "Encryption complete!";
+                    statusMessage.textContent = "Encryption complete! Download your file.";
                     setUIState(false);
 
                 } catch (error) {
                     statusMessage.textContent = `Encryption failed: ${error.message}`;
-                    console.error(error);
+                    console.error("Encryption Error:", error);
                     setUIState(false);
                 }
             });
@@ -337,30 +357,40 @@ Special Notes:
                 }
 
                 setUIState(true);
-                statusMessage.textContent = "Deriving key with PBKDF2...";
+                statusMessage.textContent = "Reading file and deriving key...";
 
                 try {
                     const encryptedFileBuffer = await originalFile.arrayBuffer();
                     
-                    // --- NEW LOGIC: EXTRACT FILENAME METADATA FIRST ---
-                    if (encryptedFileBuffer.byteLength < 29) { // 1 byte length + 1 byte filename + 16 salt + 12 iv
-                        statusMessage.textContent = "Decryption failed. The file is corrupted or not a valid encrypted file.";
-                        setUIState(false);
-                        return;
+                    const MIN_HEADER_SIZE = 1 + 1 + 16 + 12; // Length(1) + Min Filename(1) + Salt(16) + IV(12)
+                    if (encryptedFileBuffer.byteLength < MIN_HEADER_SIZE) { 
+                        throw new Error("File is too small or corrupted.");
                     }
 
-                    const fileNameLength = new Uint8Array(encryptedFileBuffer.slice(0, 1))[0];
-                    const fileNameBuffer = new Uint8Array(encryptedFileBuffer.slice(1, 1 + fileNameLength));
+                    // --- EXTRACT METADATA ---
+                    let offset = 0;
+                    const headerArray = new Uint8Array(encryptedFileBuffer);
+
+                    // 1. Filename Length (1 byte)
+                    const fileNameLength = headerArray[offset]; offset += 1;
+                    if (fileNameLength === 0) throw new Error("Filename metadata is missing.");
+
+                    // 2. Filename Buffer
+                    const fileNameBuffer = headerArray.slice(offset, offset + fileNameLength); offset += fileNameLength;
                     const newFileName = new TextDecoder().decode(fileNameBuffer);
-
-                    const saltStart = 1 + fileNameLength;
-                    const ivStart = saltStart + 16;
-                    const encryptedDataStart = ivStart + 12;
-
-                    const salt = new Uint8Array(encryptedFileBuffer.slice(saltStart, ivStart));
-                    const iv = new Uint8Array(encryptedFileBuffer.slice(ivStart, encryptedDataStart));
-                    const encryptedData = new Uint8Array(encryptedFileBuffer.slice(encryptedDataStart));
                     
+                    // 3. Salt (16 bytes)
+                    const salt = headerArray.slice(offset, offset + 16); offset += 16;
+                    
+                    // 4. IV (12 bytes)
+                    const iv = headerArray.slice(offset, offset + 12); offset += 12;
+                    
+                    // 5. Encrypted Data (rest of the file)
+                    const encryptedData = headerArray.slice(offset);
+                    
+                    if (encryptedData.byteLength === 0) throw new Error("Encrypted data is missing or zero length.");
+
+                    // Derive the decryption key
                     const derivedKey = await deriveKeyFromPassword(keyInput.value, salt, ["decrypt"]);
 
                     statusMessage.textContent = "Decrypting file...";
@@ -374,31 +404,32 @@ Special Notes:
 
                     const decryptedBlob = new Blob([decryptedBuffer], { type: 'application/octet-stream' });
                     
+                    const finalFileName = newFileName.endsWith('.enc') ? newFileName.slice(0, -4) : newFileName;
+
                     const url = URL.createObjectURL(decryptedBlob);
                     downloadLink.href = url;
-                    downloadLink.download = newFileName;
-                    downloadLink.textContent = `Download Decrypted File (${newFileName})`;
+                    downloadLink.download = finalFileName;
+                    downloadLink.textContent = `Download Decrypted File (${finalFileName})`;
                     downloadLink.classList.remove('hidden');
 
                     downloadLink.addEventListener('click', () => {
                         setTimeout(() => URL.revokeObjectURL(url), 500);
-                    });
+                    }, { once: true });
 
-                    statusMessage.textContent = "Decryption complete!";
+                    statusMessage.textContent = "Decryption complete! Download your file.";
                     setUIState(false);
 
                 } catch (error) {
                     if (error.name === 'OperationError') {
-                        statusMessage.textContent = "Decryption failed. The secret key is incorrect or the file has been tampered with.";
+                        statusMessage.textContent = "Decryption failed. The secret key is incorrect or the file was corrupted.";
                     } else {
-                        statusMessage.textContent = `Decryption failed. Please check your file. Error: ${error.message}`;
+                        statusMessage.textContent = `Decryption failed. Error: ${error.message}`;
                     }
-                    console.error(error);
+                    console.error("Decryption Error:", error);
                     setUIState(false);
                 }
             });
         });
     </script>
-    
 </body>
 </html>
