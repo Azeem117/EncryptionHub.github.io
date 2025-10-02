@@ -331,5 +331,21 @@ Report security issues: adwardcollin365@gmail.com
         });
         
     </script>
+   <script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      // The scope path is crucial for GitHub Pages subdirectories!
+      navigator.serviceWorker.register('/EncryptionHub.github.io/sw.js', {
+          scope: '/EncryptionHub.github.io/' 
+        })
+        .then(registration => {
+          console.log('Service Worker registered with scope:', registration.scope);
+        })
+        .catch(error => {
+          console.error('Service Worker registration failed:', error);
+        });
+    });
+  }
+</script>
 </body>
 </html>
