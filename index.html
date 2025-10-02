@@ -81,6 +81,8 @@ Special Notes:
             transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
             /* Subtle inner shadow for depth on dark background */
             box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 4px 10px rgba(0, 0, 0, 0.5);
+            /* Ensure cards stretch evenly within the grid */
+            height: 100%;
         }
         /* Enhanced hover effect with Violet/Indigo glow */
         .card:hover {
@@ -92,18 +94,20 @@ Special Notes:
 </head>
 <body class="text-white min-h-screen flex flex-col items-center p-4">
     <div class="flex-grow flex items-center justify-center w-full">
-        <!-- Main Container: Darker slate background with less transparency for contrast -->
-        <div class="bg-gray-900/90 backdrop-blur-xl p-8 md:p-14 rounded-3xl shadow-2xl border border-violet-500/50 w-full max-w-5xl text-center">
+        <!-- Main Container: INCREASED MAX WIDTH to 7xl and added lg:p-16 for desktop padding -->
+        <div class="bg-gray-900/90 backdrop-blur-xl p-6 md:p-12 lg:p-16 rounded-3xl shadow-2xl border border-violet-500/50 w-full max-w-7xl text-center">
             <!-- Primary accent color maintained, using text-violet-400 for maximum brightness -->
-            <h1 class="text-5xl md:text-6xl font-extrabold mb-4 text-violet-400">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4 text-violet-400">
                 <span class="text-indigo-300">Encryption</span> Hub
             </h1>
             <!-- Intro text changed to a slightly brighter gray for readability -->
-            <p class="text-gray-300 mb-12 max-w-prose mx-auto text-xl opacity-90">
+            <p class="text-gray-300 mb-10 sm:mb-12 max-w-prose mx-auto text-lg sm:text-xl opacity-90">
                 Your privacy is our priority. Explore our suite of modern, browser-based encryption tools to protect your messages and files.
             </p>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+            <!-- IMPROVEMENT: Refined Grid Breakpoints for smoother mobile and tablet transitions. 
+                 Added 'items-stretch' to ensure all cards have equal height in the same row. -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 items-stretch">
                 <!-- Card 1: Encryption 1.0 (Text) - Primary Indigo/Violet Theme -->
                 <a href="page1.html" class="card group flex flex-col items-center p-6 bg-slate-900/50 rounded-xl border border-indigo-700/50 hover:border-violet-500">
                     <svg class="w-16 h-16 mb-4 text-violet-400 group-hover:text-violet-300 transition duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -182,7 +186,7 @@ Special Notes:
 
     <!-- Footer -->
     <footer class="text-center p-6 mt-12 w-full border-t border-slate-800">
-        <p class="text-gray-500">Encryption Hub v1.0.2 - <a href="https://www.gnu.org/licenses/gpl-3.0.html" class="text-violet-400 hover:text-violet-300 transition">GPLv3 Licensed</a></p>
+        <p class="text-gray-500">Encryption Hub v.1.0.3 - <a href="https://www.gnu.org/licenses/gpl-3.0.html" class="text-violet-400 hover:text-violet-300 transition">GPLv3 Licensed</a></p>
         <p class="text-gray-500 text-sm mt-1">Copyright © 2025 Azeem117.</p>
     </footer>
 </body>
