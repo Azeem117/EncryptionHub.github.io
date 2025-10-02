@@ -60,82 +60,101 @@ Special Notes:
     <link rel="icon" type="image/png" sizes="48x48" href="logo/icon.png">
     <link rel="apple-touch-icon" sizes="180x180" href="logo/icon.png">
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#111827">
+    <meta name="theme-color" content="#000000">
 
     <!-- Inter font from Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Crypto-JS for AES encryption -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <!-- Removed Crypto-JS: Now using native Web Crypto API -->
     <style>
+        /* NEW DEEP BLACK & ELECTRIC MAGENTA THEME */
         :root {
-            --color-primary: #0a0a0a;
-            --color-secondary: #181818;
-            --color-accent: #6C1E9D;
-            --color-accent-light: #8A2BE2;
-            --color-accent-dark: #4A147D;
-            --color-text: #E0E0E0;
-            --color-text-subtle: #A3A3A3;
+            --color-primary: #000000; /* Pure Black for body background base */
+            --color-secondary: #0D0D0D; /* Near Black for containers/inputs */
+            --color-accent: #E879F9; /* ELECTRIC MAGENTA (Fuchsia-400) */
+            --color-accent-light: #F0ABFC; /* Lighter Magenta for hover/spinner/glow */
+            --color-accent-dark: #C026D3; /* Deep Magenta/Fuchsia-700 for borders */
+            --color-text: #F3F4F6; /* Near White */
+            --color-text-subtle: #4B5563; /* Dark Gray for subtle text */
         }
         body {
-            background-image: linear-gradient(135deg, #100C1C 0%, #1A1A1A 100%);
+            /* Pure Black background, removing gradient */
+            background-color: var(--color-primary);
+            background-image: none;
             font-family: 'Inter', sans-serif;
+            color: var(--color-text);
         }
         .container {
             background-color: var(--color-secondary);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            border: 1px solid var(--color-accent-dark);
+            /* Subtle magenta glow shadow */
+            box-shadow: 0 10px 30px rgba(232, 121, 249, 0.3);
+            border: 1px solid var(--color-accent-dark); /* Border uses dark accent */
         }
         .logo-svg {
             fill: var(--color-accent);
         }
+        /* Style for the main title glow effect (Now CYBER Glow) */
+        .cyber-glow {
+            color: var(--color-accent);
+            text-shadow: 0 0 5px var(--color-accent), 0 0 15px var(--color-accent-light), 0 0 30px rgba(240, 171, 252, 0.8);
+        }
         .password-toggle svg path {
             transition: stroke 0.2s;
+            stroke: var(--color-text-subtle);
         }
         .password-toggle:hover svg path {
-            stroke: var(--color-text);
+            stroke: var(--color-accent-light);
         }
         .btn {
+            /* Neon Magenta gradient for main buttons */
             background: linear-gradient(to right, var(--color-accent-light), var(--color-accent));
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
             transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+            color: var(--color-secondary); /* Dark text for contrast */
         }
         .btn:hover {
+            /* Hover gradient */
             background: linear-gradient(to right, var(--color-accent-dark), var(--color-accent-light));
             transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(138, 43, 226, 0.5);
+            /* Stronger glow on hover (Magenta glow) */
+            box-shadow: 0 8px 25px rgba(240, 171, 252, 0.9);
         }
         .progress-bar {
-            background: linear-gradient(to right, var(--color-accent-dark), var(--color-accent-light));
+            background: linear-gradient(to right, var(--color-accent-dark), var(--color-accent));
             transition: width 0.3s ease;
         }
         #download-link {
+            /* Neon Magenta gradient for download link */
             background: linear-gradient(to right, var(--color-accent-light), var(--color-accent));
-            box-shadow: 0 5px 15px rgba(138, 43, 226, 0.3);
+            box-shadow: 0 5px 15px rgba(232, 121, 249, 0.3);
             transition: background 0.3s, transform 0.2s;
+            color: var(--color-secondary);
         }
         #download-link:hover {
+            /* Hover gradient and stronger glow */
             background: linear-gradient(to right, var(--color-accent-dark), var(--color-accent-light));
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(138, 43, 226, 0.5);
+            box-shadow: 0 8px 25px rgba(240, 171, 252, 0.9);
         }
         .modal {
-            background-color: rgba(0,0,0,0.7);
+            background-color: rgba(0,0,0,0.8);
         }
         .modal-content {
             background-color: var(--color-secondary);
             box-shadow: 0 5px 25px rgba(0,0,0,0.5);
         }
         .modal-close-btn {
+            /* Close button uses accent dark/normal */
             background: linear-gradient(to right, var(--color-accent), var(--color-accent-dark));
+            color: var(--color-text);
         }
         .modal-close-btn:hover {
             background: linear-gradient(to right, var(--color-accent-dark), var(--color-accent));
         }
         .spinner {
             border: 4px solid rgba(255, 255, 255, 0.3);
-            border-top: 4px solid white;
+            border-top: 4px solid var(--color-accent-light); /* Spinner uses light accent */
             border-radius: 50%;
             width: 20px;
             height: 20px;
@@ -147,7 +166,7 @@ Special Notes:
         }
     </style>
 </head>
-<body class="bg-gray-900 text-gray-200 flex flex-col justify-center items-center min-h-screen p-4">
+<body class="flex flex-col justify-center items-center min-h-screen p-4 text-gray-50">
     <div class="container rounded-2xl p-8 w-full max-w-2xl text-center">
         <div class="logo mb-5">
             <svg class="logo-svg mx-auto w-20 h-20" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
@@ -161,24 +180,26 @@ Special Notes:
                 <path d="M50 20 C 40 10, 30 15, 30 25 L 30 40 C 30 50, 40 60, 50 60 C 60 60, 70 50, 70 40 L 70 25 C 70 15, 60 10, 50 20 Z" fill="var(--color-secondary)"/>
             </svg>
         </div>
-        <h1 class="text-4xl font-extrabold text-purple-400 -mt-2 mb-1">Encryption2.0</h1>
+        <!-- Applied new cyber-glow class for the title -->
+        <h1 class="text-4xl font-extrabold cyber-glow -mt-2 mb-1">Encryption2.0</h1>
+        <!-- Updated subtle text color -->
         <p class="text-gray-400 text-lg mb-8">Securely hide secret messages within images.</p>
 
         <div class="mb-6 text-left">
             <label for="image-input" class="block mb-2 font-semibold text-gray-200">Upload an Image</label>
-            <input type="file" id="image-input" accept="image/*" class="block w-full text-sm text-gray-500
+            <input type="file" id="image-input" accept="image/*" class="block w-full text-sm text-gray-400
                 file:mr-4 file:py-2 file:px-4
                 file:rounded-md file:border-0
                 file:text-sm file:font-semibold
-                file:bg-purple-600 file:text-white
-                hover:file:bg-purple-700
+                file:bg-[#701a75] file:text-white
+                hover:file:bg-[#86198f]
                 border border-gray-700 rounded-md bg-gray-800">
         </div>
 
         <div class="mb-6 text-left">
             <label for="message-input" class="block mb-2 font-semibold text-gray-200">Secret Message</label>
             <textarea id="message-input" placeholder="Enter your secret message here..."
-                      class="w-full h-32 p-3 bg-gray-800 border-2 border-gray-700 rounded-lg text-gray-200 resize-y focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors"></textarea>
+                      class="w-full h-32 p-3 bg-gray-800 border-2 border-gray-700 rounded-lg text-gray-200 resize-y focus:outline-none focus:ring-2 focus:ring-[#E879F9] transition-colors"></textarea>
         </div>
 
         <div class="relative mb-6 text-left">
@@ -192,14 +213,14 @@ Special Notes:
                 </span>
             </div>
             <input type="password" id="password-input" placeholder="Enter a password to encrypt/decrypt"
-                   class="w-full p-3 bg-gray-800 border-2 border-gray-700 rounded-lg text-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors">
+                   class="w-full p-3 bg-gray-800 border-2 border-gray-700 rounded-lg text-gray-200 focus:outline-none focus:ring-2 focus:ring-[#E879F9] transition-colors">
         </div>
 
         <div class="flex flex-col sm:flex-row gap-4 mt-8">
-            <button class="btn flex-1 min-w-[150px] p-4 rounded-lg text-lg font-bold text-white relative flex items-center justify-center" id="hide-btn">
+            <button class="btn flex-1 min-w-[150px] p-4 rounded-lg text-lg font-bold relative flex items-center justify-center" id="hide-btn">
                 Encrypt
             </button>
-            <button class="btn flex-1 min-w-[150px] p-4 rounded-lg text-lg font-bold text-white relative flex items-center justify-center" id="reveal-btn">
+            <button class="btn flex-1 min-w-[150px] p-4 rounded-lg text-lg font-bold relative flex items-center justify-center" id="reveal-btn">
                 Decrypt
             </button>
         </div>
@@ -208,9 +229,10 @@ Special Notes:
             <div id="progress-bar" class="h-full rounded-md" style="width: 0;"></div>
         </div>
 
-        <p id="status-message" class="font-semibold text-purple-400 min-h-[20px] text-sm mb-4"></p>
+        <!-- Updated status color default to magenta-400 -->
+        <p id="status-message" class="font-semibold text-[#E879F9] min-h-[20px] text-sm mb-4"></p>
 
-        <a href="#" id="download-link" download="cloaked_image.png" class="hidden inline-block px-8 py-3 rounded-lg font-bold text-white">
+        <a href="#" id="download-link" download="cloaked_image.png" class="hidden inline-block px-8 py-3 rounded-lg font-bold">
             Download Image
         </a>
     </div>
@@ -220,7 +242,7 @@ Special Notes:
     <div id="modal" class="modal fixed inset-0 flex justify-center items-center z-50 hidden">
         <div class="modal-content rounded-xl p-8 w-11/12 max-w-md text-center">
             <p class="modal-message text-lg mb-6" id="modal-message-text"></p>
-            <button class="modal-close-btn py-2 px-6 rounded-lg font-semibold text-white" onclick="closeModal()">OK</button>
+            <button class="modal-close-btn py-2 px-6 rounded-lg font-semibold" onclick="closeModal()">OK</button>
         </div>
     </div>
 
@@ -241,10 +263,140 @@ Special Notes:
         const modalMessageText = document.getElementById('modal-message-text');
 
         // The number of pixel channels to process per animation frame
-        // Higher values mean faster processing but potentially less responsive UI
         const CHANNELS_PER_CHUNK = 50000;
 
-        // --- Helper Functions ---
+        // --- Helper Functions for Cryptography ---
+
+        // Converts a string to a Uint8Array.
+        function strToUint8(str) {
+            return new TextEncoder().encode(str);
+        }
+
+        // Converts a Uint8Array to a string.
+        function uint8ToStr(uint8) {
+            return new TextDecoder().decode(uint8);
+        }
+
+        // Converts an ArrayBuffer to a Base64 string.
+        function arrayBufferToBase64(buffer) {
+            let binary = '';
+            const bytes = new Uint8Array(buffer);
+            const len = bytes.byteLength;
+            for (let i = 0; i < len; i++) {
+                binary += String.fromCharCode(bytes[i]);
+            }
+            return window.btoa(binary);
+        }
+
+        // Converts a Base64 string to an ArrayBuffer.
+        function base64ToArrayBuffer(base64) {
+            const binaryString = window.atob(base64);
+            const len = binaryString.length;
+            const bytes = new Uint8Array(len);
+            for (let i = 0; i < len; i++) {
+                bytes[i] = binaryString.charCodeAt(i);
+            }
+            return bytes.buffer;
+        }
+
+        // --- Core Cryptographic Functions (Web Crypto API) ---
+
+        /**
+         * Derives a cryptographic key using PBKDF2 with 1,000,000 iterations.
+         * @param {string} password User password string.
+         * @param {ArrayBuffer} salt 16-byte random salt.
+         * @returns {Promise<CryptoKey>} The derived AES-GCM 256-bit key.
+         */
+        async function getKey(password, salt) {
+            const keyMaterial = await window.crypto.subtle.importKey(
+                "raw",
+                strToUint8(password),
+                { name: "PBKDF2" },
+                false,
+                ["deriveKey"]
+            );
+            return window.crypto.subtle.deriveKey(
+                {
+                    name: "PBKDF2",
+                    salt: salt,
+                    iterations: 1000000, // 1 million iterations
+                    hash: "SHA-256",
+                },
+                keyMaterial,
+                { name: "AES-GCM", length: 256 },
+                true,
+                ["encrypt", "decrypt"]
+            );
+        }
+
+        /**
+         * Encrypts a message using AES-GCM.
+         * The result is a Base64 string combining Salt (16 bytes), IV (12 bytes), and Ciphertext.
+         * @param {string} message The plain text message.
+         * @param {string} password The user password.
+         * @returns {Promise<string>} Base64 encoded payload (Salt + IV + Ciphertext).
+         */
+        async function encryptMessage(message, password) {
+            if (!message || !password) throw new Error("Message and password required.");
+
+            const data = strToUint8(message);
+            
+            // Generate unique salt (16 bytes) and IV (12 bytes for AES-GCM)
+            const salt = window.crypto.getRandomValues(new Uint8Array(16));
+            const iv = window.crypto.getRandomValues(new Uint8Array(12));
+
+            const key = await getKey(password, salt);
+            
+            const encryptedData = await window.crypto.subtle.encrypt(
+                { name: "AES-GCM", iv: iv },
+                key,
+                data
+            );
+
+            // Combine Salt, IV, and Ciphertext into one buffer
+            const combined = new Uint8Array(salt.byteLength + iv.byteLength + encryptedData.byteLength);
+            combined.set(salt, 0);
+            combined.set(iv, salt.byteLength);
+            combined.set(new Uint8Array(encryptedData), salt.byteLength + iv.byteLength);
+
+            return arrayBufferToBase64(combined);
+        }
+
+        /**
+         * Decrypts an encrypted payload.
+         * @param {string} encryptedBase64 Base64 encoded payload (Salt + IV + Ciphertext).
+         * @param {string} password The user password.
+         * @returns {Promise<string>} The decrypted plain text message.
+         */
+        async function decryptMessage(encryptedBase64, password) {
+            if (!encryptedBase64 || !password) throw new Error("Encrypted message and password required.");
+
+            const combined = base64ToArrayBuffer(encryptedBase64);
+            
+            // 28 bytes required for Salt (16) and IV (12)
+            if (combined.byteLength < 28) { 
+                throw new Error("Invalid payload: too short.");
+            }
+
+            // Separate the salt, IV, and encrypted data
+            const salt = combined.slice(0, 16);
+            const iv = combined.slice(16, 28);
+            const encryptedData = combined.slice(28);
+
+            const key = await getKey(password, salt);
+            
+            // Decrypts and verifies the authentication tag automatically
+            const decryptedData = await window.crypto.subtle.decrypt(
+                { name: "AES-GCM", iv: iv },
+                key,
+                encryptedData
+            );
+
+            return uint8ToStr(new Uint8Array(decryptedData));
+        }
+
+
+        // --- UI State Management Functions ---
 
         /**
          * Shows a modal with a given message.
@@ -282,9 +434,13 @@ Special Notes:
          * @param {string} message The message to display.
          * @param {string} color The color of the message (Tailwind class).
          */
-        function showStatus(message, color = 'text-purple-400') {
+        function showStatus(message, color = 'text-[#E879F9]') {
             statusMessage.textContent = message;
-            statusMessage.className = `font-semibold min-h-[20px] text-sm mb-4 ${color}`;
+            // Note: Directly using hex code in Tailwind class list is generally not supported, 
+            // but we use custom CSS variables for the default color and use built-in classes 
+            // like text-green-500/text-red-500 for error/success.
+            statusMessage.style.color = color.startsWith('text-') ? '' : color; // Use inline style for custom hex
+            statusMessage.className = `font-semibold min-h-[20px] text-sm mb-4 ${color.startsWith('text-') ? color : ''}`;
         }
 
         /**
@@ -293,7 +449,7 @@ Special Notes:
         function resetUI() {
             messageInput.value = '';
             passwordInput.value = '';
-            statusMessage.textContent = '';
+            showStatus('', 'text-transparent'); // Clear status
             progressBar.style.width = '0%';
             downloadLink.classList.add('hidden');
             showLoading(hideBtn, 'Encrypt', false);
@@ -393,23 +549,27 @@ Special Notes:
             downloadLink.classList.add('hidden');
             
             try {
+                // 1. Encrypt message using Web Crypto API
+                showStatus('Encrypting message with PBKDF2...');
+                // encryptedPayload is a Base64 string containing (Salt + IV + Ciphertext)
+                const encryptedPayload = await encryptMessage(message, password);
+                
+                // 2. Prepare the payload for steganography
+                const secretData = encryptedPayload + '###END_OF_MESSAGE###';
+                const binarySecret = toBinary(secretData);
+
+                // 3. Load image and hide the binary data
                 const reader = new FileReader();
                 reader.readAsDataURL(imageFile);
-                reader.onloadend = async () => {
+                reader.onloadend = () => {
                     const img = new Image();
-                    img.onload = async () => {
+                    img.onload = () => {
                         canvas.width = img.width;
                         canvas.height = img.height;
                         ctx.drawImage(img, 0, 0);
 
                         const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
                         const data = imageData.data;
-                        
-                        showStatus('Encrypting message...');
-                        const encryptedMessage = CryptoJS.AES.encrypt(message, password).toString();
-                        
-                        const secretData = encryptedMessage + '###END_OF_MESSAGE###';
-                        const binarySecret = toBinary(secretData);
                         
                         const availableSpace = (data.length / 4) * 3;
                         if (binarySecret.length > availableSpace) {
@@ -425,7 +585,7 @@ Special Notes:
                             downloadLink.href = newImageUrl;
                             downloadLink.classList.remove('hidden');
                             
-                            showStatus('Message hidden! Click the link below to download.', 'text-green-500');
+                            showStatus('Message hidden! Click the link below to download.', 'text-green-500'); /* Success is Green for contrast */
                             updateProgress(100);
                             showLoading(hideBtn, 'Encrypt', false);
                         });
@@ -435,7 +595,7 @@ Special Notes:
             } catch (error) {
                 showStatus('An error occurred during hiding. Please try again.', 'text-red-500');
                 showLoading(hideBtn, 'Encrypt', false);
-                console.error(error);
+                console.error("Encryption/Hiding Failed:", error);
             }
         });
 
@@ -465,7 +625,7 @@ Special Notes:
                         const data = imageData.data;
                         
                         showStatus('Extracting message from pixels...');
-                        revealMessageAsync(data, (binarySecret) => {
+                        revealMessageAsync(data, async (binarySecret) => {
                             if (!binarySecret) {
                                 showModal('No hidden message found or the image is corrupted.');
                                 showStatus('No hidden message found.', 'text-red-500');
@@ -474,7 +634,7 @@ Special Notes:
                             }
                             
                             const secretMessageWithSeparator = fromBinary(binarySecret);
-                            const [secretMessage, separator] = secretMessageWithSeparator.split('###END_OF_MESSAGE###');
+                            const [encryptedPayload, separator] = secretMessageWithSeparator.split('###END_OF_MESSAGE###');
                             
                             if (separator === undefined) {
                                 showModal('Could not find the end of the message. The image may be corrupted.');
@@ -485,19 +645,16 @@ Special Notes:
 
                             showStatus('Decrypting message...');
                             try {
-                                const decryptedBytes = CryptoJS.AES.decrypt(secretMessage, password);
-                                const decryptedMessage = decryptedBytes.toString(CryptoJS.enc.Utf8);
+                                // 1. Decrypt payload using Web Crypto API
+                                const decryptedMessage = await decryptMessage(encryptedPayload, password);
                                 
-                                if (decryptedMessage) {
-                                    messageInput.value = decryptedMessage;
-                                    showStatus('Message revealed successfully!', 'text-green-500');
-                                } else {
-                                    showModal('Could not decrypt the message. The password may be incorrect.');
-                                    showStatus('Decryption failed. Invalid password.', 'text-red-500');
-                                }
+                                messageInput.value = decryptedMessage;
+                                showStatus('Message revealed successfully!', 'text-green-500'); /* Success is Green for contrast */
                             } catch (e) {
-                                showModal('Could not decrypt the message. The password may be incorrect or the data is invalid.');
-                                showStatus('Decryption failed.', 'text-red-500');
+                                // Catch-all for failed decryption (bad password, corrupt data, invalid tag, etc.)
+                                showModal('Decryption failed. The password may be incorrect or the image data is invalid.');
+                                showStatus('Decryption failed. Invalid password or corrupted message.', 'text-red-500');
+                                console.error("Decryption Failed:", e);
                             }
                             updateProgress(100);
                             showLoading(revealBtn, 'Decrypt', false);
@@ -508,11 +665,11 @@ Special Notes:
             } catch (error) {
                 showStatus('An error occurred during revealing. Please try again.', 'text-red-500');
                 showLoading(revealBtn, 'Decrypt', false);
-                console.error(error);
+                console.error("Revealing Failed:", error);
             }
         });
 
-        // --- Helper Functions for Data Conversion ---
+        // --- Helper Functions for Data Conversion (Steganography) ---
 
         function toBinary(str) {
             return str.split('').map(char => char.charCodeAt(0).toString(2).padStart(8, '0')).join('');
@@ -544,8 +701,8 @@ Special Notes:
     </script>
 
         <!-- Footer -->
-    <footer class="bg-gray-800 text-center p-6 mt-8">
-        <p>Encryption Hub v1.0.1 - <a href="https://www.gnu.org/licenses/gpl-3.0.html" class="text-blue-400 hover:underline">GPLv3 Licensed</a></p>
+    <footer class="bg-[#0D0D0D] text-center p-6 mt-8">
+        <p>Encryption Hub v1.0.1 - <a href="https://www.gnu.org/licenses/gpl-3.0.html" class="text-[#E879F9] hover:underline">GPLv3 Licensed</a></p>
         <p class="text-gray-400">Copyright © 2025 Azeem117.</p>
     </footer>
 </body>
