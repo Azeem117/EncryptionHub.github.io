@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encryption 5.0</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for aesthetic appeal and responsiveness */
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #e4e7eb; /* Light text for dark theme */
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            /* Enhanced Gradient Background: Deep blue/navy */
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        }
+        .card {
+            background-color: #1e293b; /* Darker card base */
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7); /* Stronger shadow */
+            max-width: 550px;
+            width: 100%;
+            border: 1px solid rgba(100, 116, 139, 0.3); /* Subtle light border */
+        }
+        /* Input styling remains similar but with better contrast */
+        .input-group input, .input-group textarea {
+            background-color: #0f172a;
+            border: 1px solid #334155;
+            color: #f8fafc;
+            /* Added padding and rounded corners for a softer look */
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+        }
+        .input-group input:focus, .input-group textarea:focus {
+            border-color: #8b5cf6; /* Use a purple accent for focus */
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.4);
+        }
+        /* Gradient Button Styling: Vibrant blue to purple */
+        .action-button {
+            transition: all 0.3s ease-in-out;
+            background: linear-gradient(90deg, #3A8DFF 0%, #6C44FC 100%); 
+            box-shadow: 0 4px 15px rgba(58, 141, 255, 0.4);
+        }
+        .action-button:hover {
+            background: linear-gradient(90deg, #6C44FC 0%, #3A8DFF 100%); /* Shift gradient direction on hover */
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(108, 68, 252, 0.5);
+        }
+        .copy-button {
+            transition: background-color 0.2s;
+            background-color: #334155; /* Darker shade for copy button */
+        }
+        .copy-button:hover {
+            background-color: #475569;
+        }
+    </style>
+</head>
+<body>
+    <div class="card p-6 md:p-8 rounded-xl">
+        <h1 class="text-3xl font-extrabold mb-2 text-center text-white">Encryption 5.0</h1>
+        <p class="text-center text-gray-400 mb-6">Uses PBKDF2 to derive a deterministic, high-entropy password.</p>
+
+        <div class="input-group mb-4">
+            <label for="inputText" class="block text-sm font-medium mb-2 text-gray-300">Password : </label>
+            <input type="text" id="inputText" placeholder="e.g., MySecretPhraseOrSiteName"
+                   class="w-full rounded-lg focus:outline-none" required>
+        </div>
+
+        <button id="generateBtn" class="action-button w-full text-white font-semibold p-3 rounded-lg mb-6">
+            Generate Complex Password
+        </button>
+
+        <div class="input-group">
+            <label for="outputPassword" class="block text-sm font-medium mb-2 text-gray-300">Generated Complex Password : </label>
+            <div class="relative">
+                <textarea id="outputPassword" rows="3" readonly
+                          class="w-full rounded-lg resize-none text-sm cursor-text focus:outline-none placeholder-gray-500"
+                          placeholder="Generated complex password will appear here..."
+                          ></textarea>
+                <button id="copyBtn" class="copy-button absolute top-2 right-2 p-2 rounded-lg text-xs font-medium text-white disabled:opacity-50" disabled>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                </button>
+            </div>
+        </div>
+        
+        <div id="messageBox" class="mt-4 p-3 rounded-lg text-sm text-center hidden" role="alert"></div>
+
+        <div class="mt-6 border-t border-gray-700 pt-4">
+            <p class="text-xs text-gray-500">
+                <span class="font-bold text-gray-400">Security Note:</span> This implementation uses PBKDF2 with SHA-256 and 310,000 iterations for robust key derivation. The fixed salt ensures the output is always deterministic.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        const inputText = document.getElementById('inputText');
+        const generateBtn = document.getElementById('generateBtn');
+        const outputPassword = document.getElementById('outputPassword');
+        const copyBtn = document.getElementById('copyBtn');
+        const messageBox = document.getElementById('messageBox');
+
+        // IMPORTANT: This salt is fixed to ensure the output is deterministic.
+        const APPLICATION_SALT = new Uint8Array([0x45, 0x61, 0x73, 0x79, 0x54, 0x6f, 0x47, 0x75, 0x65, 0x73, 0x73, 0x53, 0x61, 0x6c, 0x74, 0x31]);
+        const ITERATIONS = 10000000; // High iteration count for security
+        const KEY_LENGTH = 32; // 256 bits
+
+        /**
+         * Converts an ArrayBuffer to a Base64 string.
+         * @param {ArrayBuffer} buffer - The key data.
+         * @returns {string} The base64 representation.
+         */
+        function bufferToBase64(buffer) {
+            let binary = '';
+            const bytes = new Uint8Array(buffer);
+            for (let i = 0; i < bytes.byteLength; i++) {
+                binary += String.fromCharCode(bytes[i]);
+            }
+            return btoa(binary);
+        }
+
+        /**
+         * Shows a temporary message in the message box.
+         * @param {string} message - The message to display.
+         * @param {boolean} isError - If true, displays an error style.
+         */
+        function showMessage(message, isError = false) {
+            messageBox.textContent = message;
+            messageBox.classList.remove('hidden', 'bg-red-900', 'text-red-300', 'bg-green-900', 'text-green-300');
+            
+            if (isError) {
+                messageBox.classList.add('bg-red-900', 'text-red-300');
+            } else {
+                messageBox.classList.add('bg-green-900', 'text-green-300');
+            }
+
+            // Hide the message after 3 seconds
+            setTimeout(() => {
+                messageBox.classList.add('hidden');
+            }, 3000);
+        }
+
+        /**
+         * Generates the complex, deterministic password using PBKDF2.
+         * @param {string} input - The user's input text.
+         * @returns {Promise<string>} The generated Base64 password string.
+         */
+        async function generateComplexPassword(input) {
+            try {
+                // 1. Convert input string to raw key material
+                const passwordBuffer = new TextEncoder().encode(input);
+                const keyMaterial = await crypto.subtle.importKey(
+                    "raw",
+                    passwordBuffer,
+                    { name: "PBKDF2" },
+                    false,
+                    ["deriveKey"]
+                );
+
+                // 2. Derive the key using PBKDF2
+                const derivedKey = await crypto.subtle.deriveKey(
+                    {
+                        name: "PBKDF2",
+                        salt: APPLICATION_SALT,
+                        iterations: ITERATIONS,
+                        hash: "SHA-256",
+                    },
+                    keyMaterial,
+                    // The output key is an AES-GCM key of 256 bits (32 bytes)
+                    { name: "AES-GCM", length: KEY_LENGTH * 8 },
+                    true, // Extractable
+                    ["encrypt", "decrypt"]
+                );
+
+                // 3. Export the derived key as raw bytes
+                const exportedKey = await crypto.subtle.exportKey("raw", derivedKey);
+
+                // 4. Convert raw bytes to Base64 to create the complex password string
+                return bufferToBase64(exportedKey);
+
+            } catch (error) {
+                console.error("Error during key derivation:", error);
+                showMessage("An error occurred during password generation.", true);
+                return null;
+            }
+        }
+
+        // --- Event Listeners ---
+
+        generateBtn.addEventListener('click', async () => {
+            const input = inputText.value.trim();
+            if (input.length === 0) {
+                showMessage("Please enter some text or password to generate from.", true);
+                return;
+            }
+
+            generateBtn.textContent = 'Generating...';
+            generateBtn.disabled = true;
+            copyBtn.disabled = true;
+
+            const complexPassword = await generateComplexPassword(input);
+
+            if (complexPassword) {
+                outputPassword.value = complexPassword;
+                copyBtn.disabled = false;
+            } else {
+                outputPassword.value = "";
+            }
+            
+            generateBtn.textContent = 'Generate Complex Password';
+            generateBtn.disabled = false;
+        });
+
+        copyBtn.addEventListener('click', () => {
+            outputPassword.select();
+            
+            // Check if document.execCommand('copy') is available
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    showMessage("Password copied to clipboard!");
+                } else {
+                    showMessage("Failed to copy. Please copy manually.", true);
+                }
+            } catch (err) {
+                console.error('Copy failed:', err);
+                showMessage("Copy failed. Please copy manually.", true);
+            }
+
+            // Deselect the text
+            if (window.getSelection) {
+                window.getSelection().removeAllRanges();
+            } else if (document.selection) {
+                document.selection.empty();
+            }
+        });
+        
+    </script>
+</body>
+</html>
