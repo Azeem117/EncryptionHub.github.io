@@ -1,99 +1,75 @@
 <!--
-==========================================================================
-Encryption Hub - A Secure Message Encryption and Steganography Application
-==========================================================================
+==============================================================================
+Encryption Hub – Secure Message, File, and Steganography Application
+==============================================================================
 
-Copyright (C) 2025 MD AZEEM
+Project: Encryption Hub
+Version: 1.0.3
+Author: MD AZEEM
 Website: https://github.com/Azeem117
-Version: 1.0.0
+Release Date: 2025
+Modules: Encryption 1.0 → 5.0 (Text, Steganography, File, PDF, Strong Password Generation)
 
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
+============================================================================== 
+License: GNU General Public License v3.0 (GPL-3.0)
+==============================================================================
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-GNU General Public License for more details.
+This software is free to use, modify, and redistribute under the terms of the 
+GNU GPL v3.0. There is **no warranty** of any kind, express or implied, 
+including merchantability or fitness for a particular purpose. 
 
-You should have received a copy of the GNU General Public License
-along with this program. If not, see <https://www.gnu.org/licenses/>.
+Full License: https://www.gnu.org/licenses/gpl-3.0.en.html
 
-==========================================================================
-Third-Party Components and Libraries
-==========================================================================
+============================================================================== 
+Third-Party Components
+==============================================================================
 
-1. PDF Generation and Handling:
-   - pdfmake (https://pdfmake.github.io/docs/)
-     License: MIT
-     Used for: Creating password-protected PDFs with embedded payload
-   
-   - PDF.js (https://mozilla.github.io/pdf.js/)
-     License: Apache 2.0
-     Used for: Reading PDF content and extracting embedded payload
+1. PDF Generation & Handling:
+   - pdfmake: https://pdfmake.github.io/docs/ (MIT License)
+     Used for: Password-protected PDFs with encrypted payloads
+   - PDF.js: https://mozilla.github.io/pdf.js/ (Apache 2.0 License)
+     Used for: Reading PDFs and extracting embedded payloads
 
-2. Styling and UI:
-   - Tailwind CSS (https://tailwindcss.com/)
-     License: MIT
-     Used for: Utility-first CSS framework
-   
-   - Inter Font (https://fonts.google.com/specimen/Inter)
-     License: SIL Open Font License 1.1
-     Used for: Main typography
+2. Styling & Typography:
+   - Tailwind CSS: https://tailwindcss.com/ (MIT License)
+   - Inter Font: https://fonts.google.com/specimen/Inter (SIL Open Font License 1.1)
 
-3. Cryptography:
-   - Web Crypto API (Built-in browser API)
-     Used for: AES-GCM encryption, PBKDF2 key derivation
-   
-   - Steganography Implementation
-     Custom implementation using LSB (Least Significant Bit) technique
-     License: GPL-3.0 (part of this project)
+3. Cryptography & Security:
+   - Web Crypto API (Browser Built-in)
+     Used for: AES-GCM encryption, PBKDF2 key derivation, strong password generation
+   - Custom LSB Steganography (GPL-3.0)
+     Used for: Hiding encrypted messages in images
 
-==========================================================================
-Feature Credits
-==========================================================================
+============================================================================== 
+Feature Highlights
+==============================================================================
 
-- Encryption: AES-GCM with PBKDF2 key derivation
-- Steganography: LSB (Least Significant Bit) implementation in image data
-- PDF Security: Password protection and encrypted payload embedding
-- UI/UX Design: Modern, responsive interface with progress feedback
-- File Handling: Support for PNG, JPEG, and PDF formats
+- AES-GCM encryption with PBKDF2 key derivation
+- LSB steganography in PNG/JPG images
+- File encryption for text, images, audio, video, and documents
+- Password-protected PDF generation with embedded encrypted payloads
+- Weak-to-strong password generation (PBKDF2, up to 10,000,000 iterations)
+- Responsive, modern UI with progress feedback and error handling
 
-==========================================================================
-License Compliance Requirements
-==========================================================================
+============================================================================== 
+License & Compliance Notes
+==============================================================================
 
-1. MIT Licensed Components (pdfmake, Tailwind CSS):
-   - Copyright notices must be included in all copies
-   - License text must be preserved
+- MIT Components (Tailwind CSS, pdfmake): Include copyright notices and preserve license text.
+- Apache 2.0 Components (PDF.js): Preserve copyright, include license, document changes, provide attribution.
+- SIL Open Font License (Inter Font): Preserve license and copyright; font name not used for derivatives.
+- GPL-3.0 Components (This Project): Source code availability, document changes, maintain same license, preserve copyright.
 
-2. Apache 2.0 Licensed Components (PDF.js):
-   - Copyright notice must be preserved
-   - License text must be included
-   - Changes must be documented
-   - Attribution must be provided
-
-3. SIL Open Font License (Inter Font):
-   - Font name must not be used for derivatives
-   - License text must be preserved
-   - Copyright notice must be preserved
-
-4. GPL-3.0 (This Project):
-   - Source code must be made available
-   - Changes must be documented
-   - Same license must be used for derivatives
-   - Copyright notices must be preserved
-
-==========================================================================
+============================================================================== 
 Security Notice
-==========================================================================
+==============================================================================
 
-This application implements client-side encryption and steganography.
-No data is transmitted to any server. All processing occurs locally
-in your browser using standard Web APIs and libraries.
+All encryption and steganography operations occur **client-side**. 
+No data is transmitted to any server. Processing uses standard Web APIs 
+in the browser to ensure maximum privacy.
 
 Report security issues: adwardcollin365@gmail.com
+==============================================================================
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -287,7 +263,7 @@ Report security issues: adwardcollin365@gmail.com
       Libraries used: <a href="https://pdfmake.github.io/docs/" target="_blank" class="text-neon-light hover:text-neon-cyan transition-colors">pdfmake</a>, <a href="https://mozilla.github.io/pdf.js/" target="_blank" class="text-neon-light hover:text-neon-cyan transition-colors">pdf.js</a>, and Web Crypto API.
     </p>
     <div class="h-px bg-neon-cyan/10 my-3 w-4/5 max-w-md mx-auto"></div>
-    <p>Encryption Hub v2.1 - <a href="https://www.gnu.org/licenses/gpl-3.0.html" class="text-neon-light hover:text-neon-cyan transition-colors">GPLv3 Licensed</a></p>
+    <p>Encryption Hub v.1.0.3 - <a href="https://www.gnu.org/licenses/gpl-3.0.html" class="text-neon-light hover:text-neon-cyan transition-colors">GPLv3 Licensed</a></p>
   </footer>
 
 <!-- Module script for PDF.js imports and helpers -->
