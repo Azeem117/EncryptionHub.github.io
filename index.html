@@ -55,13 +55,17 @@ Special Notes:
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Encryption Hub</title>
-    <     <link rel="icon" type="image/png" sizes="32x32" href="logo/icon.png">
+
+    <!--
+    CRITICAL STEP: Check that your icon file is accessible at the path "logo/icon.png"
+    If the icon is directly in the root folder, change the href to "icon.png"
+    -->
+    <link rel="icon" type="image/png" sizes="32x32" href="logo/icon.png">
     <link rel="icon" type="image/png" sizes="48x48" href="logo/icon.png">
     <link rel="apple-touch-icon" sizes="180x180" href="logo/icon.png">
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#000005">
 
-    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -100,7 +104,6 @@ Special Notes:
             </p>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                
                 <!-- Card 1: Encryption 1.0 (Text) - Primary Indigo/Violet Theme -->
                 <a href="page1.html" class="card group flex flex-col items-center p-6 bg-slate-900/50 rounded-xl border border-indigo-700/50 hover:border-violet-500">
                     <svg class="w-16 h-16 mb-4 text-violet-400 group-hover:text-violet-300 transition duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -114,7 +117,7 @@ Special Notes:
                         Encryption 1.0
                     </span>
                 </a>
-                
+
                 <!-- Card 2: Encryption 2.0 (Steganography) - Vibrant Pink/Rose Theme -->
                 <a href="page2.html" class="card group flex flex-col items-center p-6 bg-slate-900/50 rounded-xl border border-pink-700/50 hover:border-pink-500">
                     <svg class="w-16 h-16 mb-4 text-pink-400 group-hover:text-pink-300 transition duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -161,7 +164,7 @@ Special Notes:
             </div>
         </div>
     </div>
-    
+
     <!-- Footer -->
     <footer class="text-center p-6 mt-12 w-full border-t border-slate-800">
         <p class="text-gray-500">Encryption Hub v3.0 - <a href="https://www.gnu.org/licenses/gpl-3.0.html" class="text-violet-400 hover:text-violet-300 transition">GPLv3 Licensed</a></p>
