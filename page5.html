@@ -77,7 +77,7 @@ Report security issues: adwardcollin365@gmail.com
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Encryption 5.0</title>
-       <link rel="icon" type="image/png" sizes="32x32" href="logo/icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="logo/icon.png">
     <link rel="icon" type="image/png" sizes="48x48" href="logo/icon.png">
     <link rel="apple-touch-icon" sizes="180x180" href="logo/icon.png">
     <link rel="manifest" href="manifest.json">
@@ -88,11 +88,6 @@ Report security issues: adwardcollin365@gmail.com
         body {
             font-family: 'Inter', sans-serif;
             color: #e4e7eb; /* Light text for dark theme */
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 1.5rem;
             /* Enhanced Gradient Background: Deep blue/navy */
             background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
         }
@@ -134,16 +129,8 @@ Report security issues: adwardcollin365@gmail.com
         .copy-button:hover {
             background-color: #475569;
         }
-             footer {
-            margin-top: auto;
-            padding-top: 2rem;
-            text-align: center;
-            color: #4f4f65; /* Subtler footer text */
-        }
-        footer p {
-            margin: 0;
-            padding: 0;
-        }
+        
+        /* Custom styles for footer links */
         footer p a {
              color: #0ea5e9; /* Vibrant link color (Neon Blue) */
              transition: color 0.2s;
@@ -153,46 +140,53 @@ Report security issues: adwardcollin365@gmail.com
         }
     </style>
 </head>
-<body>
-    <div class="card p-6 md:p-8 rounded-xl">
-        <h1 class="text-3xl font-extrabold mb-2 text-center text-white">Encryption 5.0</h1>
-        <p class="text-center text-gray-400 mb-6">Uses PBKDF2 to derive a deterministic, high-entropy password.</p>
+<!-- The body is now a flex column spanning the full viewport height (min-h-screen) -->
+<body class="flex flex-col min-h-screen">
+    
+    <!-- main element takes up all available vertical space (flex-grow) and centers its content (the card) -->
+    <main class="flex-grow flex items-center justify-center p-4">
+        <div class="card p-6 md:p-8 rounded-xl">
+            <h1 class="text-3xl font-extrabold mb-2 text-center text-white">Encryption 5.0</h1>
+            <p class="text-center text-gray-400 mb-6">Uses PBKDF2 to derive a deterministic, high-entropy password.</p>
 
-        <div class="input-group mb-4">
-            <label for="inputText" class="block text-sm font-medium mb-2 text-gray-300">Password : </label>
-            <input type="text" id="inputText" placeholder="e.g., MySecretPhraseOrSiteName"
-                   class="w-full rounded-lg focus:outline-none" required>
-        </div>
+            <div class="input-group mb-4">
+                <label for="inputText" class="block text-sm font-medium mb-2 text-gray-300">Password : </label>
+                <input type="text" id="inputText" placeholder="e.g., MySecretPhraseOrSiteName"
+                        class="w-full rounded-lg focus:outline-none" required>
+            </div>
 
-        <button id="generateBtn" class="action-button w-full text-white font-semibold p-3 rounded-lg mb-6">
-            Generate Complex Password
-        </button>
+            <button id="generateBtn" class="action-button w-full text-white font-semibold p-3 rounded-lg mb-6">
+                Generate Complex Password
+            </button>
 
-        <div class="input-group">
-            <label for="outputPassword" class="block text-sm font-medium mb-2 text-gray-300">Generated Complex Password : </label>
-            <div class="relative">
-                <textarea id="outputPassword" rows="3" readonly
-                          class="w-full rounded-lg resize-none text-sm cursor-text focus:outline-none placeholder-gray-500"
-                          placeholder="Generated complex password will appear here..."
-                          ></textarea>
-                <button id="copyBtn" class="copy-button absolute top-2 right-2 p-2 rounded-lg text-xs font-medium text-white disabled:opacity-50" disabled>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-                </button>
+            <div class="input-group">
+                <label for="outputPassword" class="block text-sm font-medium mb-2 text-gray-300">Generated Complex Password : </label>
+                <div class="relative">
+                    <textarea id="outputPassword" rows="3" readonly
+                                class="w-full rounded-lg resize-none text-sm cursor-text focus:outline-none placeholder-gray-500"
+                                placeholder="Generated complex password will appear here..."
+                                ></textarea>
+                    <button id="copyBtn" class="copy-button absolute top-2 right-2 p-2 rounded-lg text-xs font-medium text-white disabled:opacity-50" disabled>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    </button>
+                </div>
+            </div>
+            
+            <div id="messageBox" class="mt-4 p-3 rounded-lg text-sm text-center hidden" role="alert"></div>
+
+            <div class="mt-6 border-t border-gray-700 pt-4">
+                <p class="text-xs text-gray-500">
+                    <span class="font-bold text-gray-400">Security Note:</span> This implementation uses PBKDF2 with SHA-256 and 310,000 iterations for robust key derivation. The fixed salt ensures the output is always deterministic.
+                </p>
             </div>
         </div>
-        
-        <div id="messageBox" class="mt-4 p-3 rounded-lg text-sm text-center hidden" role="alert"></div>
-
-        <div class="mt-6 border-t border-gray-700 pt-4">
-            <p class="text-xs text-gray-500">
-                <span class="font-bold text-gray-400">Security Note:</span> This implementation uses PBKDF2 with SHA-256 and 310,000 iterations for robust key derivation. The fixed salt ensures the output is always deterministic.
-            </p>
-        </div>
-    </div>
-    <footer>
-    <p>Encryption Hub v1.0.3 - <a href="https://www.gnu.org/licenses/gpl-3.0.html" class="text-blue-400 hover:underline">GPLv3 Licensed</a></p>
-    <p class="text-gray-400">Copyright © 2025 Azeem117.</p>
-</footer>    
+    </main>
+    
+    <!-- Footer is now styled with Tailwind classes and positioned at the bottom -->
+    <footer class="w-full py-4 text-center bg-slate-900/40 text-gray-500 text-sm border-t border-slate-700/50">
+        <p class="mb-1">Encryption Hub v1.0.3 - <a href="https://www.gnu.org/licenses/gpl-3.0.html" class="hover:underline">GPLv3 Licensed</a></p>
+        <p class="text-xs">Copyright &copy; 2025 Azeem117.</p>
+    </footer>    
 
     <script>
         const inputText = document.getElementById('inputText');
