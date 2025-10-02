@@ -10,8 +10,6 @@ const urlsToCache = [
   './page4.html',    // Encryption 4.0 (PDF Export)
   './page5.html',    // Encryption 5.0 (Password Generation)
   './manifest.json', // Your PWA manifest
-  './styles.css',    // (Assuming you have a separate styles.css, if not, remove this)
-  './script.js',     // (Assuming you have a separate script.js, if not, remove this)
   './logo/icon.png'  // Your application icon (adjust path if needed)
 ];
 
