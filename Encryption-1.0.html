@@ -68,6 +68,12 @@ All encryption and steganography operations occur **client-side**.
 No data is transmitted to any server. Processing uses standard Web APIs 
 in the browser to ensure maximum privacy.
 
+Security Best Practices for Deployment:
+- Consider implementing Content Security Policy (CSP) headers
+- Use HTTPS only (enforce via HTTP Strict Transport Security)
+- Regularly update third-party dependencies
+- Implement Subresource Integrity (SRI) for CDN resources
+
 Report security issues: adwardcollin365@gmail.com
 ==============================================================================
 -->
@@ -359,28 +365,28 @@ Report security issues: adwardcollin365@gmail.com
 
     <div class="flex items-center justify-between">
         <div class="btn-group flex-grow">
-            <button id="encryptBtn" class="btn btn-primary">Encrypt</button>
-            <button id="decryptBtn" class="btn btn-secondary"> Decrypt</button>
-            <button id="clearBtn" class="btn btn-secondary">Clear</button>
+            <button id="encryptBtn" class="btn btn-primary" aria-label="Encrypt the message with the provided password">Encrypt</button>
+            <button id="decryptBtn" class="btn btn-secondary" aria-label="Decrypt the message with the provided password"> Decrypt</button>
+            <button id="clearBtn" class="btn btn-secondary" aria-label="Clear all input fields and results">Clear</button>
         </div>
-        <div id="loadingSpinner" class="loading-spinner hidden"></div>
+        <div id="loadingSpinner" class="loading-spinner hidden" role="status" aria-label="Processing..."></div>
     </div>
 
     <div id="resultBox" class="result-box hidden mt-6">
         <div class="result-title">
             Output Console:
-            <button id="copyBtn" class="copy-btn">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <button id="copyBtn" class="copy-btn" aria-label="Copy result to clipboard">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                     <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
                     <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3h-2a3 3 0 01-3-3z" />
                 </svg>
                 Copy
             </button>
         </div>
-        <div id="resultText" class="result-text"></div>
+        <div id="resultText" class="result-text" role="region" aria-live="polite" aria-label="Encryption or decryption result"></div>
     </div>
     
-    <div id="messageBox" class="message-box"></div>
+    <div id="messageBox" class="message-box" role="alert" aria-live="assertive"></div>
 </div>
     
 <footer>

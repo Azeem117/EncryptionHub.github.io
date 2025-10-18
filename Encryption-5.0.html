@@ -68,6 +68,12 @@ All encryption and steganography operations occur **client-side**.
 No data is transmitted to any server. Processing uses standard Web APIs 
 in the browser to ensure maximum privacy.
 
+Security Best Practices for Deployment:
+- Consider implementing Content Security Policy (CSP) headers
+- Use HTTPS only (enforce via HTTP Strict Transport Security)
+- Regularly update third-party dependencies
+- Implement Subresource Integrity (SRI) for CDN resources
+
 Report security issues: adwardcollin365@gmail.com
 ==============================================================================
 -->
@@ -155,7 +161,7 @@ Report security issues: adwardcollin365@gmail.com
                         class="w-full rounded-lg focus:outline-none" required>
             </div>
 
-            <button id="generateBtn" class="action-button w-full text-white font-semibold p-3 rounded-lg mb-6">
+            <button id="generateBtn" class="action-button w-full text-white font-semibold p-3 rounded-lg mb-6" aria-label="Generate a complex password from the input text">
                 Generate Complex Password
             </button>
 
@@ -165,9 +171,10 @@ Report security issues: adwardcollin365@gmail.com
                     <textarea id="outputPassword" rows="3" readonly
                                 class="w-full rounded-lg resize-none text-sm cursor-text focus:outline-none placeholder-gray-500"
                                 placeholder="Generated complex password will appear here..."
+                                aria-label="Generated complex password output"
                                 ></textarea>
-                    <button id="copyBtn" class="copy-button absolute top-2 right-2 p-2 rounded-lg text-xs font-medium text-white disabled:opacity-50" disabled>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    <button id="copyBtn" class="copy-button absolute top-2 right-2 p-2 rounded-lg text-xs font-medium text-white disabled:opacity-50" disabled aria-label="Copy generated password to clipboard">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
                     </button>
                 </div>
             </div>
@@ -286,6 +293,12 @@ Report security issues: adwardcollin365@gmail.com
             const input = inputText.value.trim();
             if (input.length === 0) {
                 showMessage("Please enter some text or password to generate from.", true);
+                return;
+            }
+            
+            // Validate minimum input length for security
+            if (input.length < 4) {
+                showMessage("Input must be at least 4 characters long for security.", true);
                 return;
             }
 
