@@ -176,7 +176,7 @@ Report security issues: adwardcollin365@gmail.com
 
             <div class="mt-6 border-t border-gray-700 pt-4">
                 <p class="text-xs text-gray-500">
-                    <span class="font-bold text-gray-400">Security Note:</span> This implementation uses PBKDF2 with SHA-256 and 310,000 iterations for robust key derivation. The fixed salt ensures the output is always deterministic.
+                    <span class="font-bold text-gray-400">Security Note:</span> This implementation uses PBKDF2 with SHA-256 and 10,000,000 iterations for robust key derivation. The fixed salt ensures the output is always deterministic.
                 </p>
             </div>
         </div>
@@ -306,16 +306,23 @@ Report security issues: adwardcollin365@gmail.com
             generateBtn.disabled = false;
         });
 
-        copyBtn.addEventListener('click', () => {
-            outputPassword.select();
+        copyBtn.addEventListener('click', async () => {
+            const textToCopy = outputPassword.value;
             
-            // Check if document.execCommand('copy') is available
+            // Use modern Clipboard API with fallback
             try {
-                const successful = document.execCommand('copy');
-                if (successful) {
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    await navigator.clipboard.writeText(textToCopy);
                     showMessage("Password copied to clipboard!");
                 } else {
-                    showMessage("Failed to copy. Please copy manually.", true);
+                    // Fallback for older browsers
+                    outputPassword.select();
+                    const successful = document.execCommand('copy');
+                    if (successful) {
+                        showMessage("Password copied to clipboard!");
+                    } else {
+                        showMessage("Failed to copy. Please copy manually.", true);
+                    }
                 }
             } catch (err) {
                 console.error('Copy failed:', err);

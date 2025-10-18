@@ -475,6 +475,12 @@ Report security issues: adwardcollin365@gmail.com
                 showMessage("Please enter a password.", true);
                 return;
             }
+            
+            // Validate password length
+            if (password.length < 4) {
+                showMessage("Password must be at least 4 characters long.", true);
+                return;
+            }
 
             // Generate a unique salt for this encryption.
             const salt = window.crypto.getRandomValues(new Uint8Array(16));
@@ -590,17 +596,19 @@ Report security issues: adwardcollin365@gmail.com
     // Handles the "Encrypt" button click.
     document.getElementById('encryptBtn').addEventListener('click', async () => {
         const messageInput = document.getElementById('message');
-        if (!messageInput.value) {
+        const message = messageInput.value.trim();
+        if (!message) {
             showMessage("Please enter a message to encrypt.", true);
             return;
         }
         
         toggleLoading(true);
         const passwordInput = document.getElementById('password');
+        const password = passwordInput.value.trim();
         const resultBox = document.getElementById('resultBox');
         const resultText = document.getElementById('resultText');
 
-        const encryptedData = await encryptMessage(strToUint8(messageInput.value), passwordInput.value);
+        const encryptedData = await encryptMessage(strToUint8(message), password);
         if (encryptedData) {
             resultText.textContent = encryptedData;
             resultBox.classList.remove('hidden');
@@ -614,17 +622,19 @@ Report security issues: adwardcollin365@gmail.com
     // Handles the "Decrypt" button click.
     document.getElementById('decryptBtn').addEventListener('click', async () => {
         const messageInput = document.getElementById('message');
-        if (!messageInput.value) {
+        const message = messageInput.value.trim();
+        if (!message) {
             showMessage("Please enter a message to decrypt.", true);
             return;
         }
 
         toggleLoading(true);
         const passwordInput = document.getElementById('password');
+        const password = passwordInput.value.trim();
         const resultBox = document.getElementById('resultBox');
         const resultText = document.getElementById('resultText');
 
-        const decryptedData = await decryptMessage(messageInput.value, passwordInput.value);
+        const decryptedData = await decryptMessage(message, password);
         if (decryptedData) {
             resultText.textContent = decryptedData;
             resultBox.classList.remove('hidden');
@@ -638,18 +648,25 @@ Report security issues: adwardcollin365@gmail.com
     // Handles the "Clear" button click.
     document.getElementById('clearBtn').addEventListener('click', clearApp);
 
-    // Copies the result to the clipboard.
-    document.getElementById('copyBtn').addEventListener('click', () => {
+    // Copies the result to the clipboard using modern Clipboard API.
+    document.getElementById('copyBtn').addEventListener('click', async () => {
         const textToCopy = document.getElementById('resultText').textContent;
         try {
-            const tempInput = document.createElement('textarea');
-            tempInput.value = textToCopy;
-            document.body.appendChild(tempInput);
-            tempInput.select();
-            document.execCommand('copy');
-            document.body.removeChild(tempInput);
-            showMessage("Copied to clipboard!", false);
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                await navigator.clipboard.writeText(textToCopy);
+                showMessage("Copied to clipboard!", false);
+            } else {
+                // Fallback for older browsers
+                const tempInput = document.createElement('textarea');
+                tempInput.value = textToCopy;
+                document.body.appendChild(tempInput);
+                tempInput.select();
+                document.execCommand('copy');
+                document.body.removeChild(tempInput);
+                showMessage("Copied to clipboard!", false);
+            }
         } catch (err) {
+            console.error("Failed to copy:", err);
             showMessage("Failed to copy. Please try again.", true);
         }
     });
