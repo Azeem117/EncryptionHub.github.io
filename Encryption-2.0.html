@@ -186,9 +186,48 @@ Report security issues: adwardcollin365@gmail.com
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+        
+        /* Back to Home Button */
+        .back-btn {
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            background-color: var(--color-accent);
+            color: #000000;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
+            border: none;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 12px rgba(232, 121, 249, 0.4);
+            z-index: 1000;
+        }
+        .back-btn:hover {
+            background-color: var(--color-accent-light);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(232, 121, 249, 0.6);
+        }
+        .back-btn svg {
+            width: 1.25rem;
+            height: 1.25rem;
+        }
     </style>
 </head>
 <body class="flex flex-col justify-center items-center min-h-screen p-4 text-gray-50">
+
+<!-- Back to Home Button -->
+<a href="index.html" class="back-btn" title="Back to Home">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+    </svg>
+    Home
+</a>
+
     <div class="container rounded-2xl p-8 w-full max-w-2xl text-center">
         <div class="logo mb-5">
             <svg class="logo-svg mx-auto w-20 h-20" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">

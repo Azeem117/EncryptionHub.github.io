@@ -77,6 +77,13 @@ Report security issues: adwardcollin365@gmail.com
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Secure client-side encryption tools for messages, files, and steganography. Features AES-GCM encryption, PBKDF2 key derivation, and password-protected PDF export.">
+    <meta name="keywords" content="encryption, security, AES, steganography, file encryption, password generator, PBKDF2, client-side encryption">
+    <meta name="author" content="MD AZEEM">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="EncHub">
     <title>Encryption Hub</title>
 
     <!--
@@ -215,9 +222,12 @@ Report security issues: adwardcollin365@gmail.com
    <script>
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      // The scope path is crucial for GitHub Pages subdirectories!
-      navigator.serviceWorker.register('/EncryptionHub.github.io/sw.js', {
-          scope: '/EncryptionHub.github.io/' 
+      // Determine the correct scope based on the current location
+      const isGitHubPages = location.hostname.includes('github.io');
+      const basePath = isGitHubPages ? '/EncryptionHub.github.io/' : '/';
+      
+      navigator.serviceWorker.register(basePath + 'sw.js', {
+          scope: basePath
         })
         .then(registration => {
           console.log('Service Worker registered with scope:', registration.scope);

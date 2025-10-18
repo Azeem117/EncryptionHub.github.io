@@ -1,7 +1,11 @@
 {
-  "name": "Encryption Hub",
+  "name": "Encryption Hub - Secure Encryption Tools",
   "short_name": "EncHub",
+  "description": "Secure client-side encryption tools for messages, files, and steganography. Features AES-GCM encryption, PBKDF2 key derivation, and password-protected PDF export.",
   "lang": "en",
+  "dir": "ltr",
+  "categories": ["security", "utilities", "productivity"],
+  "orientation": "any",
   "icons": [
     {
       "src": "logo/icon.png",
@@ -43,13 +47,50 @@
       "purpose": "maskable"
     }
   ],
-  "theme_color": "#111827",
-  "background_color": "#111827",
+  "theme_color": "#000005",
+  "background_color": "#000005",
   "display": "standalone",
-  "start_url": "/EncryptionHub.github.io/",
-  "scope": "/EncryptionHub.github.io/",
+  "start_url": "./",
+  "scope": "./",
   "display_override": [
     "window-controls-overlay",
     "standalone"
+  ],
+  "shortcuts": [
+    {
+      "name": "Text Encryption",
+      "short_name": "Text",
+      "description": "Encrypt and decrypt text messages",
+      "url": "./Encryption-1.0.html",
+      "icons": [{ "src": "logo/icon.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Steganography",
+      "short_name": "Stego",
+      "description": "Hide messages in images",
+      "url": "./Encryption-2.0.html",
+      "icons": [{ "src": "logo/icon.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "File Encryption",
+      "short_name": "Files",
+      "description": "Encrypt any file type",
+      "url": "./Encryption-3.0.html",
+      "icons": [{ "src": "logo/icon.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "PDF Export",
+      "short_name": "PDF",
+      "description": "Export to password-protected PDF",
+      "url": "./Encryption-4.0.html",
+      "icons": [{ "src": "logo/icon.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Password Generator",
+      "short_name": "Password",
+      "description": "Generate strong passwords",
+      "url": "./Encryption-5.0.html",
+      "icons": [{ "src": "logo/icon.png", "sizes": "192x192" }]
+    }
   ]
 }

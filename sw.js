@@ -1,15 +1,15 @@
-const CACHE_NAME = 'encryption-hub-cache-v2';
-const RUNTIME_CACHE = 'encryption-hub-runtime-v2';
+const CACHE_NAME = 'encryption-hub-cache-v3';
+const RUNTIME_CACHE = 'encryption-hub-runtime-v3';
 
 // IMPORTANT: Use './' for relative paths because of the GitHub Pages subpath
 const urlsToCache = [
   './',              // The main index.html
   './index.html',
-  './page1.html',    // Encryption 1.0
-  './page2.html',    // Encryption 2.0 (Steganography)
-  './page3.html',    // Encryption 3.0 (File Encryption)
-  './page4.html',    // Encryption 4.0 (PDF Export)
-  './page5.html',    // Encryption 5.0 (Password Generation)
+  './Encryption-1.0.html',    // Encryption 1.0
+  './Encryption-2.0.html',    // Encryption 2.0 (Steganography)
+  './Encryption-3.0.html',    // Encryption 3.0 (File Encryption)
+  './Encryption-4.0.html',    // Encryption 4.0 (PDF Export)
+  './Encryption-5.0.html',    // Encryption 5.0 (Password Generation)
   './manifest.json', // Your PWA manifest
   './logo/icon.png'  // Your application icon (adjust path if needed)
 ];
