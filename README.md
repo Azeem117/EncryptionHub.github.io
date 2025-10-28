@@ -134,3 +134,38 @@ Full license: [GNU GPL 3.0](https://www.gnu.org/licenses/gpl-3.0.en.html)
 - Responsive, user-friendly design  
 
 Visit the live portal: 🔗 [Encryption Hub](https://azeem117.github.io/EncryptionHub.github.io/)  
+
+---
+
+## 🌐 Deployment (GitHub Pages)
+
+This repository includes an automated deployment workflow for GitHub Pages.
+
+How it works:
+- On every push to `main`, GitHub Actions builds and deploys the site to GitHub Pages.
+- Workflow file: `.github/workflows/pages.yml`
+
+One-time setup in GitHub:
+1. Go to Repository Settings → Pages
+2. Set Source to “GitHub Actions”
+3. Save. After the next push, the site will be live at:
+	- `https://azeem117.github.io/EncryptionHub.github.io/`
+
+Local preview (optional):
+- You can open `index.html` directly in a browser, or use a simple static server for proper service worker behavior.
+
+---
+
+## 📱 Install as a PWA
+
+Encryption Hub is installable as a Progressive Web App (PWA):
+- Supports offline usage with a service worker and precached assets
+- Includes a web app manifest and icons
+
+To install:
+1. Visit the live site in Chrome/Edge.
+2. Click the “Install App” icon in the address bar (or use browser menu → Install).
+
+Notes:
+- An `offline.html` fallback is included for when the network is unavailable.
+- A custom `404.html` is provided for GitHub Pages routing.

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Offline – Encryption Hub</title>
+  <meta name="theme-color" content="#111827" />
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="icon" type="image/png" href="./logo/icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Inter', sans-serif; background: radial-gradient(ellipse at bottom, #0b0b14 0%, #000005 100%); }
+  </style>
+</head>
+<body class="min-h-screen flex items-center justify-center text-white p-6">
+  <main class="bg-gray-900/90 backdrop-blur-xl p-8 rounded-2xl border border-violet-500/40 max-w-lg w-full text-center">
+    <img src="./logo/icon.png" alt="Encryption Hub" class="w-16 h-16 mx-auto mb-4 opacity-90"/>
+    <h1 class="text-2xl font-bold text-violet-300 mb-2">You're offline</h1>
+    <p class="text-gray-300 mb-6">It looks like your device isn't connected to the internet. Some features may be unavailable. Once you reconnect, everything will sync up.</p>
+    <div class="space-y-3">
+      <a href="./index.html" class="block w-full px-4 py-3 bg-violet-600 hover:bg-violet-700 rounded-lg font-semibold">Go to Home</a>
+      <button onclick="location.reload()" class="block w-full px-4 py-3 bg-gray-700 hover:bg-gray-600 rounded-lg font-semibold">Try Again</button>
+    </div>
+  </main>
+</body>
+</html>
