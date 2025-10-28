@@ -169,3 +169,17 @@ To install:
 Notes:
 - An `offline.html` fallback is included for when the network is unavailable.
 - A custom `404.html` is provided for GitHub Pages routing.
+
+---
+
+## 📦 Android app (Trusted Web Activity)
+
+Want this as a Play Store app? Use Path A (TWA) to wrap the PWA:
+
+High level steps:
+- Generate an Android project with Bubblewrap from your manifest.
+- Create `assetlinks.json` using your app’s SHA-256 fingerprint.
+- Host `/.well-known/assetlinks.json` in a separate repo `azeem117/azeem117.github.io` (required for project pages), or on a custom domain.
+- Build a signed AAB in Android Studio and publish to Play.
+
+See `TWA-GUIDE.md` in this repo for PowerShell commands and step-by-step instructions, plus `assetlinks.template.json` ready to edit.
